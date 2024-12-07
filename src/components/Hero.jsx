@@ -3,8 +3,8 @@ import Caraousel from './Caraousel';
 
 const Hero = () =>{
     return (
-        <div> 
-            <Caraousel/>    
+        <div > 
+            <Caraousel />    
         </div>
 );
 }

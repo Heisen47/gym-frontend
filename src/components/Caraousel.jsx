@@ -1,34 +1,92 @@
-import React from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
+import React from 'react';
+import { Box } from '@mui/material';
+import Carousel from 'react-material-ui-carousel';
+import banner_1 from "../assets/banner_1.jpg";
+import banner_2 from "../assets/banner_2.jpg";
+import banner_3 from "../assets/banner_3.jpg";
 
 const Caraousel = () => {
+  const items = [
+    {
+      name: "Random Name #1",
+      description: "Probably the most random thing you have ever seen!",
+      bannerImage: banner_1,
+    },
+    {
+      name: "Random Name #2",
+      description: "Hello World!",
+      bannerImage: banner_2,
+    },
+    {
+      name: "Random Name #3",
+      description: "Another banner here!",
+      bannerImage: banner_3,
+    },
+  ];
+
   return (
-    <div>
-      <Carousel className="w-full max-w-xs">
-        <CarouselContent>
-          {Array.from({ length: 5 }).map((_, index) => (
-            <CarouselItem key={index}>
-              <div className="p-1">
-                <Card>
-                  <CardContent className="flex aspect-square items-center justify-center p-6">
-                    <span className="text-4xl font-semibold">{index + 1}</span>
-                  </CardContent>
-                </Card>
-              </div>
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-        <CarouselPrevious />
-        <CarouselNext />
+    <Box 
+      sx={{
+        width: '100%',
+        maxWidth: '1200px', // Set a max-width to prevent extreme stretching
+        margin: '0 auto',   // Center the carousel
+        height: {
+          xs: '200px',   // Mobile
+          sm: '300px',   // Tablet
+          md: '400px',   // Desktop
+          lg: '500px',   // Large screens
+        },
+        overflow: 'hidden',
+        position: 'relative', // Ensures proper containment
+        '& .MuiPaper-root': {
+          height: '100%',
+          width: '100%',
+          margin: 0,
+          boxShadow: 'none', // Remove default paper shadow
+        }
+      }}
+    >
+      <Carousel 
+        autoPlay 
+        interval={2000} 
+        animation="slide" 
+        indicators={false}
+        navButtonsAlwaysVisible={false}
+        sx={{ 
+          height: '100%', 
+          width: '100%',
+          '& .carousel-container': {
+            height: '100%',
+            width: '100%'
+          }
+        }}
+      >
+        {items.map((item, index) => (
+          <Box 
+            key={index} 
+            sx={{ 
+              height: '100%', 
+              width: '100%', 
+              display: 'flex', 
+              justifyContent: 'center', 
+              alignItems: 'center',
+              overflow: 'hidden'
+            }}
+          >
+            <img
+              src={item.bannerImage}
+              alt={item.name}
+              style={{ 
+                width: '100%', 
+                height: '100%', 
+                objectFit: 'cover',
+                objectPosition: 'center'
+              }}
+            />
+          </Box>
+        ))}
       </Carousel>
-    </div>
+    </Box>
   );
 };
 

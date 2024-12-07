@@ -1,6 +1,8 @@
 import './index.css'
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import Footer from './components/Footer';
+import Body from './components/Body';
 
 
 function App() {
@@ -8,6 +10,8 @@ function App() {
     <div className="App">
       <Navbar />
       <Hero />
+      <Body />
+      <Footer />
     </div>
   );
 }
