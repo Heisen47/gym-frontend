@@ -6,12 +6,17 @@ import {
   Menu,
   MenuItem,
   Typography,
+  Button,
+  Modal,
 } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { Link } from "react-router";
+import { CustomModal } from "./CustomModal";
 
 const Navbar = () => {
-  const [anchorEl, setAnchorEl] = useState(null); // State to track the anchor element for the menu
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [modalView, setModalView] = useState(null);
+
   const settings = ["Profile", "Account", "Dashboard", "Logout"];
   const navs = ["About", "Product", "Contact"];
 
@@ -23,6 +28,10 @@ const Navbar = () => {
   // Close the menu
   const handleCloseUserMenu = () => {
     setAnchorEl(null);
+  };
+
+  const handleModal = () => {
+    setModalView(<Modal />);
   };
 
   return (
@@ -50,6 +59,18 @@ const Navbar = () => {
             ))}
           </div>
         </Typography>
+
+        {/* SignIn  */}
+        <CustomModal
+          trigger={<Button color="inherit">Sign In</Button>}
+          title="Welcome to Our App"
+          description="Learn more about our features"
+        >
+          <Typography sx={{ mt: 2 }}>
+            This is the main content of the modal. You can add any custom
+            content here.
+          </Typography>
+        </CustomModal>
 
         {/* Account Icon */}
         <IconButton onClick={handleOpenUserMenu} color="inherit">
