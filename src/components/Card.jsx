@@ -15,7 +15,7 @@ const bull = (
   </Box>
 );
 
-const card = (
+const Card = (
   <React.Fragment>
     <CardContent>
       <Typography gutterBottom sx={{ color: 'text.secondary', fontSize: 14 }}>
@@ -40,7 +40,7 @@ const card = (
 export default function OutlinedCard() {
   return (
     <Box sx={{ minWidth: 275 }}>
-      <Card variant="outlined">{card}</Card>
+      <Card variant="outlined">{Card}</Card>
     </Box>
   );
 }
