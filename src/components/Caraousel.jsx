@@ -1,9 +1,9 @@
 import React from 'react';
 import { Box } from '@mui/material';
 import Carousel from 'react-material-ui-carousel';
-import banner_1 from "../assets/banner_1.jpg";
-import banner_2 from "../assets/banner_2.jpg";
-import banner_3 from "../assets/banner_3.jpg";
+import banner_1 from "../assets/hero/banner_1.jpg";
+import banner_2 from "../assets/hero/banner_2.jpg";
+import banner_3 from "../assets/hero/banner_3.jpg";
 
 const Caraousel = () => {
   const items = [
