@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Modal, Box, Typography, Button } from "@mui/material";
 
 import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
+import { Facebook, Google, Phone } from "@mui/icons-material";
 
 const style = {
   position: "absolute",
@@ -17,9 +17,10 @@ const style = {
   p: 4,
 };
 
+
 export const CustomModal = ({
   trigger,
-  // title = "Modal Title",
+  title = "Modal Title",
   // description = "Modal description",
   children,
 }) => {
@@ -37,23 +38,32 @@ export const CustomModal = ({
         onClose={handleClose}
         aria-labelledby="modal-title"
         aria-describedby="modal-description"
+        className="rounded-lg"
       >
         <Box sx={style}>
-          {/* <Typography id="modal-title" variant="h6" component="h2">
+          <Typography id="modal-title" variant="h6" component="h2" className="text-center">
             {title}
           </Typography>
-          <Typography id="modal-description" sx={{ mt: 2 }}>
+          {/* <Typography id="modal-description" sx={{ mt: 2 }}>
             {description}
           </Typography> */}
+         
+
           <Typography id="modal-description" className="flex justify-between mt-2">
-            <Card variant="outlined">card</Card>
-            <Card variant="outlined">card</Card>
-            <Card variant="outlined">card</Card>
+            <Card variant="outlined">
+              <Google sx={{ fontSize: 40 }}/>
+            </Card>
+            <Card variant="outlined">
+              <Facebook sx={{ fontSize: 40 }}/>
+            </Card>
+            <Card variant="outlined">
+              <Phone sx={{ fontSize: 40 }}/>
+            </Card>
           </Typography>
 
           {children}
 
-          <Button onClick={handleClose} variant="contained" className="mt-2 content-center ">
+          <Button onClick={handleClose} variant="contained" className="text-center">
             Close
           </Button>
         </Box>
