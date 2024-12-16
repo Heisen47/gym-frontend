@@ -38,14 +38,14 @@ export const CustomModal = ({
         aria-labelledby="modal-title"
         aria-describedby="modal-description"
       >
-        <Box sx={style}>
-          {/* <Typography id="modal-title" variant="h6" component="h2">
-            {title}
+        <Box sx={style} className="flex flex-col items-center">
+          <Typography id="modal-title" variant="h6" component="h2">
+            Sign In
           </Typography>
-          <Typography id="modal-description" sx={{ mt: 2 }}>
+          {/* <Typography id="modal-description" sx={{ mt: 2 }}>
             {description}
           </Typography> */}
-          <Typography id="modal-description" className="flex justify-between mt-2">
+          <Typography id="modal-description" className="lg:flex sm:justify-between sm:mt-2">
             <Card variant="outlined">card</Card>
             <Card variant="outlined">card</Card>
             <Card variant="outlined">card</Card>

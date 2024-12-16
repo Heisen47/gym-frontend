@@ -6,11 +6,7 @@ const SignIn = () => {
   return (
     <div className='flex justify-center items-center h-screen text-center p-2'>
       <div className='border border-black container'>
-      <Card variant="outlined">card</Card>
-      <Card variant="outlined">card</Card>
-      <Card variant="outlined">card</Card>
-      <Card variant="outlined">card</Card>
-      <Card variant="outlined">card</Card>
+
       </div>
     </div>
   )
