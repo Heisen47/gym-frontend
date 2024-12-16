@@ -7,10 +7,6 @@ const Home = () => {
     <>
     <Hero />
     <div className="container mx-auto p-4">
-<<<<<<< HEAD
-      {/* <p></p> */}
-=======
->>>>>>> d411c3db2a6da6b81324ed773aacfb271a844643
       <Body />
     </div>
   </>

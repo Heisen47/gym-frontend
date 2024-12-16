@@ -1,5 +1,5 @@
 import React from "react";
-<<<<<<< HEAD
+
 import Card from "@mui/material/Card";
 
 const Body = () => {
@@ -39,15 +39,10 @@ const Body = () => {
         </div>
       </div>
     </>
-=======
 
 
-const Body = () => {
-  return (
-    <div>
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quisquam voluptates quibusdam eius blanditiis sequi suscipit quos ipsa expedita incidunt doloremque. Sint fuga eligendi natus totam amet ratione, vitae blanditiis voluptate.
-    </div>
->>>>>>> d411c3db2a6da6b81324ed773aacfb271a844643
+
+
   );
 };
 

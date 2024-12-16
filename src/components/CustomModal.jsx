@@ -40,25 +40,15 @@ export const CustomModal = ({
         aria-describedby="modal-description"
         className="rounded-lg"
       >
-<<<<<<< HEAD
-        <Box sx={style} className="flex flex-col items-center">
-          <Typography id="modal-title" variant="h6" component="h2">
-            Sign In
-=======
         <Box sx={style}>
           <Typography id="modal-title" variant="h6" component="h2" className="text-center">
             {title}
->>>>>>> d411c3db2a6da6b81324ed773aacfb271a844643
+
           </Typography>
           {/* <Typography id="modal-description" sx={{ mt: 2 }}>
             {description}
           </Typography> */}
-<<<<<<< HEAD
-          <Typography id="modal-description" className="lg:flex sm:justify-between sm:mt-2">
-            <Card variant="outlined">card</Card>
-            <Card variant="outlined">card</Card>
-            <Card variant="outlined">card</Card>
-=======
+
          
 
           <Typography id="modal-description" className="flex justify-between mt-2">
@@ -71,7 +61,7 @@ export const CustomModal = ({
             <Card variant="outlined">
               <Phone sx={{ fontSize: 40 }}/>
             </Card>
->>>>>>> d411c3db2a6da6b81324ed773aacfb271a844643
+
           </Typography>
 
           {children}

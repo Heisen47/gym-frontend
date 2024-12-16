@@ -1,0 +1,7 @@
+https://developers.facebook.com/apps/2661120014088265/use_cases/customize/?use_case_enum=FB_LOGIN&selected_tab=quickstart&product_route=fb-login
+
+
+https://developers.facebook.com/docs/development/create-an-app/facebook-login-use-case
+
+
+https://console.firebase.google.com/u/0/project/auth-b39ea/authentication/providers
