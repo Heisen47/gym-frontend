@@ -4,6 +4,8 @@ import { Modal, Box, Typography, Button } from "@mui/material";
 
 import Card from "@mui/material/Card";
 import { Facebook, Google, Phone } from "@mui/icons-material";
+import GoogleAuth from "./GoogleAuth";
+import FbAuth from "./FbAuth";
 
 const style = {
   position: "absolute",
@@ -52,15 +54,9 @@ export const CustomModal = ({
          
 
           <Typography id="modal-description" className="flex justify-between mt-2">
-            <Card variant="outlined">
-              <Google sx={{ fontSize: 40 }}/>
-            </Card>
-            <Card variant="outlined">
-              <Facebook sx={{ fontSize: 40 }}/>
-            </Card>
-            <Card variant="outlined">
-              <Phone sx={{ fontSize: 40 }}/>
-            </Card>
+            <GoogleAuth/>
+            <FbAuth />
+            <Phone />
 
           </Typography>
 
