@@ -4,9 +4,9 @@ import Card from "@mui/material/Card";
 
 const phoneAuth = () => {
   return (
-    <div>
+    <div  className="cursor-pointer">
       <Card variant="outlined">
-        <Phone sx={{ fontSize: 40 }} />
+        <Phone sx={{ fontSize: 70 }} />
       </Card>
     </div>
   );

@@ -1,11 +1,9 @@
-// ModalComponent.js
 import React, { useState } from "react";
 import { Modal, Box, Typography, Button } from "@mui/material";
 
-import Card from "@mui/material/Card";
-import { Facebook, Google, Phone } from "@mui/icons-material";
 import GoogleAuth from "./GoogleAuth";
 import FbAuth from "./FbAuth";
+import PhoneAuth from "./PhoneAuth";
 
 const style = {
   position: "absolute",
@@ -18,7 +16,6 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
-
 
 export const CustomModal = ({
   trigger,
@@ -43,28 +40,36 @@ export const CustomModal = ({
         className="rounded-lg"
       >
         <Box sx={style}>
-          <Typography id="modal-title" variant="h6" component="h2" className="text-center">
+          <Typography
+            id="modal-title"
+            variant="h6"
+            component="h2"
+            className="text-center m-2 text-2xl"
+          >
             {title}
-
           </Typography>
-          {/* <Typography id="modal-description" sx={{ mt: 2 }}>
-            {description}
-          </Typography> */}
 
-         
-
-          <Typography id="modal-description" className="flex justify-between mt-2">
-            <GoogleAuth/>
+          <Typography
+            id="modal-description"
+            className="flex flex-col md:flex-row md:justify-between space-y-4 md:space-y-0 md:space-x-4"
+          >
+            <GoogleAuth />
             <FbAuth />
-            <Phone />
+            <PhoneAuth />
 
           </Typography>
 
           {children}
 
-          <Button onClick={handleClose} variant="contained" className="text-center">
-            Close
-          </Button>
+          <div className="flex justify-center items-center h-full mt-5">
+            <Button
+              onClick={handleClose}
+              variant="contained"
+              className="text-center"
+            >
+              Close
+            </Button>
+          </div>
         </Box>
       </Modal>
     </>

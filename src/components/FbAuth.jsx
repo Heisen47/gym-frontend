@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import Card from "@mui/material/Card";
 import { Facebook } from "@mui/icons-material";
 
 const FbAuth = () => {
+
+
   return (
-    <div>
-      <Card variant="outlined">
-        <Facebook sx={{ fontSize: 40 }} />
+    <div className="cursor-pointer">
+      <Card variant="outlined" >
+        <Facebook sx={{ fontSize: 70 }} />
       </Card>
     </div>
   );

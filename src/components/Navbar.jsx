@@ -64,7 +64,6 @@ const Navbar = () => {
         <CustomModal
           trigger={<Button color="inherit">Sign In</Button>}
           title="Sign In"
-          // description="Learn more about our features"
         >
           {/* <Typography sx={{ mt: 2 }}>
             This is the main content of the modal. You can add any custom
