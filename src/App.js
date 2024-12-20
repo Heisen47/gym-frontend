@@ -7,9 +7,11 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import { BrowserRouter as Router, Routes, Route } from "react-router";
 import Product from "./pages/Product";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 function App() {
   return (
+    <GoogleOAuthProvider clientId="799455265041-4e660qpe66qgv6ru8pm449v1vp92un3m.apps.googleusercontent.com">
     <Router>
 
       <div className="flex flex-col min-h-screen">
@@ -27,6 +29,7 @@ function App() {
         <Footer />
       </div>
     </Router>
+    </GoogleOAuthProvider>
   );
 }
 
