@@ -16,6 +16,8 @@ import { CustomModal } from "./CustomModal";
 const Navbar = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [modalView, setModalView] = useState(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   const settings = ["Profile", "Account", "Dashboard", "Logout"];
   const navs = ["About", "Product", "Contact"];
@@ -30,8 +32,9 @@ const Navbar = () => {
     setAnchorEl(null);
   };
 
-  const handleModal = () => {
-    setModalView(<Modal />);
+  const handleAuthSuccess = () => {
+    setIsAuthenticated(true);
+    setShowModal(false); // Close modal after successful auth
   };
 
   return (
@@ -61,15 +64,18 @@ const Navbar = () => {
         </Typography>
 
         {/* SignIn  */}
-        <CustomModal
-          trigger={<Button color="inherit">Sign In</Button>}
-          title="Sign In"
-        >
-          {/* <Typography sx={{ mt: 2 }}>
-            This is the main content of the modal. You can add any custom
-            content here.
-          </Typography> */}
-        </CustomModal>
+        {!showModal && (
+          <CustomModal
+            trigger={
+              <Button color="inherit">
+                {isAuthenticated ? "Welcome" : "Sign In"}
+              </Button>
+            }
+            title="Sign In"
+            onClose={() => setShowModal(false)}
+            onAuthSuccess={handleAuthSuccess}
+          />
+        )}
 
         {/* Account Icon */}
         <IconButton onClick={handleOpenUserMenu} color="inherit">

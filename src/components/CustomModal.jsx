@@ -20,8 +20,8 @@ const style = {
 export const CustomModal = ({
   trigger,
   title = "Modal Title",
-  // description = "Modal description",
   children,
+  onAuthSuccess,
 }) => {
   const [open, setOpen] = useState(false);
 
@@ -53,10 +53,9 @@ export const CustomModal = ({
             id="modal-description"
             className="flex flex-col md:flex-row md:justify-between space-y-4 md:space-y-0 md:space-x-4"
           >
-            <GoogleAuth />
+            <GoogleAuth onAuthSuccess={onAuthSuccess} />
             <FbAuth />
             <PhoneAuth />
-
           </Typography>
 
           {children}
