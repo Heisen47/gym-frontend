@@ -22,6 +22,8 @@ export const CustomModal = ({
   title = "Modal Title",
   children,
   onAuthSuccess,
+  setName,
+  setDp
 }) => {
   const [open, setOpen] = useState(false);
 
@@ -53,7 +55,7 @@ export const CustomModal = ({
             id="modal-description"
             className="flex flex-col md:flex-row md:justify-between space-y-4 md:space-y-0 md:space-x-4"
           >
-            <GoogleAuth onAuthSuccess={onAuthSuccess} />
+            <GoogleAuth onAuthSuccess={onAuthSuccess}  setName = {setName} setDp={setDp}/>
             <FbAuth />
             <PhoneAuth />
           </Typography>

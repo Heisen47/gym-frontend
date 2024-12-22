@@ -18,6 +18,8 @@ const Navbar = () => {
   const [modalView, setModalView] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [name, setName] = useState("Bob");
+  const [dp, setDp] = useState(null);
 
   const settings = ["Profile", "Account", "Dashboard", "Logout"];
   const navs = ["About", "Product", "Contact"];
@@ -68,19 +70,23 @@ const Navbar = () => {
           <CustomModal
             trigger={
               <Button color="inherit">
-                {isAuthenticated ? "Welcome" : "Sign In"}
+                {isAuthenticated ? `Welcome ${name}` : "Sign In"}
               </Button>
             }
             title="Sign In"
             onClose={() => setShowModal(false)}
             onAuthSuccess={handleAuthSuccess}
+            setName={setName}
+            setDp={setDp}
           />
         )}
 
         {/* Account Icon */}
-        <IconButton onClick={handleOpenUserMenu} color="inherit">
-          <AccountCircleIcon />
-        </IconButton>
+        {isAuthenticated ? 
+          <IconButton onClick={handleOpenUserMenu} color="inherit">
+            <img src={`${dp}`} alt="" />
+          </IconButton>
+        : <AccountCircleIcon />}
 
         {/* Menu */}
         <Menu

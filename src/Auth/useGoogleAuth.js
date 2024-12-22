@@ -1,7 +1,7 @@
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 
-const useGoogleAuth = (onAuthSuccess) => {
+const useGoogleAuth = (onAuthSuccess , setName ,setDp) => {
 
   const handleGoogleLogin = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
@@ -20,6 +20,9 @@ const useGoogleAuth = (onAuthSuccess) => {
         console.log("User Info:", userInfo.data);
         onAuthSuccess();
         const name = userInfo.data.given_name;
+        const dp = userInfo.data.picture;
+        setName(name);
+        setDp(dp);
 
         return userInfo.data;
       } catch (error) {

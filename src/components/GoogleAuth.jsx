@@ -3,9 +3,9 @@ import Card from "@mui/material/Card";
 import { Google } from "@mui/icons-material";
 import useGoogleAuth from "../Auth/useGoogleAuth";
 
-const GoogleAuth = ({ onAuthSuccess }) => {
+const GoogleAuth = ({ onAuthSuccess , setName , setDp}) => {
 
-const login = useGoogleAuth(onAuthSuccess)
+const login = useGoogleAuth(onAuthSuccess , setName , setDp)
 
   return (
     <>
