@@ -12,10 +12,10 @@ import {
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { Link } from "react-router";
 import { CustomModal } from "./CustomModal";
+import { googleLogout } from "@react-oauth/google";
 
 const Navbar = () => {
   const [anchorEl, setAnchorEl] = useState(null);
-  const [modalView, setModalView] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [name, setName] = useState("Bob");
@@ -30,8 +30,13 @@ const Navbar = () => {
   };
 
   // Close the menu
-  const handleCloseUserMenu = () => {
+  const handleCloseUserMenu = (setting) => {
     setAnchorEl(null);
+    if (setting === "Logout") {
+      googleLogout();
+      setIsAuthenticated(false);
+      setDp(null);
+    }
   };
 
   const handleAuthSuccess = () => {
@@ -66,7 +71,8 @@ const Navbar = () => {
         </Typography>
 
         {/* SignIn  */}
-        {!showModal && (
+
+        {!isAuthenticated && (
           <CustomModal
             trigger={
               <Button color="inherit">
@@ -74,11 +80,16 @@ const Navbar = () => {
               </Button>
             }
             title="Sign In"
-            onClose={() => setShowModal(false)}
-            onAuthSuccess={handleAuthSuccess}
+            onClose={() => setShowModal(false)} // Handles modal close
+            onAuthSuccess={handleAuthSuccess} // Handles authentication success
             setName={setName}
             setDp={setDp}
           />
+        )}
+
+        {/* Display Welcome Message if Authenticated */}
+        {isAuthenticated && (
+          <Button color="inherit">{`Welcome ${name}`}</Button>
         )}
 
         {/* Account Icon */}
@@ -109,7 +120,10 @@ const Navbar = () => {
           }}
         >
           {settings.map((setting) => (
-            <MenuItem key={setting} onClick={handleCloseUserMenu}>
+            <MenuItem
+              key={setting}
+              onClick={() => handleCloseUserMenu(setting)}
+            >
               <Typography sx={{ textAlign: "center" }}>{setting}</Typography>
             </MenuItem>
           ))}
@@ -118,5 +132,4 @@ const Navbar = () => {
     </AppBar>
   );
 };
-
 export default Navbar;
