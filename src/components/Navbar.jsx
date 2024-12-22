@@ -82,11 +82,17 @@ const Navbar = () => {
         )}
 
         {/* Account Icon */}
-        {isAuthenticated ? 
-          <IconButton onClick={handleOpenUserMenu} color="inherit">
-            <img src={`${dp}`} alt="" />
-          </IconButton>
-        : <AccountCircleIcon />}
+        <IconButton onClick={handleOpenUserMenu} color="inherit">
+          {dp ? (
+            <img
+              src={dp}
+              alt="user"
+              style={{ width: 40, height: 40, borderRadius: "50%" }} // Styling for a circular avatar
+            />
+          ) : (
+            <AccountCircleIcon />
+          )}
+        </IconButton>
 
         {/* Menu */}
         <Menu
