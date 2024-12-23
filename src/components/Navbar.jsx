@@ -55,7 +55,7 @@ const Navbar = () => {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" className="z-50">
       <Toolbar>
         <span className="absolute left-1/2 transform -translate-x-1/2 md:static md:transform-none">
           <Link to="/" className="block md:inline hover:underline">
@@ -70,7 +70,7 @@ const Navbar = () => {
               <MenuIcon className="h-8 w-8" />
             </button>
           </Drawer.Trigger>
-          <HamburgerMenu />
+          <HamburgerMenu  setShowHamburgerMenu  = {setShowHamburgerMenu}/>
         </Drawer.Root>
 
         {/* Add other navbar elements here */}
@@ -89,7 +89,7 @@ const Navbar = () => {
             </Link>
             {navs.map((nav) => (
               <Link key={nav} to={`/${nav}`} className="block md:inline ">
-                {nav}
+                | {nav}
               </Link>
             ))}
           </div>
