@@ -4,8 +4,8 @@ import Card from "@mui/material/Card";
 
 const Body = () => {
   return (
-    <>
-      <div className="offerings">
+    <div className="p-4">
+      <div className="offerings bg-secondary">
         <h1 className="font-extrabold p-2 border border-black">
           What we offer
         </h1>
@@ -73,7 +73,7 @@ const Body = () => {
           </Card>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

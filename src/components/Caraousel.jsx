@@ -45,7 +45,7 @@ const Caraousel = () => {
           boxShadow: 'none', // Remove default paper shadow
         }
       }}
-      className="-z-50"
+      className="-z-20"
     >
       <Carousel 
         autoPlay 
