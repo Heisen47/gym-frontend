@@ -26,6 +26,11 @@ const Navbar = () => {
   const [dp, setDp] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const [showHamburgerMenu, setShowHamburgerMenu] = useState(false);
+  const [open, setOpen] = useState(false);
+  
+  const handleLinkClick = () => {
+    setOpen(false);  // Close drawer
+  };
 
   const settings = ["Profile", "Account", "Dashboard", "Logout"];
   const navs = ["About", "Product"];
@@ -64,13 +69,13 @@ const Navbar = () => {
         </span>
 
         {/* Hamburger Icon */}
-        <Drawer.Root  direction="top">
+        <Drawer.Root  direction="top" open={open} onOpenChange={setOpen}>
           <Drawer.Trigger asChild>
             <button className="block md:hidden focus:outline-none">
               <MenuIcon className="h-8 w-8" />
             </button>
           </Drawer.Trigger>
-          <HamburgerMenu  setShowHamburgerMenu  = {setShowHamburgerMenu}/>
+          <HamburgerMenu handleLinkClick ={handleLinkClick} />
         </Drawer.Root>
 
         {/* Add other navbar elements here */}

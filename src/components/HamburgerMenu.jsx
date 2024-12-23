@@ -1,40 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router";
 import { Drawer } from "vaul";
 
-const HamburgerMenu = ({ setShowHamburgerMenu }) => {
+const HamburgerMenu = ({handleLinkClick}) => {
   const navs = ["About", "Product"];
-
-  const handleHamburger = () => {
-    setShowHamburgerMenu(false);
-  };
 
 
   return (
-    <Drawer.Portal>
-      <Drawer.Overlay className="fixed inset-0 bg-black/40" />
-      <Drawer.Content className="fixed top-0 left-0 right-0 bg-white flex flex-col min-h-16
+      <Drawer.Portal>
+        <Drawer.Overlay className="fixed inset-0 bg-black/40" />
+        <Drawer.Content
+          className="fixed top-0 left-0 right-0 bg-white flex flex-col min-h-16
        outline-none data-[state=open]:animate-in
         data-[state=closed]:animate-out data-[state=closed]:slide-out-to-top 
-        data-[state=open]:slide-in-from-top">
-        <div className="p-4">
-          <div className="mx-auto w-12 h-1.5 rounded-full bg-gray-300 mb-8" />
-          <div 
-          className="flex justify-center items-center content-center gap-2 pt-4"
-            onClick={handleHamburger}
-          >
-            <Link to="/" className="block md:inline">
-              Home 
-            </Link>
-            {navs.map((nav) => (
-              <Link key={nav} to={`/${nav}`} className="block md:inline ">
-                | {nav} 
+        data-[state=open]:slide-in-from-top"
+        >
+          <div className="p-4">
+            <div className="mx-auto w-12 h-1.5 rounded-full bg-gray-300 mb-8" />
+            <div className="flex justify-center items-center content-center gap-2 pt-4">
+              <Link
+                to="/"
+                className="block md:inline"
+                onClick={handleLinkClick}
+              >
+                Home
               </Link>
-            ))}
-          </div>
-        </div>
-      </Drawer.Content>
-    </Drawer.Portal>
+              {navs.map((nav) => (
+                <Link
+                  key={nav}
+                  to={`/${nav}`}
+                  className="block md:inline"
+                  onClick={handleLinkClick}
+                >
+                  | {nav}
+                </Link>
+              ))}
+            </div>
+          </div>    
+        </Drawer.Content>
+      </Drawer.Portal>
+
   );
 };
 
