@@ -110,7 +110,7 @@ const Navbar = () => {
         )}
         {/* Display Welcome Message if Authenticated */}
         {isAuthenticated && (
-          <span color="inherit" className="mr-6">{`Welcome ${name}!`}</span>
+          <span color="inherit" className="mr-6 hidden md:inline">{`Welcome ${name}!`}</span>
         )}
 
         {/* Account Icon */}
