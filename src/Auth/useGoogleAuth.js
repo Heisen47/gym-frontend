@@ -19,6 +19,8 @@ const useGoogleAuth = (onAuthSuccess , setName ,setDp) => {
 
         console.log("User Info:", userInfo.data);
         onAuthSuccess();
+
+        // setup user info
         const name = userInfo.data.given_name;
         const dp = userInfo.data.picture;
         setName(name);

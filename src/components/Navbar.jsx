@@ -22,6 +22,7 @@ const Navbar = () => {
   const [showModal, setShowModal] = useState(false);
   const [name, setName] = useState("Bob");
   const [dp, setDp] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
 
   const settings = ["Profile", "Account", "Dashboard", "Logout"];
   const navs = ["About", "Product"];
@@ -49,18 +50,36 @@ const Navbar = () => {
   return (
     <AppBar position="static">
       <Toolbar>
-        <span>
+
+        <span className="absolute left-1/2 transform -translate-x-1/2 md:static md:transform-none">
           <Link to="/" className="block md:inline hover:underline">
             <FitnessCenterIcon className="h-8 w-8" />
           </Link>
         </span>
+
+         {/* Hamburger Icon */}
+        <button
+          className="block md:hidden focus:outline-none"
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          <div className="space-y-1">
+            <span className="block w-6 h-0.5 bg-white"></span>
+            <span className="block w-6 h-0.5 bg-white"></span>
+            <span className="block w-6 h-0.5 bg-white"></span>
+          </div>
+        </button>
+
         {/* Add other navbar elements here */}
         <Typography
           variant="h6"
           sx={{ flexGrow: 1 }}
           className="flex items-center justify-center"
         >
-          <div className="flex space-x-4 ml-4 justify-center items-center">
+          <div 
+          className={`${
+            isOpen ? "block" : "hidden"
+          } md:flex md:space-x-4 absolute md:static top-16 left-0 w-full md:w-auto bg-gray-800 md:bg-transparent`}
+          >
             <Link to="/" className="block md:inline">
               Home
             </Link>
@@ -71,6 +90,9 @@ const Navbar = () => {
             ))}
           </div>
         </Typography>
+
+
+
         {/* SignIn  */}
         {!isAuthenticated && (
           <CustomModal
@@ -90,6 +112,7 @@ const Navbar = () => {
         {isAuthenticated && (
           <span color="inherit" className="mr-6">{`Welcome ${name}!`}</span>
         )}
+
         {/* Account Icon */}
         {isAuthenticated && (
           <IconButton onClick={handleOpenUserMenu} color="inherit">
