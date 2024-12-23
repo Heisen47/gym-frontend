@@ -7,7 +7,6 @@ import {
   MenuItem,
   Typography,
   Button,
-  Modal,
 } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { Link } from "react-router";
@@ -25,15 +24,15 @@ const Navbar = () => {
   const [name, setName] = useState("Bob");
   const [dp, setDp] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
-  const [showHamburgerMenu, setShowHamburgerMenu] = useState(false);
   const [open, setOpen] = useState(false);
-  
-  const handleLinkClick = () => {
-    setOpen(false);  // Close drawer
-  };
 
   const settings = ["Profile", "Account", "Dashboard", "Logout"];
   const navs = ["About", "Product"];
+
+  //drawer settings for mobile
+  const handleLinkClick = () => {
+    setOpen(!open); // Close drawer
+  };
 
   // Open the menu
   const handleOpenUserMenu = (event) => {
@@ -50,18 +49,15 @@ const Navbar = () => {
     }
   };
 
+  //Auth success
   const handleAuthSuccess = () => {
     setIsAuthenticated(true);
     setShowModal(false);
   };
 
-  const handleHamburger = () => {
-    setShowHamburgerMenu(!showHamburgerMenu);
-  };
-
   return (
     <AppBar position="static" className="z-50">
-      <Toolbar>
+      <Toolbar className="bg-primary">
         <span className="absolute left-1/2 transform -translate-x-1/2 md:static md:transform-none">
           <Link to="/" className="block md:inline hover:underline">
             <FitnessCenterIcon className="h-8 w-8" />
@@ -69,13 +65,13 @@ const Navbar = () => {
         </span>
 
         {/* Hamburger Icon */}
-        <Drawer.Root  direction="top" open={open} onOpenChange={setOpen}>
+        <Drawer.Root direction="top" open={open} onOpenChange={handleLinkClick}>
           <Drawer.Trigger asChild>
             <button className="block md:hidden focus:outline-none">
               <MenuIcon className="h-8 w-8" />
             </button>
           </Drawer.Trigger>
-          <HamburgerMenu handleLinkClick ={handleLinkClick} />
+          <HamburgerMenu handleLinkClick={handleLinkClick}/>
         </Drawer.Root>
 
         {/* Add other navbar elements here */}
@@ -115,6 +111,7 @@ const Navbar = () => {
             setDp={setDp}
           />
         )}
+
         {/* Display Welcome Message if Authenticated */}
         {isAuthenticated && (
           <span
