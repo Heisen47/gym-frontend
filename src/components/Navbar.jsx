@@ -13,6 +13,8 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { Link } from "react-router";
 import { CustomModal } from "./CustomModal";
 import { googleLogout } from "@react-oauth/google";
+// import logo from "../assets/logo/logo.png";
+import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
 
 const Navbar = () => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -22,7 +24,7 @@ const Navbar = () => {
   const [dp, setDp] = useState(null);
 
   const settings = ["Profile", "Account", "Dashboard", "Logout"];
-  const navs = ["About", "Product", "Contact"];
+  const navs = ["About", "Product"];
 
   // Open the menu
   const handleOpenUserMenu = (event) => {
@@ -47,31 +49,29 @@ const Navbar = () => {
   return (
     <AppBar position="static">
       <Toolbar>
+        <span>
+          <Link to="/" className="block md:inline hover:underline">
+            <FitnessCenterIcon className="h-8 w-8" />
+          </Link>
+        </span>
         {/* Add other navbar elements here */}
         <Typography
           variant="h6"
           sx={{ flexGrow: 1 }}
-          className="flex items-center"
+          className="flex items-center justify-center"
         >
-          MyApp
-          <div className="flex space-x-4 ml-4">
-            <Link to="/" className="block md:inline hover:underline">
+          <div className="flex space-x-4 ml-4 justify-center items-center">
+            <Link to="/" className="block md:inline">
               Home
             </Link>
             {navs.map((nav) => (
-              <Link
-                key={nav} // Add a unique key for each link
-                to={`/${nav}`} // Use template literal syntax for the `to` prop
-                className="block md:inline hover:underline"
-              >
+              <Link key={nav} to={`/${nav}`} className="block md:inline ">
                 {nav}
               </Link>
             ))}
           </div>
         </Typography>
-
         {/* SignIn  */}
-
         {!isAuthenticated && (
           <CustomModal
             trigger={
@@ -86,26 +86,24 @@ const Navbar = () => {
             setDp={setDp}
           />
         )}
-
         {/* Display Welcome Message if Authenticated */}
         {isAuthenticated && (
-          <Button color="inherit">{`Welcome ${name}`}</Button>
+          <span color="inherit" className="mr-6">{`Welcome ${name}!`}</span>
         )}
-
         {/* Account Icon */}
-        <IconButton onClick={handleOpenUserMenu} color="inherit">
-          {dp ? (
-            <img
-              src={dp}
-              alt="user"
-              style={{ width: 40, height: 40, borderRadius: "50%" }} // Styling for a circular avatar
-            />
-          ) : (
-            <AccountCircleIcon />
-          )}
-        </IconButton>
-
-        {/* Menu */}
+        {isAuthenticated && (
+          <IconButton onClick={handleOpenUserMenu} color="inherit">
+            {dp ? (
+              <img
+                src={dp}
+                alt="user"
+                style={{ width: 40, height: 40, borderRadius: "50%" }} // Styling for a circular avatar
+              />
+            ) : (
+              <AccountCircleIcon />
+            )}
+          </IconButton>
+        )}
         <Menu
           anchorEl={anchorEl}
           open={Boolean(anchorEl)}
@@ -128,6 +126,7 @@ const Navbar = () => {
             </MenuItem>
           ))}
         </Menu>
+        
       </Toolbar>
     </AppBar>
   );
