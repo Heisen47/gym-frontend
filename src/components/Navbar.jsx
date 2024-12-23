@@ -13,8 +13,10 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { Link } from "react-router";
 import { CustomModal } from "./CustomModal";
 import { googleLogout } from "@react-oauth/google";
-// import logo from "../assets/logo/logo.png";
+import MenuIcon from "@mui/icons-material/Menu";
 import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
+import HamburgerMenu from "./HamburgerMenu";
+import { Drawer } from "vaul";
 
 const Navbar = () => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -23,6 +25,7 @@ const Navbar = () => {
   const [name, setName] = useState("Bob");
   const [dp, setDp] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
+  const [showHamburgerMenu, setShowHamburgerMenu] = useState(false);
 
   const settings = ["Profile", "Account", "Dashboard", "Logout"];
   const navs = ["About", "Product"];
@@ -44,30 +47,31 @@ const Navbar = () => {
 
   const handleAuthSuccess = () => {
     setIsAuthenticated(true);
-    setShowModal(false); // Close modal after successful auth
+    setShowModal(false);
+  };
+
+  const handleHamburger = () => {
+    setShowHamburgerMenu(!showHamburgerMenu);
   };
 
   return (
     <AppBar position="static">
       <Toolbar>
-
         <span className="absolute left-1/2 transform -translate-x-1/2 md:static md:transform-none">
           <Link to="/" className="block md:inline hover:underline">
             <FitnessCenterIcon className="h-8 w-8" />
           </Link>
         </span>
 
-         {/* Hamburger Icon */}
-        <button
-          className="block md:hidden focus:outline-none"
-          onClick={() => setIsOpen(!isOpen)}
-        >
-          <div className="space-y-1">
-            <span className="block w-6 h-0.5 bg-white"></span>
-            <span className="block w-6 h-0.5 bg-white"></span>
-            <span className="block w-6 h-0.5 bg-white"></span>
-          </div>
-        </button>
+        {/* Hamburger Icon */}
+        <Drawer.Root  direction="top">
+          <Drawer.Trigger asChild>
+            <button className="block md:hidden focus:outline-none">
+              <MenuIcon className="h-8 w-8" />
+            </button>
+          </Drawer.Trigger>
+          <HamburgerMenu />
+        </Drawer.Root>
 
         {/* Add other navbar elements here */}
         <Typography
@@ -75,10 +79,10 @@ const Navbar = () => {
           sx={{ flexGrow: 1 }}
           className="flex items-center justify-center"
         >
-          <div 
-          className={`${
-            isOpen ? "block" : "hidden"
-          } md:flex md:space-x-4 absolute md:static top-16 left-0 w-full md:w-auto bg-gray-800 md:bg-transparent`}
+          <div
+            className={`${
+              isOpen ? "block" : "hidden"
+            } md:flex md:space-x-4 absolute md:static top-16 left-0 w-full md:w-auto bg-gray-800 md:bg-transparent`}
           >
             <Link to="/" className="block md:inline">
               Home
@@ -90,8 +94,6 @@ const Navbar = () => {
             ))}
           </div>
         </Typography>
-
-
 
         {/* SignIn  */}
         {!isAuthenticated && (
@@ -110,7 +112,10 @@ const Navbar = () => {
         )}
         {/* Display Welcome Message if Authenticated */}
         {isAuthenticated && (
-          <span color="inherit" className="mr-6 hidden md:inline">{`Welcome ${name}!`}</span>
+          <span
+            color="inherit"
+            className="mr-6 hidden md:inline"
+          >{`Welcome ${name}!`}</span>
         )}
 
         {/* Account Icon */}
@@ -149,7 +154,6 @@ const Navbar = () => {
             </MenuItem>
           ))}
         </Menu>
-        
       </Toolbar>
     </AppBar>
   );
