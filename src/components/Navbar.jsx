@@ -115,7 +115,7 @@ const Navbar = () => {
                 isOpen ? "block" : "hidden"
               } md:flex md:space-x-4 absolute md:static top-16 left-0 w-full md:w-auto bg-gray-800 md:bg-transparent`}
             >
-              <Link to="/" className="block md:inline">
+              <Link to="/" className="block md:inline font-sans">
                 <motion.div
                   initial={{ opacity: 0, y: -50 }} // Start off-screen to the top
                   animate={{ opacity: 1, y: 0 }} // Slide into view
@@ -126,7 +126,7 @@ const Navbar = () => {
                 </motion.div>
               </Link>
               {navs.map((nav) => (
-                <Link key={nav} to={`/${nav}`} className="block md:inline ">
+                <Link key={nav} to={`/${nav}`} className="block md:inline font-sans">
                   <motion.div
                     initial={{ opacity: 0, y: -50 }} // Start off-screen to the top
                     animate={{ opacity: 1, y: 0 }} // Slide into view

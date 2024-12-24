@@ -28,10 +28,10 @@ const OutlineCard = () => {
         <div className="text-[#C7B7A3] text-sm mb-2 text-center">
           Quote of the Day
         </div>
-        <div className="text-[#C7C8CC] italic mb-4 text-center text-xl mt-2">
+        <div className="text-[#C7C8CC] font-semibold mb-4 text-center text-xl mt-2">
           "{currentQuote}"
         </div>
-        <div className="text-center">
+        <div className="text-center mt-5">
           <button className="text-[#493628]">
             {currentAuthor}
           </button>
