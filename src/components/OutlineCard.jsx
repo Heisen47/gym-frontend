@@ -12,27 +12,27 @@ const OutlineCard = () => {
       setCurrentIndex((prevIndex) =>
         prevIndex === quotesData.length - 1 ? 0 : prevIndex + 1
       );
-    }, 8000);
+    }, 10000);
 
     return () => clearInterval(timer);
   }, []);
 
   return (
-    <div className="fixed bottom-4 right-4 sm:bottom-2 sm:right-2 w-80 bg-[#758694] shadow-md p-6 rounded-lg">
+    <div className="fixed bottom-8 right-4 sm:bottom-2 sm:right-2 min-w-96 min-h-52 bg-[#758694] shadow-md p-6 rounded-lg">
       <motion.div
         initial={{ opacity: 0, x: 50 }} // Start off-screen to the right
         animate={{ opacity: 1, x: 0 }} // Slide into view
         transition={{ duration: 0.5 }} // Control animation speed
         className="flex flex-col"
       >
-        <div className="text-gray-500 text-sm mb-2 text-center">
+        <div className="text-[#C7B7A3] text-sm mb-2 text-center">
           Quote of the Day
         </div>
-        <div className="text-gray-800 italic mb-4 text-center">
+        <div className="text-[#C7C8CC] italic mb-4 text-center text-xl mt-2">
           "{currentQuote}"
         </div>
-        <div className="text-right">
-          <button className="text-blue-500 hover:underline">
+        <div className="text-center">
+          <button className="text-[#9B4444]">
             {currentAuthor}
           </button>
         </div>

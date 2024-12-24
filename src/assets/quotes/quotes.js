@@ -1,52 +1,52 @@
 const quotes = [
     {
       quote:
-        "The only person you are destined to become is the person you decide to be.",
+        "The only person you are destined to become is the person you decide to be.☝️",
       author: "Ralph Waldo Emerson",
     },
     {
-      quote: "The body achieves what the mind believes.",
+      quote: "The body achieves what the mind believes. 🏋️‍♂️",
       author: "Napoleon Hill",
     },
     {
       quote:
-        "Success usually comes to those who are too busy to be looking for it.",
+        "Success usually comes to those who are too busy to be looking for it. 👁️",
       author: "Henry David Thoreau",
     },
     {
       quote:
-        "The difference between the impossible and the possible lies in determination.",
+        "The difference between the impossible and the possible lies in determination. 🚴‍♂️",
       author: "Tommy Lasorda",
     },
     {
-      quote: "Don't count the days, make the days count.",
+      quote: "Don't count the days, make the days count. ⏲️",
       author: "Muhammad Ali",
     },
     {
       quote:
-        "The hard days are the best because that's when champions are made.",
+        "The hard days are the best because that's when champions are made. 🥇",
       author: "Gabrielle Reece",
     },
     {
-      quote: "What hurts today makes you stronger tomorrow.",
+      quote: "What hurts today makes you stronger tomorrow. 🏊‍♂️",
       author: "Jay Cutler",
     },
     {
-      quote: "Push harder than yesterday if you want a different tomorrow.",
+      quote: "Push harder than yesterday if you want a different tomorrow. 🙇",
       author: "Vincent Williams Sr.",
     },
     {
       quote:
-        "Your body can stand almost anything. It's your mind that you have to convince.",
+        "Your body can stand almost anything. It's your mind that you have to convince. 🏃",
       author: "Eric Thomas",
     },
     {
-      quote: "The only bad workout is the one that didn't happen.",
+      quote: "The only bad workout is the one that didn't happen. 🦾",
       author: "Les Brown",
     },
     {
       quote:
-        "Strength does not come from physical capacity. It comes from an indomitable will.",
+        "Strength does not come from physical capacity. It comes from an indomitable will.🧠",
       author: "Mahatma Gandhi",
     },
     {

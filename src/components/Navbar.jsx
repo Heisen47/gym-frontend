@@ -60,7 +60,7 @@ const Navbar = () => {
   const theme = createTheme({
     palette: {
       primary: {
-        main: "#343131",
+        main: "#373A40",
       },
     },
   });
@@ -72,7 +72,7 @@ const Navbar = () => {
           <span className="absolute left-1/2 transform -translate-x-1/2 md:static md:transform-none">
             <Link to="/" className="block md:inline hover:underline">
               <motion.div
-                initial={{ opacity: 0, y: -50 }} // Start off-screen to the right
+                initial={{ opacity: 0, y: -50 }} // Start off-screen to the top
                 animate={{ opacity: 1, y: 0 }} // Slide into view
                 transition={{ duration: 0.5 }} // Control animation speed
                 className="flex flex-col"
@@ -83,18 +83,25 @@ const Navbar = () => {
           </span>
 
           {/* Hamburger Icon */}
-          <Drawer.Root
-            direction="top"
-            open={open}
-            onOpenChange={handleLinkClick}
+          <motion.div
+            initial={{ opacity: 0, y: -50 }} // Start off-screen to the top
+            animate={{ opacity: 1, y: 0 }} // Slide into view
+            transition={{ duration: 0.5 }} // Control animation speed
+            className="flex flex-col"
           >
-            <Drawer.Trigger asChild>
-              <button className="block md:hidden focus:outline-none">
-                <MenuIcon className="h-8 w-8" />
-              </button>
-            </Drawer.Trigger>
-            <HamburgerMenu handleLinkClick={handleLinkClick} />
-          </Drawer.Root>
+            <Drawer.Root
+              direction="top"
+              open={open}
+              onOpenChange={handleLinkClick}
+            >
+              <Drawer.Trigger asChild>
+                <button className="block md:hidden focus:outline-none">
+                  <MenuIcon className="h-8 w-8" />
+                </button>
+              </Drawer.Trigger>
+              <HamburgerMenu handleLinkClick={handleLinkClick} />
+            </Drawer.Root>
+          </motion.div>
 
           {/* Add other navbar elements here */}
           <Typography
@@ -109,7 +116,7 @@ const Navbar = () => {
             >
               <Link to="/" className="block md:inline">
                 <motion.div
-                  initial={{ opacity: 0, y: -50 }} // Start off-screen to the right
+                  initial={{ opacity: 0, y: -50 }} // Start off-screen to the top
                   animate={{ opacity: 1, y: 0 }} // Slide into view
                   transition={{ duration: 0.5 }} // Control animation speed
                   className="flex flex-col"
@@ -120,12 +127,12 @@ const Navbar = () => {
               {navs.map((nav) => (
                 <Link key={nav} to={`/${nav}`} className="block md:inline ">
                   <motion.div
-                    initial={{ opacity: 0, y: -50 }} // Start off-screen to the right
+                    initial={{ opacity: 0, y: -50 }} // Start off-screen to the top
                     animate={{ opacity: 1, y: 0 }} // Slide into view
                     transition={{ duration: 0.5 }} // Control animation speed
                     className="flex flex-col"
                   >
-                    | {nav}
+                    {nav}
                   </motion.div>
                 </Link>
               ))}
