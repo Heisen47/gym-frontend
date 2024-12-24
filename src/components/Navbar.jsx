@@ -18,6 +18,7 @@ import HamburgerMenu from "./HamburgerMenu";
 import { Drawer } from "vaul";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { motion } from "framer-motion";
+import PersonIcon from "@mui/icons-material/Person";
 
 const Navbar = () => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -150,7 +151,9 @@ const Navbar = () => {
                     transition={{ duration: 0.5 }} // Control animation speed
                     className="flex flex-col"
                   >
-                    {isAuthenticated ? `Welcome ${name}` : "Sign In"}
+                    <span className="inline-block text-center">
+                      {isAuthenticated ? `Welcome ${name}` : <PersonIcon />}
+                    </span>
                   </motion.div>
                 </Button>
               }
@@ -166,7 +169,7 @@ const Navbar = () => {
           {isAuthenticated && (
             <span
               color="inherit"
-              className="mr-6 hidden md:inline"
+              className="hidden md:inline"
             >{`Welcome ${name}!`}</span>
           )}
 

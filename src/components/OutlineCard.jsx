@@ -12,13 +12,13 @@ const OutlineCard = () => {
       setCurrentIndex((prevIndex) =>
         prevIndex === quotesData.length - 1 ? 0 : prevIndex + 1
       );
-    }, 10000);
+    }, 20000);
 
     return () => clearInterval(timer);
   }, []);
 
   return (
-    <div className="fixed bottom-8 right-4 sm:bottom-2 sm:right-2 min-w-96 min-h-52 bg-[#758694] shadow-md p-6 rounded-lg">
+    <div className="fixed top-1/4 right-4 min-w-96 min-h-52 bg-[#758694] shadow-md p-6 rounded-lg">
       <motion.div
         initial={{ opacity: 0, x: 50 }} // Start off-screen to the right
         animate={{ opacity: 1, x: 0 }} // Slide into view
@@ -32,7 +32,7 @@ const OutlineCard = () => {
           "{currentQuote}"
         </div>
         <div className="text-center">
-          <button className="text-[#9B4444]">
+          <button className="text-[#493628]">
             {currentAuthor}
           </button>
         </div>

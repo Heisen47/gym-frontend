@@ -54,16 +54,16 @@ const quotes = [
       author: "Arnold Schwarzenegger",
     },
     {
-      quote: "Wake up with determination. Go to bed with satisfaction.",
+      quote: "Wake up with determination. Go to bed with satisfaction.🪂",
       author: "David Goggins",
     },
     {
-      quote: "You don't have to be extreme, just consistent.",
+      quote: "You don't have to be extreme, just consistent. 🏃",
       author: "Dwayne 'The Rock' Johnson",
     },
     {
       quote:
-        "Champions aren't made in the gyms. Champions are made from something they have deep inside them—a desire, a dream, a vision.",
+        "Champions aren't made in the gyms. Champions are made from something they have deep inside them—a desire, a dream, a vision. 🧿",
       author: "Muhammad Ali",
     },
   ]
