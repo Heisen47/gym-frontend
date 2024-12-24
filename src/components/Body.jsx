@@ -73,6 +73,7 @@ const Body = () => {
           </Card>
         </div>
       </div>
+    
     </div>
   );
 };

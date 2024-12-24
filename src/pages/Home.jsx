@@ -1,16 +1,16 @@
-import React from 'react'
-import Hero from '../components/Hero'
-import Body from '../components/Body'
+import React from "react";
+import Hero from "../components/Hero";
+import Body from "../components/Body";
 
 const Home = () => {
   return (
     <>
-    <Hero />
-    <div className="container mx-auto p-4">
-      <Body />
-    </div>
-  </>
-  )
-}
+      <Hero />
+      <div className="container mx-auto p-4">
+        <Body />
+      </div>
+    </>
+  );
+};
 
-export default Home
+export default Home;

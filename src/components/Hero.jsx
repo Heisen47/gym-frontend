@@ -1,10 +1,11 @@
 import React from 'react';
-import Caraousel from './Caraousel';
+
+import QuoteBox from './QuoteBox';
 
 const Hero = () =>{
     return (
         <div > 
-            <Caraousel />    
+            <QuoteBox />  
         </div>
 );
 }
