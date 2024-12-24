@@ -18,16 +18,17 @@ const OutlineCard = () => {
   }, []);
 
   return (
-    <div className="flex justify-end items-center h-screen p-4">
+    <div className="fixed bottom-4 right-4 sm:bottom-2 sm:right-2 w-80 bg-white shadow-md p-6 rounded-lg">
       <motion.div
         initial={{ opacity: 0, x: 50 }} // Start off-screen to the right
-        whileInView={{ opacity: 1, x: 0 }} // Slide into view
-        viewport={{ once: true, amount: 0.2 }} // Trigger when 20% of the card is in view
+        animate={{ opacity: 1, x: 0 }} // Slide into view
         transition={{ duration: 0.5 }} // Control animation speed
-        className="bg-white shadow-md p-4 rounded-lg max-w-sm"
+        className="flex flex-col"
       >
-        <div className="text-gray-500 text-sm mb-2">Quote of the Day</div>
-        <div className="text-gray-800 italic mb-4">
+        <div className="text-gray-500 text-sm mb-2 text-center">
+          Quote of the Day
+        </div>
+        <div className="text-gray-800 italic mb-4 text-center">
           "{currentQuote}"
         </div>
         <div className="text-right">

@@ -17,6 +17,7 @@ import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
 import HamburgerMenu from "./HamburgerMenu";
 import { Drawer } from "vaul";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { motion } from "framer-motion";
 
 const Navbar = () => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -59,7 +60,7 @@ const Navbar = () => {
   const theme = createTheme({
     palette: {
       primary: {
-        main: "#2E073F",
+        main: "#1A1A1D",
       },
     },
   });
@@ -100,11 +101,25 @@ const Navbar = () => {
               } md:flex md:space-x-4 absolute md:static top-16 left-0 w-full md:w-auto bg-gray-800 md:bg-transparent`}
             >
               <Link to="/" className="block md:inline">
-                Home
+                <motion.div
+                  initial={{ opacity: 0, y: -50 }} // Start off-screen to the right
+                  animate={{ opacity: 1, y: 0 }} // Slide into view
+                  transition={{ duration: 0.5 }} // Control animation speed
+                  className="flex flex-col"
+                >
+                  Home
+                </motion.div>
               </Link>
               {navs.map((nav) => (
                 <Link key={nav} to={`/${nav}`} className="block md:inline ">
-                  | {nav}
+                  <motion.div
+                    initial={{ opacity: 0, y: -50 }} // Start off-screen to the right
+                    animate={{ opacity: 1, y: 0 }} // Slide into view
+                    transition={{ duration: 0.5 }} // Control animation speed
+                    className="flex flex-col"
+                  >
+                    | {nav}
+                  </motion.div>
                 </Link>
               ))}
             </div>
