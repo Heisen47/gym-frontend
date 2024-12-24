@@ -4,13 +4,15 @@ import { motion } from "framer-motion";
 
 const OutlineCard = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const currentQuote = quotesData[currentIndex].quote || quotesData[0].quote;
+  const currentAuthor = quotesData[currentIndex].author || quotesData[0].author;
 
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentIndex((prevIndex) =>
         prevIndex === quotesData.length - 1 ? 0 : prevIndex + 1
       );
-    }, 8000);
+    }, 1000);
 
     return () => clearInterval(timer);
   }, []);
@@ -26,11 +28,11 @@ const OutlineCard = () => {
       >
         <div className="text-gray-500 text-sm mb-2">Quote of the Day</div>
         <div className="text-gray-800 italic mb-4">
-          "{quotesData.quotes[currentIndex].quote}"
+          "{currentQuote}"
         </div>
         <div className="text-right">
           <button className="text-blue-500 hover:underline">
-            {quotesData.quotes[currentIndex].author}
+            {currentAuthor}
           </button>
         </div>
       </motion.div>

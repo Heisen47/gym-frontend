@@ -1,5 +1,4 @@
-const quotesData = {
-  quotes: [
+const quotes = [
     {
       quote:
         "The only person you are destined to become is the person you decide to be.",
@@ -67,7 +66,7 @@ const quotesData = {
         "Champions aren't made in the gyms. Champions are made from something they have deep inside them—a desire, a dream, a vision.",
       author: "Muhammad Ali",
     },
-  ],
-};
+  ]
 
-export default quotesData;
+
+export default quotes;
