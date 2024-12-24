@@ -1,11 +1,10 @@
 import React from 'react';
-
-import QuoteBox from './QuoteBox';
+import OutlineCard from './OutlineCard';
 
 const Hero = () =>{
     return (
         <div > 
-            <QuoteBox />  
+            <OutlineCard />  
         </div>
 );
 }
