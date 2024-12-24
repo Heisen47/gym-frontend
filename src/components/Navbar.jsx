@@ -60,7 +60,7 @@ const Navbar = () => {
   const theme = createTheme({
     palette: {
       primary: {
-        main: "#1A1A1D",
+        main: "#343131",
       },
     },
   });
@@ -71,7 +71,14 @@ const Navbar = () => {
         <Toolbar className="bg-primary">
           <span className="absolute left-1/2 transform -translate-x-1/2 md:static md:transform-none">
             <Link to="/" className="block md:inline hover:underline">
-              <FitnessCenterIcon className="h-8 w-8" />
+              <motion.div
+                initial={{ opacity: 0, y: -50 }} // Start off-screen to the right
+                animate={{ opacity: 1, y: 0 }} // Slide into view
+                transition={{ duration: 0.5 }} // Control animation speed
+                className="flex flex-col"
+              >
+                <FitnessCenterIcon className="h-8 w-8" />
+              </motion.div>
             </Link>
           </span>
 
@@ -130,7 +137,14 @@ const Navbar = () => {
             <CustomModal
               trigger={
                 <Button color="inherit">
-                  {isAuthenticated ? `Welcome ${name}` : "Sign In"}
+                  <motion.div
+                    initial={{ opacity: 0, y: -50 }} // Start off-screen to the right
+                    animate={{ opacity: 1, y: 0 }} // Slide into view
+                    transition={{ duration: 0.5 }} // Control animation speed
+                    className="flex flex-col"
+                  >
+                    {isAuthenticated ? `Welcome ${name}` : "Sign In"}
+                  </motion.div>
                 </Button>
               }
               title="Sign In"

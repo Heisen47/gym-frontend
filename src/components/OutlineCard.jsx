@@ -18,7 +18,7 @@ const OutlineCard = () => {
   }, []);
 
   return (
-    <div className="fixed bottom-4 right-4 sm:bottom-2 sm:right-2 w-80 bg-white shadow-md p-6 rounded-lg">
+    <div className="fixed bottom-4 right-4 sm:bottom-2 sm:right-2 w-80 bg-[#758694] shadow-md p-6 rounded-lg">
       <motion.div
         initial={{ opacity: 0, x: 50 }} // Start off-screen to the right
         animate={{ opacity: 1, x: 0 }} // Slide into view

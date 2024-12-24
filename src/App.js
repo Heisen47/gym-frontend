@@ -18,7 +18,7 @@ function App() {
           <div className="flex flex-col min-h-screen">
             <Navbar />
 
-            <div className="flex-grow bg-[#7A1CAC] -z-10">
+            <div className="flex-grow bg-[#3C3D37] -z-10">
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/about" element={<About />} />
