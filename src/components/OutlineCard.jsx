@@ -10,7 +10,7 @@ const OutlineCard = () => {
       setCurrentIndex((prevIndex) =>
         prevIndex === quotesData.length - 1 ? 0 : prevIndex + 1
       );
-    }, 10000);
+    }, 8000);
 
     return () => clearInterval(timer);
   }, []);
