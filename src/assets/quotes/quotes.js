@@ -38,11 +38,11 @@ const quotes = [
     {
       quote:
         "Your body can stand almost anything. It's your mind that you have to convince.",
-      author: "Unknown",
+      author: "Eric Thomas",
     },
     {
       quote: "The only bad workout is the one that didn't happen.",
-      author: "Unknown",
+      author: "Les Brown",
     },
     {
       quote:
@@ -50,12 +50,12 @@ const quotes = [
       author: "Mahatma Gandhi",
     },
     {
-      quote: "The pain you feel today will be the strength you feel tomorrow.",
+      quote: "The pain you feel today will be the strength you feel tomorrow. 💪",
       author: "Arnold Schwarzenegger",
     },
     {
       quote: "Wake up with determination. Go to bed with satisfaction.",
-      author: "Unknown",
+      author: "David Goggins",
     },
     {
       quote: "You don't have to be extreme, just consistent.",
