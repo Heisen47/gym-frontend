@@ -46,7 +46,7 @@ export const CustomModal = ({
             id="modal-title"
             variant="h6"
             component="h2"
-            className="text-center m-2 text-2xl"
+            className="text-center m-2 font-sans font-semibold pb-4"
           >
             {title}
           </Typography>

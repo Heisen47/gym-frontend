@@ -19,6 +19,7 @@
     "firebase": "^11.1.0",
     "framer-motion": "^11.15.0",
     "jwt-decode": "^4.0.0",
+    "lucide-react": "^0.469.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-material-ui-carousel": "^3.4.2",
@@ -28,6 +29,7 @@
     "styled-components": "^6.1.13",
     "tailwind-gradient-mask-image": "^1.2.0",
     "tailwind-merge": "^2.5.5",
+    "tailwind-scrollbar-hide": "^2.0.0",
     "tailwindcss-animate": "^1.0.7",
     "vaul": "^1.1.2",
     "web-vitals": "^2.1.4"

@@ -1,20 +1,17 @@
 import React from "react";
 
 import Card from "@mui/material/Card";
+import AutoScrollCarousel from "./AutoScrollCarousel";
+
 
 const Body = () => {
+
+
   return (
     <div className="p-4">
-      <div className="offerings bg-secondary">
-        <h1 className="font-extrabold p-2 border border-black">
-          What we offer
-        </h1>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat
-          reprehenderit, assumenda perspiciatis et, dolor magnam optio sed
-          voluptatem cum, officiis eligendi blanditiis distinctio! Est corporis
-          accusantium fuga eum reprehenderit laboriosam enim molestias?
-        </p>
+      <div className="offerings bg-secondary border border-black">
+        <h1 className="text-white text-3xl p-2 font-sans">What we offer</h1>
+        <AutoScrollCarousel />
       </div>
 
       <h3 className="font-extrabold p-2 border border-black">
@@ -73,7 +70,6 @@ const Body = () => {
           </Card>
         </div>
       </div>
-    
     </div>
   );
 };
