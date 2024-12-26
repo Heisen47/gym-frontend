@@ -9,8 +9,8 @@ const Body = () => {
 
   return (
     <div className="p-4">
-      <div className="offerings bg-secondary border border-black">
-        <h1 className="text-white text-3xl p-2 font-sans">What we offer</h1>
+      <div className="offerings bg-secondary border border-black shadow-md">
+        <h1 className="text-[#C7C8CC] text-3xl p-2 font-sans">What we offer</h1>
         <AutoScrollCarousel />
       </div>
 
