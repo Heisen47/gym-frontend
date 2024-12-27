@@ -2,72 +2,32 @@ import React from "react";
 
 import Card from "@mui/material/Card";
 import AutoScrollCarousel from "./AutoScrollCarousel";
-
+import RecipeReviewCard from "./Offering";
 
 const Body = () => {
-
-
   return (
     <div className="p-4">
-      <div className="offerings bg-secondary border border-black shadow-md">
+      <div className="bg-secondary border border-black shadow-md">
         <h1 className="text-[#C7C8CC] text-3xl p-2 font-sans">What we offer</h1>
         <AutoScrollCarousel />
       </div>
 
-      <h3 className="font-extrabold p-2 border border-black">
-        Success Stories
-      </h3>
-      <div className="flex items-center gap-4">
+      <div className="bg-secondary border border-black shadow-md">
+        <h3 className="text-[#C7C8CC] text-3xl p-2 font-sans">
+          Success Stories
+        </h3>
         <div>
-          <img src="" alt="" />
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab,
-            repellat. Nostrum vel pariatur veniam possimus doloribus qui ducimus
-            necessitatibus eius ut magnam, alias, quaerat expedita aperiam, sunt
-            adipisci totam sequi?
-          </p>
-        </div>
-        <div>
-          <img src="" alt="" />
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab,
-            repellat. Nostrum vel pariatur veniam possimus doloribus qui ducimus
-            necessitatibus eius ut magnam, alias, quaerat expedita aperiam, sunt
-            adipisci totam sequi?
-          </p>
-        </div>
-        <div>
-          <img src="" alt="" />
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab,
-            repellat. Nostrum vel pariatur veniam possimus doloribus qui ducimus
-            necessitatibus eius ut magnam, alias, quaerat expedita aperiam, sunt
-            adipisci totam sequi?
-          </p>
+          <AutoScrollCarousel />
         </div>
       </div>
 
-      <div className="review">
+      <div className="bg-secondary border border-black shadow-md">
         <h1 className="font-extrabold p-2 border border-black">Reviews</h1>
         <div className="flex p-2 gap-3 justify-between">
-          <Card variant="outlined">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita,
-            alias reiciendis voluptatibus sunt inventore vel dolores ducimus
-            voluptas nisi beatae doloremque consequuntur fugiat possimus minima
-            in necessitatibus corrupti itaque deleniti.
-          </Card>
-          <Card variant="outlined">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita,
-            alias reiciendis voluptatibus sunt inventore vel dolores ducimus
-            voluptas nisi beatae doloremque consequuntur fugiat possimus minima
-            in necessitatibus corrupti itaque deleniti.
-          </Card>
-          <Card variant="outlined">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita,
-            alias reiciendis voluptatibus sunt inventore vel dolores ducimus
-            voluptas nisi beatae doloremque consequuntur fugiat possimus minima
-            in necessitatibus corrupti itaque deleniti.
-          </Card>
+            <RecipeReviewCard/>
+            <RecipeReviewCard/>
+            <RecipeReviewCard/>
+            <RecipeReviewCard/>
         </div>
       </div>
     </div>
