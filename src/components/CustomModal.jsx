@@ -71,21 +71,21 @@ export const CustomModal = ({
           <div className="text-center">
             <ToggleButtonGroup
               color="primary"
-              value={alignment}
+              value={admin ? "admin" : "user"}
               exclusive
               onChange={handleChange}
               aria-label="Platform"
             >
-              <ToggleButton value="user" onClick={() => setAdmin(!admin)}>
+              <ToggleButton value="user" onClick={() => setAdmin(false)}>
                 User
               </ToggleButton>
-              <ToggleButton value="admin" onClick={() => setAdmin(!admin)}>
+              <ToggleButton value="admin" onClick={() => setAdmin(true)}>
                 Admin
               </ToggleButton>
             </ToggleButtonGroup>
           </div>
 
-          {admin && (
+          {!admin && (
             <Typography
               id="modal-description"
               className="flex flex-col md:flex-row md:justify-between space-y-4 md:space-y-0 md:space-x-4
@@ -101,7 +101,7 @@ export const CustomModal = ({
             </Typography>
           )}
 
-          {!admin && (
+          {admin && (
             <Box
               sx={{
                 display: "flex",
