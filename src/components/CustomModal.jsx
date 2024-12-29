@@ -1,5 +1,16 @@
 import React, { useState } from "react";
-import { Modal, Box, Typography, Button } from "@mui/material";
+import {
+  Modal,
+  Box,
+  Typography,
+  Button,
+  ToggleButtonGroup,
+  ToggleButton,
+  FormControl,
+  InputLabel,
+  Input,
+  FormHelperText,
+} from "@mui/material";
 
 import GoogleAuth from "./GoogleAuth";
 import FbAuth from "./FbAuth";
@@ -23,12 +34,18 @@ export const CustomModal = ({
   children,
   onAuthSuccess,
   setName,
-  setDp
+  setDp,
 }) => {
   const [open, setOpen] = useState(false);
+  const [alignment, setAlignment] = useState("left");
+  const [admin, setAdmin] = useState(false);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const handleChange = (event, newAlignment) => {
+    setAlignment(newAlignment);
+  };
 
   return (
     <>
@@ -46,19 +63,64 @@ export const CustomModal = ({
             id="modal-title"
             variant="h6"
             component="h2"
-            className="text-center m-2 font-sans font-semibold pb-4"
+            className="text-center m-2 font-sans font-semibold text-2xl"
           >
             {title}
           </Typography>
 
-          <Typography
-            id="modal-description"
-            className="flex flex-col md:flex-row md:justify-between space-y-4 md:space-y-0 md:space-x-4"
-          >
-            <GoogleAuth onAuthSuccess={onAuthSuccess}  setName = {setName} setDp={setDp}/>
-            <FbAuth />
-            <PhoneAuth />
-          </Typography>
+          <div className="text-center">
+            <ToggleButtonGroup
+              color="primary"
+              value={alignment}
+              exclusive
+              onChange={handleChange}
+              aria-label="Platform"
+            >
+              <ToggleButton value="user" onClick={() => setAdmin(!admin)}>
+                User
+              </ToggleButton>
+              <ToggleButton value="admin" onClick={() => setAdmin(!admin)}>
+                Admin
+              </ToggleButton>
+            </ToggleButtonGroup>
+          </div>
+
+          {admin && (
+            <Typography
+              id="modal-description"
+              className="flex flex-col md:flex-row md:justify-between space-y-4 md:space-y-0 md:space-x-4
+            p-2"
+            >
+              <GoogleAuth
+                onAuthSuccess={onAuthSuccess}
+                setName={setName}
+                setDp={setDp}
+              />
+              <FbAuth />
+              <PhoneAuth />
+            </Typography>
+          )}
+
+          {!admin && (
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                bgcolor: "background.default",
+              }}
+            >
+              <FormControl className="text-center">
+                <InputLabel htmlFor="my-input">Email address</InputLabel>
+                <Input id="my-input" aria-describedby="my-helper-text" />
+              </FormControl>
+              <FormControl>
+                <InputLabel htmlFor="my-input">Password</InputLabel>
+                <Input id="my-input" aria-describedby="my-helper-text" />
+              </FormControl>
+            </Box>
+          )}
 
           {children}
 
