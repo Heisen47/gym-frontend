@@ -1,8 +1,11 @@
 import React from 'react'
+import Sidebar from '../components/dashboardComponents/Sidebar'
 
 const Admin = () => {
   return (
-    <div></div>
+    <div>
+        <Sidebar />
+    </div>
   )
 }
 
