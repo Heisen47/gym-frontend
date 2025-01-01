@@ -8,6 +8,7 @@ import Contact from "./pages/Contact";
 import { BrowserRouter as Router, Routes, Route } from "react-router";
 import Product from "./pages/Product";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import Admin from "./pages/Admin";
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
                 <Route path="/about" element={<About />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/product" element={<Product />} />
+                <Route path="/Admin" element={<Admin />} />
               </Routes>
             </div>
 

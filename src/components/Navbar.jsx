@@ -126,7 +126,11 @@ const Navbar = () => {
                 </motion.div>
               </Link>
               {navs.map((nav) => (
-                <Link key={nav} to={`/${nav}`} className="block md:inline font-sans">
+                <Link
+                  key={nav}
+                  to={`/${nav}`}
+                  className="block md:inline font-sans"
+                >
                   <motion.div
                     initial={{ opacity: 0, y: -50 }} // Start off-screen to the top
                     animate={{ opacity: 1, y: 0 }} // Slide into view
@@ -137,6 +141,17 @@ const Navbar = () => {
                   </motion.div>
                 </Link>
               ))}
+
+              <Link to="/Admin" className="block md:inline font-sans">
+                <motion.div
+                  initial={{ opacity: 0, y: -50 }} // Start off-screen to the top
+                  animate={{ opacity: 1, y: 0 }} // Slide into view
+                  transition={{ duration: 0.5 }} // Control animation speed
+                  className="flex flex-col"
+                >
+                  Admin
+                </motion.div>
+              </Link>
             </div>
           </Typography>
 
