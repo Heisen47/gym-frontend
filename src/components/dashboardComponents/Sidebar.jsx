@@ -2,19 +2,20 @@ import React, { useState } from "react";
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(true);
-  
+
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
 
   return (
-    <div className="relative flex items-center ">
+    <div className="flex items-center">
+
       <div
         className={`bg-gray-800 text-white h-screen flex flex-col transition-all duration-300 ${
           isOpen ? "w-64" : "w-16"
         }`}
       >
-        <div className="flex flex-col items-center mt-10">
+        <div className="flex flex-col items-center mt-10"> 
           {/* Menu Items */}
           <div
             className={`flex items-center gap-4 w-full p-3 hover:bg-gray-700 rounded-md ${
@@ -42,17 +43,19 @@ const Sidebar = () => {
           </div>
         </div>
       </div>
+
+      
       {/* Drawer Toggle Button */}
-      <div>
+
         <button
           onClick={toggleSidebar}
-          className="textcenter bg-gray-800 text-white p-2 rounded-md cursor-pointer"
+          className="text-center bg-gray-800 text-white p-2 rounded-md cursor-pointer"
         >
-          <span className="text-xl">
-            {isOpen ? "❮" : "❯"}
-          </span>
+          
+          {!isOpen ? "❮" : "❯"}
         </button>
-      </div>
+
+
     </div>
   );
 };
