@@ -1,177 +1,67 @@
-import * as React from "react";
-import PropTypes from "prop-types";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import CssBaseline from "@mui/material/CssBaseline";
-import Divider from "@mui/material/Divider";
-import Drawer from "@mui/material/Drawer";
-import IconButton from "@mui/material/IconButton";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import MailIcon from "@mui/icons-material/Mail";
-import MenuIcon from "@mui/icons-material/Menu";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import { Card } from "@mui/material";
+import React, { useState } from "react";
+import {
+  ChevronRight,
+  ChevronLeft,
+  Grid,
+  Users,
+  DollarSign,
+} from "lucide-react";
 
-const drawerWidth = 240;
+const Sidebar = () => {
+  const [isOpen, setIsOpen] = useState(true);
 
-function Sidebar(props) {
-  const { window } = props;
-  const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [isClosing, setIsClosing] = React.useState(false);
-
-  const handleDrawerClose = () => {
-    setIsClosing(true);
-    setMobileOpen(false);
+  const toggleSidebar = () => {
+    setIsOpen(!isOpen);
   };
-
-  const handleDrawerTransitionEnd = () => {
-    setIsClosing(false);
-  };
-
-  const handleDrawerToggle = () => {
-    if (!isClosing) {
-      setMobileOpen(!mobileOpen);
-    }
-  };
-
-  const drawer = (
-    <div>
-      <Toolbar />
-      <Divider />
-      <List>
-        {["Dashboard", "Customers", "Payment"].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-    </div>
-  );
-
-  // Remove this const when copying and pasting into your project.
-  const container =
-    window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: "flex" }}>
-      <CssBaseline />
-      <AppBar
-        position="fixed"
-        sx={{
-          width: { sm: `calc(100% - ${drawerWidth}px)` },
-          ml: { sm: `${drawerWidth}px` },
-        }}
+    <div className="relative flex items-center">
+      <div
+        className={`bg-gray-800 text-white h-screen flex flex-col transition-all duration-300 ${
+          isOpen ? "w-64" : "w-16"
+        }`}
       >
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: "none" } }}
+        {/* Sidebar Content */}
+        <div className="flex flex-col items-center mt-10">
+          {/* Menu Items */}
+          <div
+            className={`flex items-center gap-4 w-full p-3 hover:bg-gray-700 rounded-md ${
+              isOpen ? "justify-start" : "justify-center"
+            }`}
           >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Responsive drawer
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <Box
-        component="nav"
-        sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-        aria-label="mailbox folders"
-      >
-        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-        <Drawer
-          container={container}
-          variant="temporary"
-          open={mobileOpen}
-          onTransitionEnd={handleDrawerTransitionEnd}
-          onClose={handleDrawerClose}
-          ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
-          }}
-          sx={{
-            display: { xs: "block", sm: "none" },
-            "& .MuiDrawer-paper": {
-              boxSizing: "border-box",
-              width: drawerWidth,
-            },
-          }}
-        >
-          {drawer}
-        </Drawer>
-        <Drawer
-          variant="permanent"
-          sx={{
-            display: { xs: "none", sm: "block" },
-            "& .MuiDrawer-paper": {
-              boxSizing: "border-box",
-              width: drawerWidth,
-            },
-          }}
-          open
-        >
-          {drawer}
-        </Drawer>
-      </Box>
-      <Box
-        component="main"
-        sx={{
-          flexGrow: 1,
-          p: 3,
-          width: { sm: `calc(100% - ${drawerWidth}px)` },
-        }}
-      >
-        <Toolbar />
-        <div className="flex justify-between">
-          <Card variant="outlined" sx={{ marginBottom: 2 }}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Rhoncus
-            dolor purus non enim praesent elementum facilisis leo vel. Risus at
-            ultrices mi tempus imperdiet.
-          </Card>
-          <Card variant="outlined" sx={{ marginBottom: 2 }}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Rhoncus
-            dolor purus non enim praesent elementum facilisis leo vel. Risus at
-            ultrices mi tempus imperdiet.
-          </Card>
-          <Card variant="outlined" sx={{ marginBottom: 2 }}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Rhoncus
-            dolor purus non enim praesent elementum facilisis leo vel. Risus at
-            ultrices mi tempus imperdiet.
-          </Card>
+            <Grid className="h-5 w-5" />
+            {isOpen && <span className="text-lg">Dashboard</span>}
+          </div>
+          <div
+            className={`flex items-center gap-4 w-full p-3 hover:bg-gray-700 rounded-md ${
+              isOpen ? "justify-start" : "justify-center"
+            }`}
+          >
+            <Users className="h-5 w-5" />
+            {isOpen && <span className="text-lg">Customers</span>}
+          </div>
+          <div
+            className={`flex items-center gap-4 w-full p-3 hover:bg-gray-700 rounded-md ${
+              isOpen ? "justify-start" : "justify-center"
+            }`}
+          >
+            <DollarSign className="h-5 w-5" />
+            {isOpen && <span className="text-lg">Payment</span>}
+          </div>
         </div>
-        <div className="flex justify-between">
-            <Card variant="outlined">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Provident, nesciunt!</Card>
-            <Card variant="outlined">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Provident, nesciunt!</Card>
-        </div>       
-      </Box>
-    </Box>
-  );
-}
+      </div>
 
-Sidebar.propTypes = {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * Remove this when copying and pasting into your project.
-   */
-  window: PropTypes.func,
+      {/* Drawer Toggle Button */}
+      <div>
+        <button
+          onClick={!toggleSidebar}
+          className="textcenter bg-gray-800 text-white p-2 rounded-md"
+        >
+          {isOpen ? <ChevronRight /> : <ChevronLeft />}
+        </button>
+      </div>
+    </div>
+  );
 };
 
 export default Sidebar;
