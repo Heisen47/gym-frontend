@@ -12,8 +12,9 @@ const Sidebar = () => {
 
   return (
     <div className="flex items-center">
+
       <div
-        className={`bg-gray-800 text-white h-screen flex flex-col transition-all duration-300 ${
+        className={`bg-gray-800 text-white h-screen flex flex-col justify-center transition-all duration-300 ${
           isOpen ? "w-64" : "w-16"
         }`}
       >
@@ -59,7 +60,7 @@ const Sidebar = () => {
         onClick={toggleSidebar}
         className="text-center bg-gray-800 text-white p-2 rounded-md cursor-pointer"
       >
-        {!isOpen ? "❮" : "❯"}
+        {isOpen ? "❮" : "❯"}
       </button>
     </div>
   );
