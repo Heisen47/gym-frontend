@@ -23,6 +23,7 @@ const Sidebar = () => {
       >
         <div className="flex flex-col gap-2">
           {/* Menu Items */}
+
           <Link to="/admin/dashboard" className="block md:inline font-sans">
           <div
             className={`flex items-center gap-4 w-full p-3 hover:bg-gray-700 rounded-md ${
@@ -35,6 +36,8 @@ const Sidebar = () => {
             {isOpen && <span className="text-lg">Dashboard</span>}
           </div>
           </Link>
+
+          <Link to="/admin/customers" className="block md:inline font-sans">
           <div
             className={`flex items-center gap-4 w-full p-3 hover:bg-gray-700 rounded-md ${
               isOpen ? "justify-start" : "justify-center"
@@ -46,7 +49,10 @@ const Sidebar = () => {
             </span>
             {isOpen && <span className="text-lg">Customers</span>}
           </div>
+          </Link>
 
+
+          <Link to="/admin/payment" className="block md:inline font-sans">
           <div
             className={`flex items-center gap-4 w-full p-3 hover:bg-gray-700 rounded-md ${
               isOpen ? "justify-start" : "justify-center"
@@ -57,6 +63,7 @@ const Sidebar = () => {
             </span>
             {isOpen && <span className="text-lg">Payment</span>}
           </div>
+          </Link>
 
         </div>
       </div>

@@ -9,6 +9,8 @@ import Product from "./pages/Product";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import Admin from "./pages/Admin";
 import Dashboard from "./pages/Dashboard";
+import Customers from "./pages/Customers";
+import Payment from "./pages/Payment";
 
 function App() {
   return (
@@ -27,6 +29,8 @@ function App() {
               {/* Admin Routes */}
               <Route path="/admin" element={<Admin />}>
                 <Route path="dashboard" element={<Dashboard />} />
+                <Route path="customers" element={<Customers />} />
+                <Route path="payment" element={<Payment />} />
               </Route>
             </Routes>
           </div>
