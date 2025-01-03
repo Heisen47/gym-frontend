@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import GroupIcon from "@mui/icons-material/Group";
 import PaymentIcon from "@mui/icons-material/Payment";
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(true);
@@ -14,11 +16,11 @@ const Sidebar = () => {
     <div className="flex items-center">
 
       <div
-        className={`bg-gray-800 text-white h-screen flex flex-col justify-center transition-all duration-300 ${
+        className={`bg-gray-600 text-white h-screen flex flex-col justify-center transition-all duration-300 ${
           isOpen ? "w-64" : "w-16"
         }`}
       >
-        <div className="flex flex-col items-center mt-10">
+        <div className="flex flex-col gap-2">
           {/* Menu Items */}
           <div
             className={`flex items-center gap-4 w-full p-3 hover:bg-gray-700 rounded-md ${
@@ -58,9 +60,10 @@ const Sidebar = () => {
 
       <button
         onClick={toggleSidebar}
-        className="text-center bg-gray-800 text-white p-2 rounded-md cursor-pointer"
+        className="text-center bg-gray-700 text-white pt-4 pb-4 cursor-pointer rounded-r-lg 
+        "
       >
-        {isOpen ? "❮" : "❯"}
+        {isOpen ? <ArrowBackIosNewIcon /> : <ArrowForwardIosIcon />}
       </button>
     </div>
   );
