@@ -4,6 +4,7 @@ import GroupIcon from "@mui/icons-material/Group";
 import PaymentIcon from "@mui/icons-material/Payment";
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import { Link } from "react-router";
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(true);
@@ -22,27 +23,30 @@ const Sidebar = () => {
       >
         <div className="flex flex-col gap-2">
           {/* Menu Items */}
+          <Link to="/admin/dashboard" className="block md:inline font-sans">
           <div
             className={`flex items-center gap-4 w-full p-3 hover:bg-gray-700 rounded-md ${
               isOpen ? "justify-start" : "justify-center"
             }`}
           >
             <span className="text-xl">
-              <DashboardIcon />{" "}
+              <DashboardIcon />
             </span>
             {isOpen && <span className="text-lg">Dashboard</span>}
           </div>
+          </Link>
           <div
             className={`flex items-center gap-4 w-full p-3 hover:bg-gray-700 rounded-md ${
               isOpen ? "justify-start" : "justify-center"
             }`}
           >
             <span className="text-xl">
-              {" "}
-              <GroupIcon />{" "}
+              
+              <GroupIcon />
             </span>
             {isOpen && <span className="text-lg">Customers</span>}
           </div>
+
           <div
             className={`flex items-center gap-4 w-full p-3 hover:bg-gray-700 rounded-md ${
               isOpen ? "justify-start" : "justify-center"
@@ -53,6 +57,7 @@ const Sidebar = () => {
             </span>
             {isOpen && <span className="text-lg">Payment</span>}
           </div>
+
         </div>
       </div>
 
@@ -60,7 +65,7 @@ const Sidebar = () => {
 
       <button
         onClick={toggleSidebar}
-        className="text-center bg-gray-700 text-white pt-4 pb-4 cursor-pointer rounded-r-lg 
+        className="text-center bg-gray-600 text-white pt-4 pb-4 cursor-pointer rounded-r-lg 
         "
       >
         {isOpen ? <ArrowBackIosNewIcon /> : <ArrowForwardIosIcon />}

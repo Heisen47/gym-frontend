@@ -1,12 +1,17 @@
-import React from 'react'
-import Sidebar from '../components/dashboardComponents/Sidebar'
+import React from "react";
+import Sidebar from "../components/dashboardComponents/Sidebar";
+import { Outlet } from "react-router"
 
 const Admin = () => {
   return (
     <div>
-        <Sidebar />
-    </div>
-  )
-}
+      <Sidebar />
 
-export default Admin
+      <div className="flex-grow p-4 bg-gray-100">
+        <Outlet />
+      </div>
+    </div>
+  );
+};
+
+export default Admin;

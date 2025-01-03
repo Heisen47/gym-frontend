@@ -30,7 +30,7 @@ const HamburgerMenu = ({ handleLinkClick }) => {
                  {nav}
               </Link>
             ))}
-            <Link to="/Admin" className="block md:inline font-sans" onClick={handleLinkClick}>
+            <Link to="/admin" className="block md:inline font-sans" onClick={handleLinkClick}>
               Admin
             </Link>
           </div>
