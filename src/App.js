@@ -8,7 +8,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router";
 import Product from "./pages/Product";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import Admin from "./pages/Admin";
-import Dashboard from "./pages/Dashboard";
+import Dashboard from "../src/components/dashboardComponents/Dashboard";
 import Customers from "./pages/Customers";
 import Payment from "./pages/Payment";
 

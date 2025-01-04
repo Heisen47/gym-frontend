@@ -4,10 +4,10 @@ import { Outlet } from "react-router"
 
 const Admin = () => {
   return (
-    <div>
+    <div className="flex">
       <Sidebar />
 
-      <div className="flex-grow p-4 bg-gray-100">
+      <div >
         <Outlet />
       </div>
     </div>
