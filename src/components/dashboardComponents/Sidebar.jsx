@@ -77,8 +77,7 @@ const Sidebar = () => {
 
       <button
         onClick={toggleSidebar}
-        className="text-center bg-gray-600 text-white pt-4 pb-4 cursor-pointer rounded-r-lg 
-        "
+        className="text-center bg-gray-600 text-white pt-4 pb-4 cursor-pointer rounded-r-lg hover:bg-gray-700"
       >
         {isOpen ? <ArrowBackIosNewIcon /> : <ArrowForwardIosIcon />}
       </button>
