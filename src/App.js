@@ -11,6 +11,7 @@ import Admin from "./pages/Admin";
 import Dashboard from "../src/components/dashboardComponents/Dashboard";
 import Customers from "./pages/Customers";
 import Payment from "./pages/Payment";
+import User from "./pages/User";
 
 function App() {
   return (
@@ -19,7 +20,7 @@ function App() {
         <div className="flex flex-col min-h-screen">
           <Navbar />
 
-          <div className="flex-grow bg-[#3C3D37] ">
+          <div className="flex-grow bg-[#3C3D37] scrollbar-hide">
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
@@ -32,6 +33,9 @@ function App() {
                 <Route path="customers" element={<Customers />} />
                 <Route path="payment" element={<Payment />} />
               </Route>
+
+              {/* User Route */}
+              <Route path="/user/:id" element={<User />} />
             </Routes>
           </div>
 
