@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from 'react-router';
+// import { useNavigate } from 'react-router';
 
 
 const CustomerTable = () => {
@@ -8,7 +8,11 @@ const CustomerTable = () => {
     return { id, name, calories, fat, carbs, protein };
   };
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
+
+  const handleRowClick = (id) => {
+    window.open(`/user/${id}`, '_blank');
+  };
 
   // Data rows
   const rows = [
@@ -63,10 +67,10 @@ const CustomerTable = () => {
                   last:border-0
                 `}
                 >
-                  <td className="p-4 text-sm text-gray-900 cursor-pointer " onClick={() => navigate(`/user/${row.id}`)}>
+                  <td className="p-4 text-sm text-gray-900 cursor-pointer " target = '_blank' onClick={() => handleRowClick(row.id)}>
                     {row.id}
                   </td>
-                  <td className="p-4 text-sm text-gray-900 cursor-pointer " onClick={() => navigate(`/user/${row.id}`)}>
+                  <td className="p-4 text-sm text-gray-900 cursor-pointer " onClick={() => handleRowClick(row.id)}>
                     {row.name}
                   </td>
                   <td className="p-4 text-sm text-gray-900 text-right cursor-pointer ">
