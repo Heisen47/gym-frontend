@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 // import { useParams } from 'react-router-dom';
+import UserProfile from '../components/dashboardComponents/UserProfile';
 
 const User = () => {
 //   const { id } = useParams();
@@ -32,12 +33,7 @@ const userData = {
 
   return (
     <div>
-      <h1>User Profile</h1>
-      <p>ID: 
-        {userData.id}</p>
-      <p>Name: {userData.name}</p>
-      <p>Email: {userData.email}</p>
-      {/* Render other user data as needed */}
+      <UserProfile />
     </div>
   );
 };
