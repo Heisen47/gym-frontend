@@ -1,32 +1,12 @@
 import React from "react";
+import rows from "./data/customerData";
 
 
 
 const CustomerTable = () => {
-  const createData = (id, name, calories, fat, carbs, protein) => {
-    return { id, name, calories, fat, carbs, protein };
-  };
-
-
   const handleRowClick = (id) => {
     window.open(`/user/${id}`, '_blank');
   };
-
-  // Data rows
-  const rows = [
-    createData("1","Frozen yoghurt", 159, 6.0, 24, 4.0),
-    createData("2","Ice cream sandwich", 237, 9.0, 37, 4.3),
-    createData("3","Eclair", 262, 16.0, 24, 6.0),
-    createData("4","Cupcake", 305, 3.7, 67, 4.3),
-    createData("5","Gingerbread", 356, 16.0, 49, 3.9),
-    createData("6","Gingerbread", 356, 16.0, 49, 3.9),
-    createData("7","Gingerbread", 356, 16.0, 49, 3.9),
-    createData("8","Gingerbread", 356, 16.0, 49, 3.9),
-    createData("9","Gingerbread", 356, 16.0, 49, 3.9),
-    createData("10","Gingerbread", 356, 16.0, 49, 3.9),
-    createData("11","Gingerbread", 356, 16.0, 49, 3.9),
-    createData("12","Gingerbread", 356, 16.0, 49, 3.9),
-  ];
 
   return (
     <div className="w-full rounded-lg flex text-center scrollbar-hide">

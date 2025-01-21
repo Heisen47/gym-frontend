@@ -1,16 +1,40 @@
-import { TextField } from "@mui/material";
-import React from "react";
+import { TextField, Autocomplete } from "@mui/material";
+import React, { useState } from "react";
 import CustomerTable from "../components/dashboardComponents/CustomerTable";
+import rows from "../components/dashboardComponents/data/customerData";
 
 const Customers = () => {
+  const [inputValue, setInputValue] = useState("");
+
+  const names = rows.map((row) => row.name);
+
   return (
     <div className="flex-col">
       {/* search bar */}
       <div className="flex justify-center p-5">
         <div className="absolute  p-8 rounded-md left-1/2 transform -translate-x-1/2 md:w-[500px] sm:w-auto z-20">
-          <TextField variant="filled" fullWidth label="Customers" id="filled-basic" sx={{
-          backgroundColor: 'gray', // Change this to your desired color
-        }}/>
+          <Autocomplete
+            freeSolo
+            id="free-solo-2-demo"
+            disableClearable
+            options={names}
+            getOptionLabel={(option) => option}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                variant="filled"
+                fullWidth
+                label="Customers"
+                sx={{
+                  backgroundColor: "gray", // Change this to your desired color
+                }}
+              />
+            )}
+            inputValue={inputValue}
+            onInputChange={(event, newInputValue) => {
+              setInputValue(newInputValue);
+            }}
+          />
         </div>
       </div>
 

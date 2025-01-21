@@ -25,11 +25,6 @@ const User = () => {
 //     return <div>Loading...</div>;
 //   }
 
-const userData = {
-    id: 1,
-    name: 'John Doe',
-    email: 'hon.haha@email.com'
-}
 
   return (
     <div>
