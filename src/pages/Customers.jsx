@@ -16,7 +16,6 @@ const Customers = () => {
           <Autocomplete
             freeSolo
             id="free-solo-2-demo"
-            disableClearable
             options={names}
             getOptionLabel={(option) => option}
             renderInput={(params) => (
