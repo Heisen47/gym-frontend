@@ -1,14 +1,12 @@
 import React from "react";
-// import { useNavigate } from 'react-router';
+
 
 
 const CustomerTable = () => {
-  // Sample data creation function
   const createData = (id, name, calories, fat, carbs, protein) => {
     return { id, name, calories, fat, carbs, protein };
   };
 
-  // const navigate = useNavigate();
 
   const handleRowClick = (id) => {
     window.open(`/user/${id}`, '_blank');
