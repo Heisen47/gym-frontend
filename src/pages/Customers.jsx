@@ -16,7 +16,7 @@ const Customers = () => {
 
   return (
     <div className="absolute inset-0 flex items-center justify-center p-5">
-      <div className="w-full max-w-4xl bg-white rounded-lg shadow-lg p-5">
+      <div className="w-full max-w-4xl bg-gray-700  rounded-lg shadow-lg p-5">
         {/* Search Bar */}
         <div className="w-full max-w-md mx-auto mb-5">
           <Autocomplete
@@ -31,7 +31,7 @@ const Customers = () => {
                 fullWidth
                 label="Customers"
                 sx={{
-                  backgroundColor: "#f3f4f6", // Soft gray for better readability
+                  backgroundColor: "#f3f4f6", 
                   borderRadius: "8px",
                 }}
               />
