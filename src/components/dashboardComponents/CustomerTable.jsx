@@ -50,7 +50,7 @@ const CustomerTable = ({ rows }) => {
                     {row.id}
                   </td>
                   <td
-                    className="p-4 text-sm text-gray-900 cursor-pointer "
+                    className="p-4 text-sm text-gray-900 cursor-pointer hover:underline"
                     onClick={() => handleRowClick(row.id)}
                   >
                     {row.name}

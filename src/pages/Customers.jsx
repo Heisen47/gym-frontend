@@ -9,16 +9,16 @@ const Customers = () => {
 
   const names = rows.map((row) => row.name);
 
-  //filter rows based on selected value
+  // Filter rows based on selected value
   const filteredRows = selectedValue
-  ? rows.filter((row) => row.name === selectedValue)
-  : rows;
+    ? rows.filter((row) => row.name === selectedValue)
+    : rows;
 
   return (
-    <div className="flex-col">
-      {/* search bar */}
-      <div className="flex justify-center p-5">
-        <div className="absolute  p-8 rounded-md left-1/2 transform -translate-x-1/2 md:w-[500px] sm:w-auto z-20">
+    <div className="absolute inset-0 flex items-center justify-center p-5">
+      <div className="w-full max-w-4xl bg-white rounded-lg shadow-lg p-5">
+        {/* Search Bar */}
+        <div className="w-full max-w-md mx-auto mb-5">
           <Autocomplete
             freeSolo
             id="free-solo-2-demo"
@@ -31,7 +31,8 @@ const Customers = () => {
                 fullWidth
                 label="Customers"
                 sx={{
-                  backgroundColor: "gray", // Change this to your desired color
+                  backgroundColor: "#f3f4f6", // Soft gray for better readability
+                  borderRadius: "8px",
                 }}
               />
             )}
@@ -44,11 +45,9 @@ const Customers = () => {
             }}
           />
         </div>
-      </div>
 
-      {/* User Table */}
-      <div className="absolute inset-0 flex items-center justify-center p-5">
-        <div className="w-full max-w-6xl bg-white rounded-lg shadow-lg p-5 scrollbar-hide">
+        {/* User Table */}
+        <div className="w-full overflow-x-auto scrollbar-hide">
           <CustomerTable rows={filteredRows} />
         </div>
       </div>
