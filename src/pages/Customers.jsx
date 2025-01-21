@@ -5,8 +5,14 @@ import rows from "../components/dashboardComponents/data/customerData";
 
 const Customers = () => {
   const [inputValue, setInputValue] = useState("");
+  const [selectedValue, setSelectedValue] = useState("");
 
   const names = rows.map((row) => row.name);
+
+  //filter rows based on selected value
+  const filteredRows = selectedValue
+  ? rows.filter((row) => row.name === selectedValue)
+  : rows;
 
   return (
     <div className="flex-col">
@@ -33,6 +39,9 @@ const Customers = () => {
             onInputChange={(event, newInputValue) => {
               setInputValue(newInputValue);
             }}
+            onChange={(event, newValue) => {
+              setSelectedValue(newValue);
+            }}
           />
         </div>
       </div>
@@ -40,7 +49,7 @@ const Customers = () => {
       {/* User Table */}
       <div className="absolute inset-0 flex items-center justify-center p-5">
         <div className="w-full max-w-6xl bg-white rounded-lg shadow-lg p-5 scrollbar-hide">
-          <CustomerTable />
+          <CustomerTable rows={filteredRows} />
         </div>
       </div>
     </div>
