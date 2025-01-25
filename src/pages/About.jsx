@@ -15,7 +15,7 @@ const About = () => {
           transition={{ duration: 0.5 }}
           
         >
-          <h1 className="text-4xl font-bold text-gray-900 sm:text-5xl md:text-6xl mb-10">
+          <h1 className="text-4xl font-bold text-[#C7C8CC] sm:text-5xl md:text-6xl mb-10">
             Our Gym
           </h1>
         </motion.div>
@@ -25,12 +25,12 @@ const About = () => {
           {/* Cardio Zone */}
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="bg-white p-6 rounded-lg shadow-lg"
+            className="bg-[#758694] p-6 rounded-lg shadow-lg"
           >
-            <h3 className="text-xl font-semibold text-gray-900 mb-4">
+            <h3 className="text-xl font-semibold text-[#C7B7A3] mb-4">
               Cardio Zone
             </h3>
-            <p className="text-gray-600">
+            <p className="text-[#C7C8CC]">
               Treadmills, ellipticals, stationary bikes, and more to elevate
               your heart rate and burn calories.
             </p>
@@ -39,12 +39,12 @@ const About = () => {
           {/* Strength Training */}
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="bg-white p-6 rounded-lg shadow-lg"
+            className="bg-[#758694] p-6 rounded-lg shadow-lg"
           >
-            <h3 className="text-xl font-semibold text-gray-900 mb-4">
+            <h3 className="text-xl font-semibold text-[#C7B7A3] mb-4">
               Strength Training
             </h3>
-            <p className="text-gray-600">
+            <p className="text-[#C7C8CC]">
               Free weights, weight machines, and functional training areas to
               build muscle and increase strength.
             </p>
@@ -53,12 +53,12 @@ const About = () => {
           {/* Group Fitness */}
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="bg-white p-6 rounded-lg shadow-lg"
+            className="bg-[#758694] p-6 rounded-lg shadow-lg"
           >
-            <h3 className="text-xl font-semibold text-gray-900 mb-4">
+            <h3 className="text-xl font-semibold text-[#C7B7A3] mb-4">
               Group Fitness Classes
             </h3>
-            <p className="text-gray-600">
+            <p className="text-[#C7C8CC]">
               Energizing Zumba, invigorating yoga, challenging spin classes, and
               more to keep you motivated.
             </p>
@@ -66,8 +66,8 @@ const About = () => {
         </div>
 
         {/* Additional Features */}
-        <div className="bg-white rounded-lg shadow-lg p-8">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
+        <div className="bg-[#758694] rounded-lg shadow-lg p-8">
+          <h2 className="text-3xl font-bold text-[#C7B7A3] mb-8 text-center">
             Beyond the Equipment
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -75,7 +75,7 @@ const About = () => {
               <h3 className="text-xl font-semibold text-gray-900 mb-4">
                 Clean and Welcoming Atmosphere
               </h3>
-              <p className="text-gray-600">
+              <p className="text-[#C7C8CC]">
                 Enjoy a comfortable and hygienic environment where you can focus
                 on your workout.
               </p>
@@ -84,7 +84,7 @@ const About = () => {
               <h3 className="text-xl font-semibold text-gray-900 mb-4">
                 Experienced Staff
               </h3>
-              <p className="text-gray-600">
+              <p className="text-[#C7C8CC]">
                 Our friendly and knowledgeable staff are always available to
                 assist you and answer your questions.
               </p>
@@ -94,12 +94,12 @@ const About = () => {
 
         {/* CTA Section */}
         <motion.div whileHover={{ scale: 1.02 }} className="text-center mt-16">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
+          <h2 className="text-3xl font-bold text-[#C7B7A3]">
             Ready to transform your fitness journey?
           </h2>
-          <button className="bg-blue-600 text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-blue-700 transition-colors">
+          {/* <button className="bg-blue-600 text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-blue-700 transition-colors">
             Join Now
-          </button>
+          </button> */}
         </motion.div>
       </div>
     </div>
