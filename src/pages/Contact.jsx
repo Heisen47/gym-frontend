@@ -23,7 +23,7 @@ const Contact = () => {
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}  
+          transition={{ duration: 0.5 }}
         >
           <h1 className="text-4xl font-bold text-[#C7C8CC] sm:text-5xl md:text-6xl mb-10">
             Contact Us
@@ -39,7 +39,7 @@ const Contact = () => {
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="bg-white rounded-lg shadow-lg p-8"
+            className="bg-[#758694] rounded-lg shadow-lg p-8"
           >
             <h2 className="text-2xl font-semibold mb-6">Send us a Message</h2>
             <form onSubmit={handleSubmit} className="space-y-6">
@@ -91,54 +91,79 @@ const Contact = () => {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="bg-white rounded-lg shadow-lg p-8"
+            className="bg-[#758694] rounded-lg shadow-lg p-8"
           >
-            <h2 className="text-2xl font-semibold mb-6">Contact Information</h2>
+            <h2 className="text-2xl font-semibold mb-6 text-gray-900 ">
+              Contact Information
+            </h2>
             <div className="space-y-4">
+              {/* Address */}
+
               <div>
-                <h3 className="text-lg font-medium text-gray-900">Address</h3>
+                <h3 className="text-lg font-medium text-[#C7B7A3]">Address</h3>
                 <p className="text-gray-600">
-                  123 Fitness Street, Gym City, GC 12345
+                  <a
+                    href="https://www.google.com/maps/search/?api=1&query=123+Fitness+Street,+Gym+City,+GC+12345"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[#C7C8CC] underline"
+                  >
+                    123 Fitness Street, Gym City, GC 12345
+                  </a>
+                </p>
+                <p className="text-gray-600">
+                  <a
+                    href="https://www.google.com/maps/search/?api=1&query=123+Fitness+Street,+Gym+City,+GC+12345"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[#C7C8CC] underline"
+                  >
+                    123 Fitness Street, Gym City, GC 12345
+                  </a>
+                </p>
+                <p className="text-gray-600">
+                  <a
+                    href="https://www.google.com/maps/search/?api=1&query=123+Fitness+Street,+Gym+City,+GC+12345"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[#C7C8CC] underline"
+                  >
+                    123 Fitness Street, Gym City, GC 12345
+                  </a>
                 </p>
               </div>
+
+              {/* Phone Number */}
               <div>
-                <h3 className="text-lg font-medium text-gray-900">Phone</h3>
-                <p className="text-gray-600">+1 (555) 123-4567</p>
+                <h3 className="text-lg font-medium text-[#C7B7A3]">Phone</h3>
+                <a
+                  href="tel:+15551234567"
+                  className="text-[#C7C8CC] md:hidden underline"
+                >
+                  +1 (555) 123-4567
+                </a>
+                <p className="text-[#C7C8CC] hidden md:block ">+1 (555) 123-4567</p>
               </div>
+
+              {/* Email */}
               <div>
-                <h3 className="text-lg font-medium text-gray-900">Email</h3>
-                <p className="text-gray-600">info@yourgym.com</p>
+                <h3 className="text-lg font-medium text-[#C7B7A3]">Email</h3>
+                <p className="text-[#C7C8CC]">info@yourgym.com</p>
               </div>
+
+              {/* Open and close hours */}
               <div>
-                <h3 className="text-lg font-medium text-gray-900">Hours</h3>
-                <p className="text-gray-600">
+                <h3 className="text-lg font-medium text-[#C7B7A3]">Hours</h3>
+                <p className="text-[#C7C8CC]">
                   Monday - Friday: 6:00 AM - 10:00 PM
                 </p>
-                <p className="text-gray-600">
+                <p className="text-[#C7C8CC]">
                   Saturday - Sunday: 8:00 AM - 8:00 PM
                 </p>
               </div>
             </div>
           </motion.div>
         </div>
-
-        {/* Map */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="mt-16"
-        >
-          <iframe
-            title="Location Map"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d387193.305935303!2d-74.25986548248684!3d40.69714941932609!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2s!4v1645054586824!5m2!1sen!2s"
-            width="100%"
-            height="450"
-            style={{ border: 0 }}
-            allowFullScreen=""
-            loading="lazy"
-          ></iframe>
-        </motion.div>
       </div>
     </div>
   );
