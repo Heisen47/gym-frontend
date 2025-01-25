@@ -17,16 +17,15 @@ const Contact = () => {
   return (
     <div
       id="Contact"
-      className="min-h-screen bg-gray-100 py-16 px-4 sm:px-6 lg:px-8"
+      className="lg:border-4 border-blue-100 rounded-2xl py-16 px-4 sm:px-6 lg:px-8"
     >
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-16"
+          transition={{ duration: 0.5 }}  
         >
-          <h1 className="text-4xl font-bold text-gray-900 sm:text-5xl md:text-6xl mb-4">
+          <h1 className="text-4xl font-bold text-[#C7C8CC] sm:text-5xl md:text-6xl mb-10">
             Contact Us
           </h1>
           <p className="text-xl text-gray-600">
