@@ -1,3 +1,6 @@
+import man from "../../assets/review/man.jpg";
+import woman from "../../assets/review/woman.jpg";
+
 const CustomerReviews = [
     {
       name: "John Doe",
@@ -6,6 +9,7 @@ const CustomerReviews = [
       weight: "160 lbs",
       transformation: "Lost 20 lbs",
       message: "I feel healthier and more energetic than ever!",
+      image: man
     },
     {
       name: "Jane Smith",
@@ -14,6 +18,7 @@ const CustomerReviews = [
       weight: "140 lbs",
       transformation: "Gained muscle mass",
       message: "I love my new muscular physique!",
+      image: woman
     },
     {
       name: "Jane Smith",
@@ -22,6 +27,7 @@ const CustomerReviews = [
       weight: "140 lbs",
       transformation: "Gained muscle mass",
       message: "I love my new muscular physique!",
+      image: man
     },
     {
       name: "Jane Smith",
@@ -30,6 +36,7 @@ const CustomerReviews = [
       weight: "140 lbs",
       transformation: "Gained muscle mass",
       message: "I love my new muscular physique!",
+      image: man
     },
     {
       name: "Jane Smith",
@@ -38,6 +45,7 @@ const CustomerReviews = [
       weight: "140 lbs",
       transformation: "Gained muscle mass",
       message: "I love my new muscular physique!",
+      image: woman
     },
     // Add more reviews as needed
   ];
