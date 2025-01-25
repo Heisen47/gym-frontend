@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   AppBar,
   Toolbar,
@@ -70,20 +70,47 @@ const Navbar = () => {
 
   const handleSectionNavigation = (sectionId) => {
     // Navigate to home page first
-    navigate('/');
+    navigate("/");
 
     // Use a small delay to ensure the page loads before scrolling
     setTimeout(() => {
       const element = document.getElementById(sectionId);
       if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
+        element.scrollIntoView({ behavior: "smooth" });
       }
     }, 100);
   };
 
+  //scrolling effect on navbar
+  const [showNavbar, setShowNavbar] = useState(true);
+  const lastScrollY = useRef(0); // Use ref instead of state
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      if (
+        currentScrollY > lastScrollY.current &&
+        currentScrollY > window.innerHeight / 2
+      ) {
+        setShowNavbar(false); // Hide navbar when scrolling down
+      } else {
+        setShowNavbar(true); // Show navbar when scrolling up
+      }
+      lastScrollY.current = currentScrollY; // Update the ref
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <ThemeProvider theme={theme}>
-      <AppBar position="static" className="z-50 bg-primary">
+      <AppBar
+        position="sticky"
+        className={`z-50 bg-primary transition-opacity duration-500 ${
+          showNavbar ? "opacity-100" : "opacity-0"
+        }`}
+      >
         <Toolbar className="bg-primary">
           <span className="absolute left-1/2 transform -translate-x-1/2 md:static md:transform-none">
             <Link to="/" className="block md:inline hover:underline">
@@ -131,49 +158,49 @@ const Navbar = () => {
               } md:flex md:space-x-4 absolute md:static top-16 left-0 w-full md:w-auto bg-gray-800 md:bg-transparent`}
             >
               <Link to="/" className="block md:inline font-sans">
-              <div className="flex space-x-4">
-                <motion.div
-                  initial={{ opacity: 0, y: -50 }} // Start off-screen to the top
-                  animate={{ opacity: 1, y: 0 }} // Slide into view
-                  transition={{ duration: 0.5 }} // Control animation speed
-                  className="flex flex-col"
-                >
-                  Home
-                </motion.div>
-                <motion.div
-                  initial={{ opacity: 0, y: -50 }} // Start off-screen to the top
-                  animate={{ opacity: 1, y: 0 }} // Slide into view
-                  transition={{ duration: 0.5 }} // Control animation speed
-                  className="flex flex-col"
-                >
-                  <a
-                    href="#"
-                    className="scroll-smooth"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleSectionNavigation('About');
-                    }}
+                <div className="flex space-x-4">
+                  <motion.div
+                    initial={{ opacity: 0, y: -50 }} // Start off-screen to the top
+                    animate={{ opacity: 1, y: 0 }} // Slide into view
+                    transition={{ duration: 0.5 }} // Control animation speed
+                    className="flex flex-col"
                   >
-                    About
-                  </a>
-                </motion.div>
-                <motion.div
-                  initial={{ opacity: 0, y: -50 }} // Start off-screen to the top
-                  animate={{ opacity: 1, y: 0 }} // Slide into view
-                  transition={{ duration: 0.5 }} // Control animation speed
-                  className="flex flex-col"
-                >
-                  <a
-                    href="#"
-                    className="scroll-smooth"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleSectionNavigation('Contact');
-                    }}
+                    Home
+                  </motion.div>
+                  <motion.div
+                    initial={{ opacity: 0, y: -50 }} // Start off-screen to the top
+                    animate={{ opacity: 1, y: 0 }} // Slide into view
+                    transition={{ duration: 0.5 }} // Control animation speed
+                    className="flex flex-col"
                   >
-                    Contact
-                  </a>
-                </motion.div>
+                    <a
+                      href="#"
+                      className="scroll-smooth"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleSectionNavigation("About");
+                      }}
+                    >
+                      About
+                    </a>
+                  </motion.div>
+                  <motion.div
+                    initial={{ opacity: 0, y: -50 }} // Start off-screen to the top
+                    animate={{ opacity: 1, y: 0 }} // Slide into view
+                    transition={{ duration: 0.5 }} // Control animation speed
+                    className="flex flex-col"
+                  >
+                    <a
+                      href="#"
+                      className="scroll-smooth"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleSectionNavigation("Contact");
+                      }}
+                    >
+                      Contact
+                    </a>
+                  </motion.div>
                 </div>
               </Link>
 
