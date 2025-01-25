@@ -6,7 +6,7 @@ import Contact from "./Contact";
 
 const Home = () => {
   return (
-    <div>
+    <div className="bg-slate-600">
       <Hero />
 
       <div className="container mx-auto">
