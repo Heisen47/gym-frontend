@@ -1,8 +1,10 @@
-import React from "react";
+import React, { Suspense } from "react";
 import Hero from "../components/Hero";
-import Body from "../components/Body";
+// import Body from "../components/Body";
 import About from "./About";
 import Contact from "./Contact";
+
+const Body = React.lazy(() => import("../components/Body"));
 
 const Home = () => {
   return (
@@ -12,7 +14,9 @@ const Home = () => {
       <div className="container mx-auto pt-2">
         <About />
 
-        <Body />
+        <Suspense fallback={<div>Loading...</div>}>
+          <Body />
+        </Suspense>
 
         <Contact />
       </div>
