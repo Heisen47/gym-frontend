@@ -36,8 +36,6 @@ const Body = () => {
 
   return (
     <div className="pt-2">
-      {/* What we offer */}
-
       {/* Gym Reviews */}
       <motion.div
         initial={{ opacity: 0, y: 50 }} // Start off-screen to the bottom
@@ -46,43 +44,45 @@ const Body = () => {
         transition={{ duration: 0.5 }} // Control animation speed
         className="flex flex-col items-center"
       >
-        <div className="bg-secondary mt-5 p-8 w-full max-w-7xl">
-          <h3 className="text-[#C7C8CC] text-4xl font-bold  mb-8">
+        <div className="bg-secondary mt-5 p-8 max-w-7xl">
+          <h3 className="text-[#C7C8CC] text-4xl font-bold mb-8">
             Customer Reviews
           </h3>
           <Slider {...settings}>
             {reviews.map((review, index) => (
               <div
                 key={index}
-                className="flex flex-col md:flex-row items-center justify-between p-6 bg-white rounded-lg shadow-md gap-4"
+                className="p-4" // Added padding to create space between slides
               >
-                {/* Image Section */}
-                <div className="flex-shrink-0">
-                  <img
-                    src={review.image}
-                    alt="Customer"
-                    className="w-28 h-28 md:w-40 md:h-40 rounded-full object-cover border-4 border-gray-200 shadow-md"
-                  />
-                </div>
+                <div className="flex md:flex-row items-center justify-between p-6 bg-white rounded-lg shadow-md">
+                  {/* Image Section */}
+                  <div className="flex-shrink-0">
+                    <img
+                      src={review.image}
+                      alt="Customer"
+                      className="w-28 h-28 md:w-40 md:h-40 rounded-full object-cover border-4 border-gray-200 shadow-md"
+                    />
+                  </div>
 
-                {/* Review Text Section */}
-                <div className="flex flex-col flex-grow text-left">
-                  <p className="text-gray-800 text-lg mb-4 italic font-serif">
-                    "{review.message}"
-                  </p>
-                  <div className="text-gray-600 text-sm space-y-1">
-                    <p>
-                      <strong>Name:</strong> {review.name}
+                  {/* Review Text Section */}
+                  <div className="flex flex-col flex-grow text-left">
+                    <p className="text-gray-800 text-lg mb-4 italic font-serif">
+                      "{review.message}"
                     </p>
-                    <p>
-                      <strong>Age:</strong> {review.age}
-                    </p>
-                    <p>
-                      <strong>Height:</strong> {review.height}
-                    </p>
-                    <p>
-                      <strong>Weight:</strong> {review.weight}
-                    </p>
+                    <div className="text-gray-600 text-sm space-y-1">
+                      <p>
+                        <strong>Name:</strong> {review.name}
+                      </p>
+                      <p>
+                        <strong>Age:</strong> {review.age}
+                      </p>
+                      <p>
+                        <strong>Height:</strong> {review.height}
+                      </p>
+                      <p>
+                        <strong>Weight:</strong> {review.weight}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -106,7 +106,7 @@ const SampleNextArrow = (props) => {
         height: "40px",
         width: "40px",
         transform: "scale(1.2)",
-        right: "-30px" 
+        right: "-50px", // Increased the right value to move the arrow further outside
       }}
       onClick={onClick}
     />
@@ -125,7 +125,7 @@ const SamplePrevArrow = (props) => {
         height: "40px",
         width: "40px",
         transform: "scale(1.2)",
-        left: "-30px"
+        left: "-50px", // Increased the left value to move the arrow further outside
       }}
       onClick={onClick}
     />
