@@ -1,76 +1,116 @@
-import React, { useState } from "react";
-import AutoScrollCarousel from "./AutoScrollCarousel";
-import RecipeReviewCard from "./Offering";
+import React from "react";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import { motion } from "framer-motion";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import Slider from "react-slick";
+import reviews from "./Data/CustomerReviews";
 
 const Body = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const cards = [
-    <RecipeReviewCard key={0}/>,
-    <RecipeReviewCard key={1}/>,
-    <RecipeReviewCard key={2}/>,
-    <RecipeReviewCard key={3}/>,
-  ];
-
-  const handlePrevious = (e) => {
-    e.stopPropagation(); // Prevent event bubbling
-    setCurrentIndex(prev => 
-      prev === 0 ? cards.length - 1 : prev - 1
-    );
-  };
-
-  const handleNext = (e) => {
-    e.stopPropagation(); // Prevent event bubbling
-    setCurrentIndex(prev => 
-      prev === cards.length - 1 ? 0 : prev + 1
-    );
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    nextArrow: <SampleNextArrow />,
+    prevArrow: <SamplePrevArrow />,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
   };
 
   return (
-    <div className="p-4">
+    <div className="pt-2">
       {/* What we offer */}
 
-
-
-
-    {/* Success Stories */}
-
-      <motion.div
-        initial={{ opacity: 0, y: 50 }} // Start off-screen to the bottom
-        whileInView={{ opacity: 1, y: 0 }} // Animate into view
-        viewport={{ amount: 0.2 }} // Trigger animation when 20% of the section is in view
-        transition={{ duration: 0.5 }} // Control animation speed
-        className="flex flex-col"
-      >
-        <div className="bg-secondary mt-5 border-4 border-gray-500 p-2 rounded-lg shadow-2xl overflow-visible">
-          <h3 className="text-[#C7C8CC] text-3xl p-2 font-sans">
-            Success Stories
-          </h3>
-          <div>
-            <AutoScrollCarousel />
-          </div>
-        </div>
-      </motion.div>
-
-
       {/* Gym Reviews */}
-
       <motion.div
         initial={{ opacity: 0, y: 50 }} // Start off-screen to the bottom
         whileInView={{ opacity: 1, y: 0 }} // Animate into view
         viewport={{ amount: 0.2 }} // Trigger animation when 20% of the section is in view
         transition={{ duration: 0.5 }} // Control animation speed
-        className="flex flex-col"
+        className="flex flex-col items-center"
       >
-        <div className="bg-secondary mt-5 border-4 border-gray-500 p-2 rounded-md shadow-2xl overflow-visible">
-          <h1 className="text-[#C7C8CC] text-3xl p-2 font-sans">Reviews</h1>
-          <div className="flex p-2 gap-3 justify-between">
-            <AutoScrollCarousel />
-          </div>
+        <div className="bg-secondary mt-5  p-6 rounded-lg overflow-visible w-full max-w-7xl">
+          <h3 className="text-[#C7C8CC] text-4xl p-2 font-sans">
+            Reviews
+          </h3>
+          <Slider {...settings}>
+            {reviews.map((review, index) => (
+              <div key={index} className="p-4">
+                <div className="bg-white p-6 rounded-lg shadow-lg">
+                  <p className="text-gray-800 text-lg mb-4">{review.message}</p>
+                  <p className="text-gray-600">
+                    <strong>Name:</strong> {review.name}
+                  </p>
+                  <p className="text-gray-600">
+                    <strong>Age:</strong> {review.age}
+                  </p>
+                  <p className="text-gray-600">
+                    <strong>Height:</strong> {review.height}
+                  </p>
+                  <p className="text-gray-600">
+                    <strong>Weight:</strong> {review.weight}
+                  </p>
+                  <p className="text-gray-600">
+                    <strong>Transformation:</strong> {review.transformation}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </Slider>
         </div>
       </motion.div>
     </div>
+  );
+};
+
+const SampleNextArrow = (props) => {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{
+        ...style,
+        display: "block",
+        height: "50px",
+        width: "50px",
+        borderRadius: "50%",
+      }}
+      onClick={onClick}
+    />
+  );
+};
+
+const SamplePrevArrow = (props) => {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{
+        ...style,
+        display: "block",
+        height: "50px",
+        width: "50px",
+        borderRadius: "50%",
+      }}
+      onClick={onClick}
+    />
   );
 };
 

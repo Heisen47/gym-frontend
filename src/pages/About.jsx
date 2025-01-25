@@ -67,12 +67,12 @@ const About = () => {
 
         {/* Additional Features */}
         <div className="bg-[#758694] rounded-lg shadow-lg p-8">
-          <h2 className="text-3xl font-bold text-[#C7B7A3] mb-8 text-center">
+          <h2 className="text-3xl font-bold  text-gray-900 mb-8 text-center">
             Beyond the Equipment
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">
+              <h3 className="text-xl font-semibold text-[#C7B7A3] mb-4">
                 Clean and Welcoming Atmosphere
               </h3>
               <p className="text-[#C7C8CC]">
@@ -81,7 +81,7 @@ const About = () => {
               </p>
             </div>
             <div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">
+              <h3 className="text-xl font-semibold text-[#C7B7A3] mb-4">
                 Experienced Staff
               </h3>
               <p className="text-[#C7C8CC]">

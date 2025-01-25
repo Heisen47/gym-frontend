@@ -9,7 +9,7 @@ const Home = () => {
     <div className="bg-slate-600">
       <Hero />
 
-      <div className="container mx-auto">
+      <div className="container mx-auto pt-2">
         <About />
 
         <Body />
