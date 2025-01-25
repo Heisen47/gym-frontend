@@ -13,18 +13,17 @@ import Payment from "./pages/Payment";
 import User from "./pages/User";
 
 function App() {
-  const [scrollFunctions, setScrollFunctions] = useState({});
 
   return (
     <GoogleOAuthProvider clientId="799455265041-4e660qpe66qgv6ru8pm449v1vp92un3m.apps.googleusercontent.com">
       <Router>
-        <Navbar {...scrollFunctions} />
+        <Navbar/>
 
         <Routes>
           {/* Home Route */}
           <Route
             path="/"
-            element={<Home setScrollFunctions={setScrollFunctions} />}
+            element={<Home />}
           />
 
           {/* Admin Routes */}

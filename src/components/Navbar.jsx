@@ -20,7 +20,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { motion } from "framer-motion";
 import PersonIcon from "@mui/icons-material/Person";
 
-const Navbar = ({ scrollToHome, scrollToAbout, scrollToContact }) => {
+const Navbar = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -64,10 +64,6 @@ const Navbar = ({ scrollToHome, scrollToAbout, scrollToContact }) => {
       },
     },
   });
-
-  const scrollToSection = (ref) => {
-    ref.current.scrollIntoView({ behavior: "smooth" });
-  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -117,9 +113,8 @@ const Navbar = ({ scrollToHome, scrollToAbout, scrollToContact }) => {
               className={`${
                 isOpen ? "block" : "hidden"
               } md:flex md:space-x-4 absolute md:static top-16 left-0 w-full md:w-auto bg-gray-800 md:bg-transparent`}
-
             >
-              <Link to="/" className="block md:inline font-sans" >
+              <Link to="/" className="block md:inline font-sans">
                 <motion.div
                   initial={{ opacity: 0, y: -50 }} // Start off-screen to the top
                   animate={{ opacity: 1, y: 0 }} // Slide into view
@@ -130,30 +125,46 @@ const Navbar = ({ scrollToHome, scrollToAbout, scrollToContact }) => {
                 </motion.div>
               </Link>
 
-              <span
-                className="block md:inline font-sans"
-                onClick={scrollToAbout}
-              >
+              <span className="block md:inline font-sans">
                 <motion.div
                   initial={{ opacity: 0, y: -50 }} // Start off-screen to the top
                   animate={{ opacity: 1, y: 0 }} // Slide into view
                   transition={{ duration: 0.5 }} // Control animation speed
                   className="flex flex-col"
                 >
-                  About
+                  <a
+                    href="#About"
+                    className="scroll-smooth"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      document.getElementById("About").scrollIntoView({
+                        behavior: "smooth",
+                      });
+                    }}
+                  >
+                    About
+                  </a>
                 </motion.div>
               </span>
-              <span
-                className="block md:inline font-sans"
-                onClick={scrollToContact}
-              >
+              <span className="block md:inline font-sans">
                 <motion.div
                   initial={{ opacity: 0, y: -50 }} // Start off-screen to the top
                   animate={{ opacity: 1, y: 0 }} // Slide into view
                   transition={{ duration: 0.5 }} // Control animation speed
                   className="flex flex-col"
                 >
-                  Contact
+                  <a
+                    href="#Contact"
+                    className="scroll-smooth"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      document.getElementById("Contact").scrollIntoView({
+                        behavior: "smooth",
+                      });
+                    }}
+                  >
+                    Contact
+                  </a>
                 </motion.div>
               </span>
 
