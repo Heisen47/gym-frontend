@@ -1,6 +1,5 @@
 import React, { Suspense } from "react";
 import Hero from "../components/Hero";
-// import Body from "../components/Body";
 import About from "./About";
 import Contact from "./Contact";
 
