@@ -9,7 +9,7 @@ import {
   Button,
 } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { CustomModal } from "./CustomModal";
 import { googleLogout } from "@react-oauth/google";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -64,6 +64,22 @@ const Navbar = () => {
       },
     },
   });
+
+  //navigation
+  const navigate = useNavigate();
+
+  const handleSectionNavigation = (sectionId) => {
+    // Navigate to home page first
+    navigate('/');
+
+    // Use a small delay to ensure the page loads before scrolling
+    setTimeout(() => {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100);
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -131,13 +147,11 @@ const Navbar = () => {
                   className="flex flex-col"
                 >
                   <a
-                    href="#About"
+                    href="#"
                     className="scroll-smooth"
                     onClick={(e) => {
                       e.preventDefault();
-                      document.getElementById("About").scrollIntoView({
-                        behavior: "smooth",
-                      });
+                      handleSectionNavigation('About');
                     }}
                   >
                     About
@@ -150,13 +164,11 @@ const Navbar = () => {
                   className="flex flex-col"
                 >
                   <a
-                    href="#Contact"
+                    href="#"
                     className="scroll-smooth"
                     onClick={(e) => {
                       e.preventDefault();
-                      document.getElementById("Contact").scrollIntoView({
-                        behavior: "smooth",
-                      });
+                      handleSectionNavigation('Contact');
                     }}
                   >
                     Contact
