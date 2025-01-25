@@ -9,12 +9,13 @@ const Home = () => {
     <div>
       <Hero />
 
-      <About/>
-      <div className="container mx-auto p-4">
-        <Body />
-      </div>
+      <div className="container mx-auto">
+        <About />
 
-      <Contact/>
+        <Body />
+
+        <Contact />
+      </div>
     </div>
   );
 };

@@ -115,6 +115,7 @@ const Navbar = () => {
               } md:flex md:space-x-4 absolute md:static top-16 left-0 w-full md:w-auto bg-gray-800 md:bg-transparent`}
             >
               <Link to="/" className="block md:inline font-sans">
+              <div className="flex space-x-4">
                 <motion.div
                   initial={{ opacity: 0, y: -50 }} // Start off-screen to the top
                   animate={{ opacity: 1, y: 0 }} // Slide into view
@@ -123,9 +124,6 @@ const Navbar = () => {
                 >
                   Home
                 </motion.div>
-              </Link>
-
-              <span className="block md:inline font-sans">
                 <motion.div
                   initial={{ opacity: 0, y: -50 }} // Start off-screen to the top
                   animate={{ opacity: 1, y: 0 }} // Slide into view
@@ -145,8 +143,6 @@ const Navbar = () => {
                     About
                   </a>
                 </motion.div>
-              </span>
-              <span className="block md:inline font-sans">
                 <motion.div
                   initial={{ opacity: 0, y: -50 }} // Start off-screen to the top
                   animate={{ opacity: 1, y: 0 }} // Slide into view
@@ -166,7 +162,8 @@ const Navbar = () => {
                     Contact
                   </a>
                 </motion.div>
-              </span>
+                </div>
+              </Link>
 
               <Link to="/admin" className="block md:inline font-sans">
                 <motion.div
