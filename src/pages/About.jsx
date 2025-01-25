@@ -5,7 +5,7 @@ const About = () => {
   return (
     <div
       id="About"
-      className="min-h-screen border-4 border-blue-100 rounded-2xl py-16 px-4 sm:px-6 lg:px-8"
+      className="lg:border-4 border-blue-100 rounded-2xl py-16 px-4 sm:px-6 lg:px-8"
     >
       <div className="max-w-7xl mx-auto">
         {/* Header Section */}
