@@ -7,7 +7,7 @@ const Body = React.lazy(() => import("../components/Body"));
 
 const Home = () => {
   return (
-    <div className="bg-slate-600">
+    <div className="bg-slate-600 ">
       <Hero />
 
       <div className="container mx-auto pt-2">
