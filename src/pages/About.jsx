@@ -3,6 +3,19 @@ import { motion } from "framer-motion";
 import LaunchIcon from '@mui/icons-material/Launch';
 
 const About = () => {
+
+    const handleCardioClick = () => {
+      window.open(`https://youtu.be/YvrKIQ_Tbsk?si=4a-sbkHFKVKtJEzV`, "_blank");
+    };
+
+    const handleStrengthClick = () => {
+      window.open(`https://youtu.be/RPi9aJGuRDM?si=De32zGrrapuIUGJj`, "_blank");
+    };
+
+    const handleZumbaClick = () => {
+      window.open(`https://youtu.be/eM1E6FFnuZ8?si=uk4aZyH7v_lFAphC`, "_blank");
+    };
+
   return (
     <div
       id="About"
@@ -26,10 +39,11 @@ const About = () => {
           {/* Cardio Zone */}
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="bg-[#758694] p-6 rounded-lg shadow-lg"
+            className="bg-[#758694] p-6 rounded-lg cursor-pointer shadow-lg"
+            onClick={handleCardioClick}
           >
             <h3 className="text-xl font-semibold text-[#C7B7A3] mb-4">
-              Cardio Zone <span className="cursor-pointer text-white"><LaunchIcon fontSize="small"/> </span>
+              Cardio Zone <span className=" text-white" ><LaunchIcon fontSize="small"/> </span>
             </h3>
             <p className="text-[#C7C8CC]">
               Treadmills, ellipticals, stationary bikes, and more to elevate
@@ -40,10 +54,11 @@ const About = () => {
           {/* Strength Training */}
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="bg-[#758694] p-6 rounded-lg shadow-lg"
+            className="bg-[#758694] p-6 rounded-lg shadow-lg cursor-pointer"
+            onClick={handleStrengthClick}
           >
             <h3 className="text-xl font-semibold text-[#C7B7A3] mb-4">
-              Strength Training <span className="cursor-pointer text-white"><LaunchIcon fontSize="small"/> </span>
+              Strength Training <span className=" text-white"><LaunchIcon fontSize="small"/> </span>
             </h3>
             <p className="text-[#C7C8CC]">
               Free weights, weight machines, and functional training areas to
@@ -54,7 +69,8 @@ const About = () => {
           {/* Group Fitness */}
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="bg-[#758694] p-6 rounded-lg shadow-lg"
+            className="bg-[#758694] p-6 rounded-lg shadow-lg cursor-pointer"
+            onClick={handleZumbaClick}
           >
             <h3 className="text-xl font-semibold text-[#C7B7A3] mb-4">
               Group Fitness Classes <span className="cursor-pointer text-white"><LaunchIcon fontSize="small"/> </span>

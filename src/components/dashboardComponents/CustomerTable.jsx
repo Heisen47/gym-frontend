@@ -1,6 +1,7 @@
 import React from "react";
 
 const CustomerTable = ({ rows }) => {
+  
   const handleRowClick = (id) => {
     window.open(`/user/${id}`, "_blank");
   };
