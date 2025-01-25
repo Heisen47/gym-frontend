@@ -77,13 +77,13 @@ const Body = () => {
 
                     <div className="text-gray-600 flex justify-end items-center text-sm space-y-1 gap-2">
                       <p>
-                        <span className="text-[#C7B7A3]"> {review.age} </span> <span className="text-xs"> yrs </span>  ,
+                        <span className="text-[#C7C8CC]"> {review.age} </span> <span className="text-xs text-[#C7C8CC]"> yrs </span>  ,
                       </p>
                       <p>
-                        <span className="text-[#C7B7A3]"> {review.height} </span> <span className="text-xs"> cms </span> ,
+                        <span className="text-[#C7C8CC]"> {review.height} </span> <span className="text-xs text-[#C7C8CC]"> cms </span> ,
                       </p>
                       <p>
-                        <span className="text-[#C7B7A3]"> {review.weight}  </span> <span className="text-xs"> kgs </span>
+                        <span className="text-[#C7C8CC]"> {review.weight}  </span> <span className="text-xs text-[#C7C8CC]"> kgs </span>
                       </p>
                     </div>
                   </div>
@@ -128,7 +128,7 @@ const SamplePrevArrow = (props) => {
         height: "40px",
         width: "40px",
         transform: "scale(1.2)",
-        left: "-50px", // Increased the left value to move the arrow further outside
+        left: "-30px", // Increased the left value to move the arrow further outside
       }}
       onClick={onClick}
     />

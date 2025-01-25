@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import LaunchIcon from '@mui/icons-material/Launch';
 
 const About = () => {
   return (
@@ -28,7 +29,7 @@ const About = () => {
             className="bg-[#758694] p-6 rounded-lg shadow-lg"
           >
             <h3 className="text-xl font-semibold text-[#C7B7A3] mb-4">
-              Cardio Zone
+              Cardio Zone <span className="cursor-pointer text-white"><LaunchIcon fontSize="small"/> </span>
             </h3>
             <p className="text-[#C7C8CC]">
               Treadmills, ellipticals, stationary bikes, and more to elevate
@@ -42,7 +43,7 @@ const About = () => {
             className="bg-[#758694] p-6 rounded-lg shadow-lg"
           >
             <h3 className="text-xl font-semibold text-[#C7B7A3] mb-4">
-              Strength Training
+              Strength Training <span className="cursor-pointer text-white"><LaunchIcon fontSize="small"/> </span>
             </h3>
             <p className="text-[#C7C8CC]">
               Free weights, weight machines, and functional training areas to
@@ -56,7 +57,7 @@ const About = () => {
             className="bg-[#758694] p-6 rounded-lg shadow-lg"
           >
             <h3 className="text-xl font-semibold text-[#C7B7A3] mb-4">
-              Group Fitness Classes
+              Group Fitness Classes <span className="cursor-pointer text-white"><LaunchIcon fontSize="small"/> </span>
             </h3>
             <p className="text-[#C7C8CC]">
               Energizing Zumba, invigorating yoga, challenging spin classes, and
