@@ -17,7 +17,7 @@ const Sidebar = () => {
     <div className="flex items-center z-30">
 
       <div
-        className={`bg-gray-500 text-white h-screen flex flex-col justify-center transition-all duration-300 ${
+        className={`bg-gray-500 text-[#C7C8CC] h-screen flex flex-col justify-center transition-all duration-300 ${
           isOpen ? "w-64" : "w-16"
         }`}
       >
@@ -77,7 +77,7 @@ const Sidebar = () => {
 
       <button
         onClick={toggleSidebar}
-        className="text-center bg-gray-600 text-white pt-4 pb-4 cursor-pointer rounded-r-lg hover:bg-gray-700"
+        className="text-center bg-gray-500 text-white pt-4 pb-4 cursor-pointer rounded-r-lg hover:bg-gray-700"
       >
         {isOpen ? <ArrowBackIosNewIcon /> : <ArrowForwardIosIcon />}
       </button>
