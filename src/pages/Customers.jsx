@@ -15,41 +15,27 @@ const Customers = () => {
     : rows;
 
   return (
-    <div className="absolute inset-0 flex items-center justify-center p-5">
-      <div className="w-full max-w-4xl bg-gray-700  rounded-lg shadow-lg p-5">
-        {/* Search Bar */}
-        <div className="w-full max-w-md mx-auto mb-5">
-          <Autocomplete
-            freeSolo
-            id="free-solo-2-demo"
-            options={names}
-            getOptionLabel={(option) => option}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                variant="filled"
-                fullWidth
-                label="Customers"
-                sx={{
-                  backgroundColor: "#f3f4f6", 
-                  borderRadius: "8px",
-                }}
-              />
-            )}
-            inputValue={inputValue}
-            onInputChange={(event, newInputValue) => {
-              setInputValue(newInputValue);
-            }}
-            onChange={(event, newValue) => {
-              setSelectedValue(newValue);
-            }}
-          />
-        </div>
-
-        {/* User Table */}
-        <div className="w-full overflow-x-auto scrollbar-hide">
-          <CustomerTable rows={filteredRows} />
-        </div>
+    <div className="min-h-screen flex items-center justify-center p-5 bg-gray-800">
+      <div className="w-full max-w-4xl bg-gray-700 rounded-lg shadow-lg p-5">
+        <h2 className="text-2xl font-bold text-white mb-4 text-center md:text-left">Customer Management</h2>
+        <Autocomplete
+          options={names}
+          value={selectedValue}
+          onChange={(event, newValue) => setSelectedValue(newValue)}
+          inputValue={inputValue}
+          onInputChange={(event, newInputValue) => setInputValue(newInputValue)}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              label="Search Customer"
+              variant="outlined"
+              fullWidth
+              className="bg-white rounded"
+            />
+          )}
+          className="mb-4"
+        />
+        <CustomerTable rows={filteredRows} />
       </div>
     </div>
   );
