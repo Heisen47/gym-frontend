@@ -20,7 +20,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { motion } from "framer-motion";
 import PersonIcon from "@mui/icons-material/Person";
 
-const Navbar = () => {
+const Navbar = ({ scrollToHome, scrollToAbout, scrollToContact }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -125,22 +125,33 @@ const Navbar = () => {
                   Home
                 </motion.div>
               </Link>
-              {navs.map((nav) => (
-                <Link
-                  key={nav}
-                  to={`/${nav}`}
-                  className="block md:inline font-sans"
+
+              <span
+                className="block md:inline font-sans"
+                onClick={scrollToAbout}
+              >
+                <motion.div
+                  initial={{ opacity: 0, y: -50 }} // Start off-screen to the top
+                  animate={{ opacity: 1, y: 0 }} // Slide into view
+                  transition={{ duration: 0.5 }} // Control animation speed
+                  className="flex flex-col"
                 >
-                  <motion.div
-                    initial={{ opacity: 0, y: -50 }} // Start off-screen to the top
-                    animate={{ opacity: 1, y: 0 }} // Slide into view
-                    transition={{ duration: 0.5 }} // Control animation speed
-                    className="flex flex-col"
-                  >
-                    {nav}
-                  </motion.div>
-                </Link>
-              ))}
+                  About
+                </motion.div>
+              </span>
+              <span
+                className="block md:inline font-sans"
+                onClick={scrollToContact}
+              >
+                <motion.div
+                  initial={{ opacity: 0, y: -50 }} // Start off-screen to the top
+                  animate={{ opacity: 1, y: 0 }} // Slide into view
+                  transition={{ duration: 0.5 }} // Control animation speed
+                  className="flex flex-col"
+                >
+                  Contact
+                </motion.div>
+              </span>
 
               <Link to="/admin" className="block md:inline font-sans">
                 <motion.div

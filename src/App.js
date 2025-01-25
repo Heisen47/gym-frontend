@@ -1,4 +1,5 @@
 import "./index.css";
+import React, { useRef } from "react";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
@@ -15,19 +16,38 @@ import Payment from "./pages/Payment";
 import User from "./pages/User";
 
 function App() {
+  const homeRef = useRef(null);
+  const aboutRef = useRef(null);
+  const contactRef = useRef(null);
+
+  const scrollToSection = (ref) => {
+    ref.current.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <GoogleOAuthProvider clientId="799455265041-4e660qpe66qgv6ru8pm449v1vp92un3m.apps.googleusercontent.com">
       <Router>
         <div className="flex flex-col min-h-screen">
-          <Navbar />
+          <Navbar
+            scrollToHome={() => scrollToSection(homeRef)}
+            scrollToAbout={() => scrollToSection(aboutRef)}
+            scrollToContact={() => scrollToSection(contactRef)}
+          />
+
+          <div>
+            <section ref={homeRef}>
+              <Home />
+            </section>
+            <section ref={aboutRef}>
+              <About />
+            </section>
+            <section ref={contactRef}>
+              <Contact />
+            </section>
+          </div>
 
           <div className="flex-grow bg-[#3C3D37] scrollbar-hide">
             <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/product" element={<Product />} />
-
               {/* Admin Routes */}
               <Route path="/admin" element={<Admin />}>
                 <Route path="dashboard" element={<Dashboard />} />

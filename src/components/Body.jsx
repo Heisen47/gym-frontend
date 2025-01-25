@@ -31,6 +31,8 @@ const Body = () => {
     <div className="p-4">
       {/* What we offer */}
 
+      
+
       <motion.div
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
