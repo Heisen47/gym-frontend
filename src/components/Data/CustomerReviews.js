@@ -5,17 +5,17 @@ const CustomerReviews = [
     {
       name: "John Doe",
       age: 28,
-      height: "5'9\"",
-      weight: "160 lbs",
-      transformation: "Lost 20 lbs",
+      height: "170",
+      weight: "160 ",
+      transformation: "Lost 20 ",
       message: "I feel healthier and more energetic than ever!",
       image: man
     },
     {
       name: "Jane Smith",
       age: 32,
-      height: "5'6\"",
-      weight: "140 lbs",
+      height: "172",
+      weight: "140 ",
       transformation: "Gained muscle mass",
       message: "I love my new muscular physique!",
       image: woman
@@ -23,8 +23,8 @@ const CustomerReviews = [
     {
       name: "Jane Smith",
       age: 32,
-      height: "5'6\"",
-      weight: "140 lbs",
+      height: "175",
+      weight: "140 ",
       transformation: "Gained muscle mass",
       message: "I love my new muscular physique!",
       image: man
@@ -32,8 +32,8 @@ const CustomerReviews = [
     {
       name: "Jane Smith",
       age: 32,
-      height: "5'6\"",
-      weight: "140 lbs",
+      height: "155",
+      weight: "140",
       transformation: "Gained muscle mass",
       message: "I love my new muscular physique!",
       image: man
@@ -41,8 +41,8 @@ const CustomerReviews = [
     {
       name: "Jane Smith",
       age: 32,
-      height: "5'6\"",
-      weight: "140 lbs",
+      height: "160",
+      weight: "140",
       transformation: "Gained muscle mass",
       message: "I love my new muscular physique!",
       image: woman

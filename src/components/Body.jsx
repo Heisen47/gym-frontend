@@ -46,7 +46,7 @@ const Body = () => {
       >
         <div className="bg-secondary mt-5 p-8 max-w-7xl">
           <h3 className="text-[#C7C8CC] text-4xl font-bold mb-8">
-            Customer Reviews
+            Reviews
           </h3>
           <Slider {...settings}>
             {reviews.map((review, index) => (
@@ -60,27 +60,30 @@ const Body = () => {
                     <img
                       src={review.image}
                       alt="Customer"
-                      className="w-28 h-28 md:w-40 md:h-40 rounded-full object-cover border-4 border-gray-200 shadow-md"
+                      className="w-28 h-28 md:w-40 md:h-40 object-cover border-4 border-gray-200 shadow-md"
+                      loading="lazy"
                     />
                   </div>
 
                   {/* Review Text Section */}
                   <div className="flex flex-col flex-grow text-left">
-                    <p className="text-gray-800 text-lg mb-4 italic font-serif">
+                    <p className="text-gray-800 text-lg mb-4 italic font-serif mx-4">
                       "{review.message}"
                     </p>
-                    <div className="text-gray-600 text-sm space-y-1">
+
+                    <p className="text-end">
+                      - <span className="text-sm font-bold"> {review.name}</span>
+                    </p>
+
+                    <div className="text-gray-600 flex justify-end items-center text-sm space-y-1 gap-2">
                       <p>
-                        <strong>Name:</strong> {review.name}
+                        {review.age} <span className="text-xs"> yrs </span>  ,
                       </p>
                       <p>
-                        <strong>Age:</strong> {review.age}
+                        {review.height} <span className="text-xs"> cms </span> ,
                       </p>
                       <p>
-                        <strong>Height:</strong> {review.height}
-                      </p>
-                      <p>
-                        <strong>Weight:</strong> {review.weight}
+                        {review.weight} <span className="text-xs"> kgs </span>
                       </p>
                     </div>
                   </div>
