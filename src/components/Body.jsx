@@ -54,7 +54,7 @@ const Body = () => {
                 key={index}
                 className="p-4" // Added padding to create space between slides
               >
-                <div className="flex md:flex-row items-center justify-between p-6 bg-white rounded-lg shadow-md">
+                <div className="flex md:flex-row items-center justify-between p-6 bg-[#758694] rounded-lg shadow-md">
                   {/* Image Section */}
                   <div className="flex-shrink-0">
                     <img
@@ -72,18 +72,18 @@ const Body = () => {
                     </p>
 
                     <p className="text-end">
-                      - <span className="text-sm font-bold"> {review.name}</span>
+                      - <span className="text-sm font-bold text-[#C7B7A3]"> {review.name}</span>
                     </p>
 
                     <div className="text-gray-600 flex justify-end items-center text-sm space-y-1 gap-2">
                       <p>
-                        {review.age} <span className="text-xs"> yrs </span>  ,
+                        <span className="text-[#C7B7A3]"> {review.age} </span> <span className="text-xs"> yrs </span>  ,
                       </p>
                       <p>
-                        {review.height} <span className="text-xs"> cms </span> ,
+                        <span className="text-[#C7B7A3]"> {review.height} </span> <span className="text-xs"> cms </span> ,
                       </p>
                       <p>
-                        {review.weight} <span className="text-xs"> kgs </span>
+                        <span className="text-[#C7B7A3]"> {review.weight}  </span> <span className="text-xs"> kgs </span>
                       </p>
                     </div>
                   </div>
