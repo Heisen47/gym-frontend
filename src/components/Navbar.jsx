@@ -30,7 +30,6 @@ const Navbar = ({ scrollToHome, scrollToAbout, scrollToContact }) => {
   const [open, setOpen] = useState(false);
 
   const settings = ["Profile", "Account", "Dashboard", "Logout"];
-  const navs = ["About", "Product"];
 
   //drawer settings for mobile
   const handleLinkClick = () => {
@@ -65,6 +64,10 @@ const Navbar = ({ scrollToHome, scrollToAbout, scrollToContact }) => {
       },
     },
   });
+
+  const scrollToSection = (ref) => {
+    ref.current.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -114,8 +117,9 @@ const Navbar = ({ scrollToHome, scrollToAbout, scrollToContact }) => {
               className={`${
                 isOpen ? "block" : "hidden"
               } md:flex md:space-x-4 absolute md:static top-16 left-0 w-full md:w-auto bg-gray-800 md:bg-transparent`}
+
             >
-              <Link to="/" className="block md:inline font-sans">
+              <Link to="/" className="block md:inline font-sans" >
                 <motion.div
                   initial={{ opacity: 0, y: -50 }} // Start off-screen to the top
                   animate={{ opacity: 1, y: 0 }} // Slide into view
