@@ -1,17 +1,16 @@
 import React, { Suspense } from "react";
-import Hero from "../components/Hero";
-import About from "./About";
+import Hero from "../components/LandingPageComponents/Hero";
 import Contact from "./Contact";
+import About from "./About";
 
-const Body = React.lazy(() => import("../components/Body"));
+const Body = React.lazy(() => import("../components/LandingPageComponents/Body"));
 
 const Home = () => {
   return (
     <div className="bg-slate-600 ">
       <Hero />
-
+      <About />
       <div className="container mx-auto pt-2">
-        <About />
 
         <Suspense fallback={<div>Loading...</div>}>
           <Body />

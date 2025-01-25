@@ -3,7 +3,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { motion } from "framer-motion";
 import Slider from "react-slick";
-import reviews from "./Data/CustomerReviews";
+import reviews from "../Data/CustomerReviews";
+import About from "../../pages/About";
 
 const Body = () => {
   const settings = {
@@ -36,6 +37,9 @@ const Body = () => {
 
   return (
     <div className="pt-2">
+
+      
+
       {/* Gym Reviews */}
       <motion.div
         initial={{ opacity: 0, y: 50 }} // Start off-screen to the bottom
@@ -45,7 +49,7 @@ const Body = () => {
         className="flex flex-col items-center"
       >
         <div className="bg-secondary mt-5 p-8 max-w-7xl w-full">
-          <h3 className="text-[#C7C8CC] text-4xl font-bold mb-8 text-center">
+          <h3 className="text-[#C7C8CC] text-4xl font-bold mb-8">
             Reviews
           </h3>
           <Slider {...settings}>

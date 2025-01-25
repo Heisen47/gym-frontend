@@ -1,6 +1,6 @@
 import React from "react";
-import OutlineCard from "./OutlineCard";
-import hero from "../assets/hero/hero.jpg";
+import OutlineCard from "../OutlineCard";
+import hero from "../../assets/hero/hero.jpg";
 
 const Hero = () => {
   return (
