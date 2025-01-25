@@ -44,17 +44,14 @@ const Body = () => {
         transition={{ duration: 0.5 }} // Control animation speed
         className="flex flex-col items-center"
       >
-        <div className="bg-secondary mt-5 p-8 max-w-7xl">
-          <h3 className="text-[#C7C8CC] text-4xl font-bold mb-8">
+        <div className="bg-secondary mt-5 p-8 max-w-7xl w-full">
+          <h3 className="text-[#C7C8CC] text-4xl font-bold mb-8 text-center">
             Reviews
           </h3>
           <Slider {...settings}>
             {reviews.map((review, index) => (
-              <div
-                key={index}
-                className="p-4" // Added padding to create space between slides
-              >
-                <div className="flex md:flex-row items-center justify-between p-6 bg-[#758694] rounded-lg shadow-md">
+              <div key={index} className="p-4">
+                <div className="flex flex-col md:flex-row items-center justify-between p-6 bg-[#758694] rounded-lg shadow-md">
                   {/* Image Section */}
                   <div className="flex-shrink-0">
                     <img
@@ -66,24 +63,35 @@ const Body = () => {
                   </div>
 
                   {/* Review Text Section */}
-                  <div className="flex flex-col flex-grow text-left">
-                    <p className="text-gray-800 text-lg mb-4 italic font-serif mx-4">
+                  <div className="flex flex-col flex-grow text-left mt-4 md:mt-0 md:ml-6">
+                    <p className="text-gray-800 text-lg mb-4 italic font-serif">
                       "{review.message}"
                     </p>
-
                     <p className="text-end">
-                      - <span className="text-sm font-bold text-[#C7B7A3]"> {review.name}</span>
+                      -{" "}
+                      <span className="text-sm font-bold text-[#C7B7A3]">
+                        {" "}
+                        {review.name}
+                      </span>
                     </p>
-
                     <div className="text-gray-600 flex justify-end items-center text-sm space-y-1 gap-2">
                       <p>
-                        <span className="text-[#C7C8CC]"> {review.age} </span> <span className="text-xs text-[#C7C8CC]"> yrs </span>  ,
+                        <span className="text-[#C7C8CC]"> {review.age} </span>{" "}
+                        <span className="text-xs text-[#C7C8CC]"> yrs </span> ,
                       </p>
                       <p>
-                        <span className="text-[#C7C8CC]"> {review.height} </span> <span className="text-xs text-[#C7C8CC]"> cms </span> ,
+                        <span className="text-[#C7C8CC]">
+                          {" "}
+                          {review.height}{" "}
+                        </span>{" "}
+                        <span className="text-xs text-[#C7C8CC]"> cms </span> ,
                       </p>
                       <p>
-                        <span className="text-[#C7C8CC]"> {review.weight}  </span> <span className="text-xs text-[#C7C8CC]"> kgs </span>
+                        <span className="text-[#C7C8CC]">
+                          {" "}
+                          {review.weight}{" "}
+                        </span>{" "}
+                        <span className="text-xs text-[#C7C8CC]"> kgs </span>
                       </p>
                     </div>
                   </div>
