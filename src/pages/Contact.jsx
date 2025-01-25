@@ -79,7 +79,16 @@ const Contact = () => {
               <Button
                 type="submit"
                 variant="contained"
-                className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full"
+                sx={{
+                  backgroundColor: '#373A40',
+                  color: '#C7C8CC',
+                  paddingX: 8,
+                  paddingY: 3,
+                  borderRadius: '9px', // Full rounded
+                  '&:hover': {
+                    backgroundColor: '#2c2f34', // Darker shade for hover state
+                  },
+                }}
               >
                 Send Message
               </Button>
