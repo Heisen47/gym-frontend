@@ -13,9 +13,10 @@ const Customers = () => {
     : rows;
 
   return (
-    <>
-      <div className="fixed bg-gray-900">
-        <div className="w-full sm:w-3/4 lg:w-2/3 bg-gray-800 rounded-lg shadow-xl p-6 fixed ">
+    <div>
+      <div>
+        <div className="w-full sm:w-3/4 lg:w-2/3 rounded-lg p-6 absolute flex flex-col justify-center">
+          {/* Search bar */}
           <div className="mb-6 w-full">
             <Autocomplete
               options={names}
@@ -36,13 +37,14 @@ const Customers = () => {
               )}
             />
           </div>
-
-          <div className="bg-gray-700 rounded-lg shadow p-4 flex-grow overflow-y-auto">
+              
+          {/* Table */}
+          <div className=" rounded-lg  p-4  overflow-y-auto">
             <CustomerTable rows={filteredRows} />
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

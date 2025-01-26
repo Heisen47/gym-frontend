@@ -8,7 +8,7 @@ const CustomerTable = ({ rows }) => {
 
   return (
     <div className="w-full rounded-lg flex text-center scrollbar-hide">
-      <div className="w-full md:min-w-[700px] relative">
+      <div className="w-full md:min-w-[700px] absolute">
         <div className="max-h-96 overflow-auto ">
           <table className="w-full border-collapse bg-white">
             <thead className="bg-gray-800 sticky top-0">

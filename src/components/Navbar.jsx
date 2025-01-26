@@ -204,7 +204,7 @@ const Navbar = () => {
                 </div>
               </Link>
 
-              <Link to="/admin" className="block md:inline font-sans">
+              <Link to="/admin/dashboard" className="block md:inline font-sans">
                 <motion.div
                   initial={{ opacity: 0, y: -50 }} // Start off-screen to the top
                   animate={{ opacity: 1, y: 0 }} // Slide into view
