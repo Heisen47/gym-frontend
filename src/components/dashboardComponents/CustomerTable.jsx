@@ -1,7 +1,6 @@
 import React from "react";
 
 const CustomerTable = ({ rows }) => {
-  
   const handleRowClick = (id) => {
     window.open(`/user/${id}`, "_blank");
   };
@@ -17,19 +16,16 @@ const CustomerTable = ({ rows }) => {
                   User Id
                 </th>
                 <th className="p-4 text-left text-sm font-semibold text-white">
-                  Dessert (100g serving)
+                  Email
                 </th>
                 <th className="p-4 text-right text-sm font-semibold text-white">
-                  Calories
+                  Membership
                 </th>
                 <th className="p-4 text-right text-sm font-semibold text-white">
-                  Fat (g)
+                  Name
                 </th>
                 <th className="p-4 text-right text-sm font-semibold text-white">
-                  Carbs (g)
-                </th>
-                <th className="p-4 text-right text-sm font-semibold text-white">
-                  Protein (g)
+                  Phone Number
                 </th>
               </tr>
             </thead>
