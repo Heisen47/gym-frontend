@@ -8,9 +8,9 @@ const Admin = () => {
     <div className="flex bg-slate-600 ">
       <Sidebar />
 
-      <div>
+      <main className="flex-grow p-4">
         <Outlet />
-      </div>
+      </main>
     </div>
   );
 };
