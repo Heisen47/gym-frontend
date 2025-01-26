@@ -17,7 +17,7 @@ const Dashboard = () => {
 
   const handleFormSubmit = async (formData) => {
     try {
-      const response = await fetch("http://localhost:8080/customers", {
+      const response = await fetch("http://localhost:8080/addUser", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
