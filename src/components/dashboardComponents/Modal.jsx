@@ -71,6 +71,7 @@ const CustomModal = ({ open, handleClose }) => {
             error={!!errors.name}
             helperText={errors.name}
             className="mb-4"
+            margin="normal"
           />
           <TextField
             label="Email"
@@ -82,8 +83,9 @@ const CustomModal = ({ open, handleClose }) => {
             error={!!errors.email}
             helperText={errors.email}
             className="mb-4"
+            margin="normal"
           />
-          <FormControl fullWidth variant="outlined" className="mb-4" error={!!errors.membership}>
+          <FormControl fullWidth variant="outlined" className="mb-4" error={!!errors.membership} margin="normal">
             <InputLabel>Membership</InputLabel>
             <Select
               label="Membership"
@@ -106,6 +108,7 @@ const CustomModal = ({ open, handleClose }) => {
             error={!!errors.phone}
             helperText={errors.phone}
             className="mb-4"
+            margin="normal"
           />
           <div className="flex justify-end space-x-4">
             <Button variant="contained" color="secondary" onClick={handleClose}>
