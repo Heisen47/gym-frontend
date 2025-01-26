@@ -1,17 +1,64 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { TextField, Button } from "@mui/material";
+import emailjs from "@emailjs/browser";
 
 const Contact = () => {
+  const formRef = useRef();
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
   });
 
+  const [loading, setLoading] = useState(false);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle form submission
+    setLoading(true);
+
+    emailjs
+      .send(
+        "service_sq0kt9e",
+        "template_6zv7ylv",
+        {
+          from_name: formData.name,
+          to_name: "Gym",
+          from_email: formData.email,
+          to_email: "iamrishi.dev47@gmail.com",
+          message: formData.message,
+        },
+        "9NnIexpXw87rn5syQ"
+      )
+      .then(
+        () => {
+          setLoading(false);
+          alert("Thank you! I will get back to you as soon as possible");
+
+          setFormData({
+            name: "",
+            email: "",
+            message: "",
+          });
+        },
+        (err) => {
+          setLoading(false);
+
+          console.log(err);
+          alert("Oops! Something went wrong.");
+        }
+      );
   };
 
   return (
@@ -33,7 +80,11 @@ const Contact = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div
+          className="grid grid-cols-1 lg:grid-cols-2 gap-8"
+          ref={formRef}
+          onSubmit={handleSubmit}
+        >
           {/* Contact Form */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -46,51 +97,48 @@ const Contact = () => {
               <TextField
                 fullWidth
                 label="Name"
+                name="name"
                 variant="outlined"
                 value={formData.name}
-                onChange={(e) =>
-                  setFormData({ ...formData, name: e.target.value })
-                }
+                onChange={handleChange}
                 required
               />
               <TextField
                 fullWidth
                 label="Email"
+                name="email"
                 variant="outlined"
                 type="email"
                 value={formData.email}
-                onChange={(e) =>
-                  setFormData({ ...formData, email: e.target.value })
-                }
+                onChange={handleChange}
                 required
               />
               <TextField
                 fullWidth
                 label="Message"
+                name="message"
                 variant="outlined"
                 multiline
                 rows={4}
                 value={formData.message}
-                onChange={(e) =>
-                  setFormData({ ...formData, message: e.target.value })
-                }
+                onChange={handleChange}
                 required
               />
               <Button
                 type="submit"
                 variant="contained"
                 sx={{
-                  backgroundColor: '#373A40',
-                  color: '#C7C8CC',
+                  backgroundColor: "#373A40",
+                  color: "#C7C8CC",
                   paddingX: 8,
                   paddingY: 3,
-                  borderRadius: '9px', // Full rounded
-                  '&:hover': {
-                    backgroundColor: '#2c2f34', // Darker shade for hover state
+                  borderRadius: "9px",
+                  "&:hover": {
+                    backgroundColor: "#2c2f34",
                   },
                 }}
               >
-                Send Message
+                {loading ? "Sending..." : "Send Message"}
               </Button>
             </form>
           </motion.div>
@@ -151,7 +199,9 @@ const Contact = () => {
                 >
                   +1 (555) 123-4567
                 </a>
-                <p className="text-[#C7C8CC] hidden md:block ">+1 (555) 123-4567</p>
+                <p className="text-[#C7C8CC] hidden md:block ">
+                  +1 (555) 123-4567
+                </p>
               </div>
 
               {/* Email */}
