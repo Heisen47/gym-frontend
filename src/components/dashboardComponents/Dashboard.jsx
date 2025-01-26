@@ -20,8 +20,9 @@ const Dashboard = () => {
           </Button>
         </div>
 
-        <h2 className="text-xl font-semibold mb-3">User Activity</h2>
-        <div className="flex space-x-5">
+        {/* <h2 className="text-xl font-semibold mb-3">User Activity</h2> */}
+        <div className="flex space-x-5 justify-center items-center border border-black">
+
           <PieChart
             series={[
               {
