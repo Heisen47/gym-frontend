@@ -50,19 +50,16 @@ const CustomerTable = ({ rows }) => {
                     className="p-4 text-sm text-gray-900 cursor-pointer hover:underline"
                     onClick={() => handleRowClick(row.id)}
                   >
+                    {row.email}
+                  </td>
+                  <td className="p-4 text-sm text-gray-900 text-right cursor-pointer ">
+                    {row.membership}
+                  </td>
+                  <td className="p-4 text-sm text-gray-900 text-right cursor-pointer ">
                     {row.name}
                   </td>
                   <td className="p-4 text-sm text-gray-900 text-right cursor-pointer ">
-                    {row.calories}
-                  </td>
-                  <td className="p-4 text-sm text-gray-900 text-right cursor-pointer ">
-                    {row.fat}
-                  </td>
-                  <td className="p-4 text-sm text-gray-900 text-right cursor-pointer ">
-                    {row.carbs}
-                  </td>
-                  <td className="p-4 text-sm text-gray-900 text-right cursor-pointer ">
-                    {row.protein}
+                    {row.phoneNumber}
                   </td>
                 </tr>
               ))}
