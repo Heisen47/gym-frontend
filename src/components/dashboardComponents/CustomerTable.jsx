@@ -53,7 +53,7 @@ const CustomerTable = ({ rows }) => {
                     {row.email}
                   </td>
                   <td className="p-4 text-sm text-gray-900 text-right cursor-pointer ">
-                    {row.membership}
+                    {row.membership ? "Active" : "Inactive"}
                   </td>
                   <td className="p-4 text-sm text-gray-900 text-right cursor-pointer ">
                     {row.name}
