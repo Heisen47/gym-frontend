@@ -61,12 +61,10 @@ const CustomModal = ({ open, handleClose, handleFormSubmit }) => {
         const data = await response.json();
         console.log("Customer created successfully:", data);
 
-        // Optional: Call a parent function to update the customers list
         if (handleFormSubmit) {
           handleFormSubmit(data);
         }
 
-        // Close the modal after successful creation
         handleClose();
       } catch (error) {
         console.error("Error creating customer:", error);
@@ -117,8 +115,8 @@ const CustomModal = ({ open, handleClose, handleFormSubmit }) => {
               value={formData.membership}
               onChange={handleChange}
             >
-              <MenuItem value="Active">Active</MenuItem>
-              <MenuItem value="Inactive">Inactive</MenuItem>
+              <MenuItem value="true">Active</MenuItem>
+              <MenuItem value="false">Inactive</MenuItem>
             </Select>
             {errors.membership && <FormHelperText>{errors.membership}</FormHelperText>}
           </FormControl>
