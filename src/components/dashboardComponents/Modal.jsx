@@ -13,7 +13,7 @@ const style = {
   borderRadius: 2,
 };
 
-const CustomModal = ({ open, handleClose }) => {
+const CustomModal = ({ open, handleClose, handleFormSubmit }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -42,11 +42,35 @@ const CustomModal = ({ open, handleClose }) => {
     return Object.values(tempErrors).every((x) => x === '');
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (validate()) {
-      console.log('Form data:', formData);
-      handleClose();
+      try {
+        const response = await fetch("http://localhost:8080/addUser", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to create customer");
+        }
+
+        const data = await response.json();
+        console.log("Customer created successfully:", data);
+
+        // Optional: Call a parent function to update the customers list
+        if (handleFormSubmit) {
+          handleFormSubmit(data);
+        }
+
+        // Close the modal after successful creation
+        handleClose();
+      } catch (error) {
+        console.error("Error creating customer:", error);
+      }
     }
   };
 

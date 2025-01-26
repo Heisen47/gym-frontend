@@ -6,9 +6,36 @@ import { LineChart } from "@mui/x-charts/LineChart";
 
 const Dashboard = () => {
   const [open, setOpen] = useState(false);
+  const [data, setData] = useState([
+    { id: 0, value: 10, label: "series A" },
+    { id: 1, value: 15, label: "series B" },
+    { id: 2, value: 20, label: "series C" },
+  ]);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const handleFormSubmit = async (formData) => {
+    try {
+      const response = await fetch("http://localhost:8080/customers", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      const newData = await response.json();
+      setData((prevData) => [...prevData, newData]);
+    } catch (error) {
+      console.error("Error submitting form data:", error);
+    }
+  };
+
+  const pieChartData = useMemo(() => [
+    {
+      data: data,
+    },
+  ], [data]);
 
   return (
     <>
@@ -24,15 +51,7 @@ const Dashboard = () => {
         <div className="flex space-x-5 justify-center items-center border border-black">
 
           <PieChart
-            series={[
-              {
-                data: [
-                  { id: 0, value: 10, label: "series A" },
-                  { id: 1, value: 15, label: "series B" },
-                  { id: 2, value: 20, label: "series C" },
-                ],
-              },
-            ]}
+            series={pieChartData}
             width={400}
             height={200}
           />
@@ -51,7 +70,7 @@ const Dashboard = () => {
       </div>
 
       {/* Modal for creating new customer */}
-      <CustomModal open={open} handleClose={handleClose} />
+      <CustomModal open={open} handleClose={handleClose} handleFormSubmit={handleFormSubmit}/>
     </>
   );
 };
