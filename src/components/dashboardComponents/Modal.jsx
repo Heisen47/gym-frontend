@@ -18,7 +18,7 @@ const CustomModal = ({ open, handleClose, handleFormSubmit }) => {
     name: '',
     email: '',
     membership: '',
-    phone: '',
+    phoneNumber: '',
   });
   const [errors, setErrors] = useState({});
 
@@ -36,8 +36,8 @@ const CustomModal = ({ open, handleClose, handleFormSubmit }) => {
     tempErrors.email = formData.email ? '' : 'Email is required';
     tempErrors.email = /\S+@\S+\.\S+/.test(formData.email) ? '' : 'Email is not valid';
     tempErrors.membership = formData.membership ? '' : 'Membership is required';
-    tempErrors.phone = formData.phone ? '' : 'Phone number is required';
-    tempErrors.phone = /^[0-9]{10}$/.test(formData.phone) ? '' : 'Phone number is not valid';
+    tempErrors.phoneNumber = formData.phoneNumber ? '' : 'phoneNumber number is required';
+    tempErrors.phoneNumber = /^[0-9]{10}$/.test(formData.phoneNumber) ? '' : 'phoneNumber number is not valid';
     setErrors(tempErrors);
     return Object.values(tempErrors).every((x) => x === '');
   };
@@ -63,6 +63,7 @@ const CustomModal = ({ open, handleClose, handleFormSubmit }) => {
 
         if (handleFormSubmit) {
           handleFormSubmit(data);
+          alert("Customer created successfully");
         }
 
         handleClose();
@@ -121,17 +122,29 @@ const CustomModal = ({ open, handleClose, handleFormSubmit }) => {
             {errors.membership && <FormHelperText>{errors.membership}</FormHelperText>}
           </FormControl>
           <TextField
-            label="Phone Number"
+            label="phone Number"
             variant="outlined"
             fullWidth
-            name="phone"
-            value={formData.phone}
+            name="phoneNumber"
+            value={formData.phoneNumber}
             onChange={handleChange}
-            error={!!errors.phone}
-            helperText={errors.phone}
+            error={!!errors.phoneNumber}
+            helperText={errors.phoneNumber}
             className="mb-4"
             margin="normal"
           />
+          {/* <TextField
+            label="phone Number"
+            variant="outlined"
+            fullWidth
+            name="phoneNumber"
+            value={formData.phoneNumber}
+            onChange={handleChange}
+            error={!!errors.phoneNumber}
+            helperText={errors.phoneNumber}
+            className="mb-4"
+            margin="normal"
+          /> */}
           <div className="flex justify-end space-x-4">
             <Button variant="contained" color="secondary" onClick={handleClose}>
               Cancel
