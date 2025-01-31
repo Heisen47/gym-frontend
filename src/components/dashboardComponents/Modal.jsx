@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Modal, Box, TextField, MenuItem, Select, InputLabel, FormControl, FormHelperText } from '@mui/material';
+import axios from 'axios';
 
 const style = {
   position: 'absolute',
@@ -46,23 +47,17 @@ const CustomModal = ({ open, handleClose, handleFormSubmit }) => {
     e.preventDefault();
     if (validate()) {
       try {
-        const response = await fetch("http://localhost:8080/addUser", {
-          method: "POST",
+        const response = await axios.post("http://localhost:8080/addUser", formData,{
           headers: {
             "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
+          }
         });
 
-        if (!response.ok) {
-          throw new Error("Failed to create customer");
-        }
-
-        const data = await response.json();
-        console.log("Customer created successfully:", data);
+        
+        console.log("Customer created successfully:", response.data);
 
         if (handleFormSubmit) {
-          handleFormSubmit(data);
+          handleFormSubmit(response.data);
           alert("Customer created successfully");
         }
 

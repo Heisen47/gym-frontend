@@ -1,7 +1,8 @@
-import { TextField, Autocomplete } from "@mui/material";
+import { TextField, Autocomplete, CircularProgress } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import CustomerTable from "../components/dashboardComponents/CustomerTable";
 import rows from "../components/dashboardComponents/data/customerData";
+import axios from "axios";
 
 const Customers = () => {
   const [inputValue, setInputValue] = useState("");
@@ -12,15 +13,14 @@ const Customers = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:8080/customers", {
-          method: "GET",
+        const response = await axios.get("http://localhost:8080/customers", {
           headers: {
             "Content-Type": "application/json",
-          }});
-        const data = await response.json();
-        setRows(data);
+          },
+        });
+        setRows(response.data);
         setLoading(false);
-        console.log(data)
+        console.log(response.data);
       } catch (error) {
         console.error("Error fetching customer data:", error);
         setLoading(false);
@@ -30,12 +30,19 @@ const Customers = () => {
     fetchData();
   }, []);
 
-
   const names = rows.map((row) => row.name);
 
   const filteredRows = selectedValue
     ? rows.filter((row) => row.name === selectedValue)
     : rows;
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center p-5 bg-gray-800 text-white">
+        <CircularProgress />
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -62,7 +69,7 @@ const Customers = () => {
               )}
             />
           </div>
-              
+
           {/* Table */}
           <div className=" rounded-lg  p-4  overflow-y-auto">
             <CustomerTable rows={filteredRows} />
