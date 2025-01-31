@@ -122,7 +122,7 @@ const CustomModal = ({ open, handleClose, handleFormSubmit }) => {
             {errors.membership && <FormHelperText>{errors.membership}</FormHelperText>}
           </FormControl>
           <TextField
-            label="phone Number"
+            label="Phone Number"
             variant="outlined"
             fullWidth
             name="phoneNumber"
