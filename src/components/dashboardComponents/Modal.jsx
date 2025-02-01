@@ -33,7 +33,6 @@ const CustomModal = ({ open, handleClose, handleFormSubmit }) => {
   });
   const [errors, setErrors] = useState({});
   const [image, setImage] = useState(null);
-  const [preview, setPreview] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -57,6 +56,10 @@ const CustomModal = ({ open, handleClose, handleFormSubmit }) => {
     tempErrors.phoneNumber = /^[0-9]{10}$/.test(formData.phoneNumber)
       ? ""
       : "phoneNumber number is not valid";
+
+      if (image && image.size > 2 * 1024 * 1024) {
+        alert('Image size should be less than 2 MB');
+      }
     setErrors(tempErrors);
     return Object.values(tempErrors).every((x) => x === "");
   };
@@ -64,13 +67,22 @@ const CustomModal = ({ open, handleClose, handleFormSubmit }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (validate()) {
+      const payload = new FormData();
+      payload.append('name', formData.name);
+      payload.append('email', formData.email);
+      payload.append('membership', formData.membership);
+      payload.append('phoneNumber', formData.phoneNumber);
+      if (image) {
+        payload.append('image', image);
+      }
+
       try {
         const response = await axios.post(
           "http://localhost:8080/addUser",
-          formData,
+          payload,
           {
             headers: {
-              "Content-Type": "application/json",
+              "Content-Type": "multipart/form-data",
             },
           }
         );
@@ -93,32 +105,6 @@ const CustomModal = ({ open, handleClose, handleFormSubmit }) => {
     const file = event.target.files[0];
     if (file) {
       setImage(file);
-      setPreview(URL.createObjectURL(file)); // Preview the image
-    }
-  };
-
-  const handleUpload = async () => {
-    if (!image) {
-      alert("Please select an image first!");
-      return;
-    }
-
-    const formData = new FormData();
-    formData.append("file", image);
-
-    try {
-      const response = await fetch("http://localhost:8080/upload", {
-        method: "POST",
-        body: formData,
-      });
-
-      if (response.ok) {
-        console.log("Image uploaded successfully!");
-      } else {
-        console.error("Upload failed!");
-      }
-    } catch (error) {
-      console.error("Error uploading image:", error);
     }
   };
 
@@ -190,22 +176,15 @@ const CustomModal = ({ open, handleClose, handleFormSubmit }) => {
             margin="normal"
           />
 
-          <div className="flex items-center justify-center gap-4">
-            <TextField
-              type="file"
-              accept="image/*"
-              onChange={handleImageChange}
-              id="image-upload"
-            />
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={handleUpload}
-              className="mt-2 z-30"
-            >
-              Upload
-            </Button>
-          </div>
+          <TextField
+            type="file"
+            accept="image/*"
+            name="image"
+            onChange={handleImageChange}
+            id="image-upload"
+            className="mb-4"
+          />
+          <p className="xs italic text-red-500">Image should be of max size 2MB</p>
 
           <div className="flex justify-end space-x-4 p-2">
             <Button variant="contained" color="secondary" onClick={handleClose}>
