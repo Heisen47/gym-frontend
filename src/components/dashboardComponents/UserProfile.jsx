@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function UserProfile() {
+export default function UserProfile({ customer }) {
   return (
     <section className="min-h-screen bg-gray-100 flex items-center justify-center">
       <div className="container mx-auto px-4">
@@ -13,14 +13,12 @@ export default function UserProfile() {
                 alt="avatar"
                 className="rounded-full w-36 h-36 mx-auto mb-3"
               />
-              <p className="text-lg font-semibold">Full Stack Developer</p>
-              <p className="text-gray-600 mb-4">Bay Area, San Francisco, CA</p>
               <div className="flex justify-center gap-2">
                 <button className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
-                  Follow
+                  Update Profile
                 </button>
                 <button className="border border-gray-300 py-2 px-4 rounded hover:bg-gray-100">
-                  Message
+                  Delete Profile
                 </button>
               </div>
             </div>
@@ -61,26 +59,17 @@ export default function UserProfile() {
             <div className="bg-white rounded-lg shadow p-5 mb-6">
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-y-4">
                 <p className="font-semibold">Full Name</p>
-                <p className="col-span-2 text-gray-600">Johnatan Smith</p>
+                <p className="col-span-2 text-gray-600">{customer.name}</p>
                 <p className="font-semibold">Email</p>
-                <p className="col-span-2 text-gray-600">example@example.com</p>
+                <p className="col-span-2 text-gray-600">{customer.email}</p>
                 <p className="font-semibold">Phone</p>
-                <p className="col-span-2 text-gray-600">(097) 234-5678</p>
-                <p className="font-semibold">Mobile</p>
-                <p className="col-span-2 text-gray-600">(098) 765-4321</p>
-                <p className="font-semibold">Address</p>
-                <p className="col-span-2 text-gray-600">
-                  Bay Area, San Francisco, CA
-                </p>
+                <p className="col-span-2 text-gray-600">{customer.phoneNumber}</p>
               </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {[1, 2].map((_, i) => (
-                <div
-                  key={i}
-                  className="bg-white rounded-lg shadow p-5"
-                >
+
+                <div className="bg-white rounded-lg shadow p-5">
                   <p className="mb-4 text-lg font-medium text-primary">
                     <span className="italic">assignment</span> Project Status
                   </p>
@@ -102,7 +91,30 @@ export default function UserProfile() {
                     </div>
                   ))}
                 </div>
-              ))}
+
+                <div className="bg-white rounded-lg shadow p-5">
+                  <p className="mb-4 text-lg font-medium text-primary">
+                     Attendance
+                  </p>
+                  {[
+                    { title: "Web Design", progress: 80 },
+                    { title: "Website Markup", progress: 72 },
+                    { title: "One Page", progress: 89 },
+                    { title: "Mobile Template", progress: 55 },
+                    { title: "Backend API", progress: 66 },
+                  ].map((task, index) => (
+                    <div key={index} className="mb-4">
+                      <p className="text-sm">{task.title}</p>
+                      <div className="w-full bg-gray-200 rounded-full h-2.5">
+                        <div
+                          className="bg-blue-500 h-2.5 rounded-full"
+                          style={{ width: `${task.progress}%` }}
+                        ></div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
             </div>
           </div>
         </div>

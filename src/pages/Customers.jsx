@@ -1,7 +1,6 @@
 import { TextField, Autocomplete, CircularProgress } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import CustomerTable from "../components/dashboardComponents/CustomerTable";
-import rows from "../components/dashboardComponents/data/customerData";
 import axios from "axios";
 
 const Customers = () => {
