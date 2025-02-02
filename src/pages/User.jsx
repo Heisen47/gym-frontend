@@ -1,5 +1,3 @@
-// import React, { useEffect, useState } from 'react';
-// import { useParams } from 'react-router-dom';
 import { useEffect, useState } from "react";
 import UserProfile from "../components/dashboardComponents/UserProfile";
 import axios from "axios";
@@ -24,10 +22,10 @@ const User = () => {
         );
         const customerData = response.data;
         if (customerData.image) {
-          // Convert binary image data to Base64
           const base64Image = `data:image/jpeg;base64,${customerData.image}`;
           customerData.image = base64Image;
         }
+
         setCustomer(customerData);
         setLoading(false);
         console.log(customerData);
