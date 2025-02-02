@@ -22,9 +22,15 @@ const User = () => {
             },
           }
         );
-        setCustomer(response.data);
+        const customerData = response.data;
+        if (customerData.image) {
+          // Convert binary image data to Base64
+          const base64Image = `data:image/jpeg;base64,${customerData.image}`;
+          customerData.image = base64Image;
+        }
+        setCustomer(customerData);
         setLoading(false);
-        console.log(response.data);
+        console.log(customerData);
       } catch (error) {
         console.error("Error fetching customer data:", error);
         setLoading(false);
