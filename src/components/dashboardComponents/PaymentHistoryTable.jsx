@@ -18,8 +18,8 @@ export default function PaymentHistoryTable({ payment, loading }) {
   };
 
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+    <TableContainer component={Paper} sx={{ maxHeight: 400 }}>
+      <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table" stickyHeader>
         <TableHead>
           <TableRow>
             <TableCell>Amount(Rs.)</TableCell>

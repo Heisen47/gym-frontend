@@ -1,11 +1,10 @@
-import React ,{ useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import PaymentHistoryTable from "./PaymentHistoryTable";
 import axios from "axios";
 
-export default function UserProfile({ customer , id }) {
-
+export default function UserProfile({ customer, id }) {
   const [loading, setLoading] = useState(true);
-  const [payment , setPayment] = useState(null);
+  const [payment, setPayment] = useState(null);
 
   useEffect(() => {
     const fetchPayments = async () => {
@@ -30,7 +29,6 @@ export default function UserProfile({ customer , id }) {
 
     fetchPayments();
   }, [id]);
-
 
   return (
     <section className="min-h-screen bg-gray-100 flex items-center justify-center">
@@ -107,11 +105,16 @@ export default function UserProfile({ customer , id }) {
                 <p className="mb-4 text-lg font-medium text-primary">
                   Payment History
                 </p>
-                <PaymentHistoryTable payment={payment} loading= {loading}/>
+
+                <div className="h-[300px] overflow-hidden">
+                  <div>
+                    <PaymentHistoryTable payment={payment} loading={loading} />
+                  </div>
+                </div>
               </div>
 
-
             </div>
+
           </div>
         </div>
       </div>
