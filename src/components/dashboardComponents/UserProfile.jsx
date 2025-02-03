@@ -1,4 +1,5 @@
 import React from "react";
+import PaymentHistoryTable from "./PaymentHistoryTable";
 
 export default function UserProfile({ customer }) {
   return (
@@ -69,53 +70,17 @@ export default function UserProfile({ customer }) {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* payment history */}
+
+            <div className="w-full">
               <div className="bg-white rounded-lg shadow p-5">
                 <p className="mb-4 text-lg font-medium text-primary">
                   Payment History
                 </p>
-                {[
-                  { title: "Web Design", progress: 80 },
-                  { title: "Website Markup", progress: 72 },
-                  { title: "One Page", progress: 89 },
-                  { title: "Mobile Template", progress: 55 },
-                  { title: "Backend API", progress: 66 },
-                ].map((task, index) => (
-                  <div key={index} className="mb-4">
-                    <p className="text-sm">{task.title}</p>
-                    <div className="w-full bg-gray-200 rounded-full h-2.5">
-                      <div
-                        className="bg-blue-500 h-2.5 rounded-full"
-                        style={{ width: `${task.progress}%` }}
-                      ></div>
-                    </div>
-                  </div>
-                ))}
+                <PaymentHistoryTable />
               </div>
 
-              {/* Attendance */}
-              <div className="bg-white rounded-lg shadow p-5">
-                <p className="mb-4 text-lg font-medium text-primary">
-                  Attendance
-                </p>
-                {[
-                  { title: "Web Design", progress: 80 },
-                  { title: "Website Markup", progress: 72 },
-                  { title: "One Page", progress: 89 },
-                  { title: "Mobile Template", progress: 55 },
-                  { title: "Backend API", progress: 66 },
-                ].map((task, index) => (
-                  <div key={index} className="mb-4">
-                    <p className="text-sm">{task.title}</p>
-                    <div className="w-full bg-gray-200 rounded-full h-2.5">
-                      <div
-                        className="bg-blue-500 h-2.5 rounded-full"
-                        style={{ width: `${task.progress}%` }}
-                      ></div>
-                    </div>
-                  </div>
-                ))}
-              </div>
+
             </div>
           </div>
         </div>
