@@ -9,8 +9,7 @@ import Paper from '@mui/material/Paper';
 
 
 
-
-export default function PaymentHistoryTable() {
+export default function PaymentHistoryTable({payment , loading}) {
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
@@ -19,22 +18,20 @@ export default function PaymentHistoryTable() {
             <TableCell>Amount(Rs.)</TableCell>
             <TableCell align="right">Payment Date</TableCell>
             <TableCell align="right">Payment method</TableCell>
-            <TableCell align="right">Validity</TableCell>
+            <TableCell align="right">Validity (days)</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-            <TableRow
-
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
+        {!loading && payment.map((payment, index) => (
+            <TableRow key={index} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
               <TableCell component="th" scope="row">
-                100
+                {payment.paymentAmount}
               </TableCell>
-              <TableCell align="right">200</TableCell>
-              <TableCell align="right">55</TableCell>
-              <TableCell align="right">88</TableCell>
-
+              <TableCell align="right">{payment.paymentDate}</TableCell>
+              <TableCell align="right">{payment.paymentMethod}</TableCell>
+              <TableCell align="right">{payment.validity}</TableCell>
             </TableRow>
+          ))}
 
         </TableBody>
       </Table>

@@ -1,7 +1,37 @@
-import React from "react";
+import React ,{ useEffect, useState } from "react";
 import PaymentHistoryTable from "./PaymentHistoryTable";
+import axios from "axios";
 
-export default function UserProfile({ customer }) {
+export default function UserProfile({ customer , id }) {
+
+  const [loading, setLoading] = useState(true);
+  const [payment , setPayment] = useState(null);
+
+  useEffect(() => {
+    const fetchPayments = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:8080/payments/user/${id}`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        setPayment(response.data);
+        setLoading(false);
+        console.log(response.data);
+      } catch (error) {
+        console.error("Error fetching customer data:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchPayments();
+  }, [id]);
+
+
   return (
     <section className="min-h-screen bg-gray-100 flex items-center justify-center">
       <div className="container mx-auto px-4">
@@ -77,7 +107,7 @@ export default function UserProfile({ customer }) {
                 <p className="mb-4 text-lg font-medium text-primary">
                   Payment History
                 </p>
-                <PaymentHistoryTable />
+                <PaymentHistoryTable payment={payment} loading= {loading}/>
               </div>
 
 

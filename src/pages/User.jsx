@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import UserProfile from "../components/dashboardComponents/UserProfile";
 import axios from "axios";
@@ -64,7 +65,7 @@ const User = () => {
     );
   }
 
-  return <UserProfile customer={customer} />;
+  return <UserProfile customer={customer} id ={id}/>;
 };
 
 export default User;
