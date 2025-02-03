@@ -10,6 +10,12 @@ import Paper from '@mui/material/Paper';
 
 
 export default function PaymentHistoryTable({payment , loading}) {
+
+    const formatDate = (dateString) => {
+        const options = { day: 'numeric', month: 'short', year: '2-digit' };
+        return new Date(dateString).toLocaleDateString('en-GB', options);
+      };
+
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
@@ -27,7 +33,7 @@ export default function PaymentHistoryTable({payment , loading}) {
               <TableCell component="th" scope="row">
                 {payment.paymentAmount}
               </TableCell>
-              <TableCell align="right">{payment.paymentDate}</TableCell>
+              <TableCell align="right">{formatDate(payment.paymentDate)}</TableCell>
               <TableCell align="right">{payment.paymentMethod}</TableCell>
               <TableCell align="right">{payment.validity}</TableCell>
             </TableRow>
