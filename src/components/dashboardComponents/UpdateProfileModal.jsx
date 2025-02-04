@@ -8,8 +8,8 @@ import {
   Select,
   FormControl,
   MenuItem,
-  FormHelperText,
 } from "@mui/material";
+import axios from "axios";
 
 const style = {
   position: "absolute",
@@ -45,6 +45,29 @@ const UpdateProfileModal = ({ open, handleClose, customer }) => {
       ...prev,
       [name]: value,
     }));
+  };
+
+  const handleSubmit = async () => {
+    const payload = new FormData();
+    payload.append('name', formData.name);
+    payload.append('email', formData.email);
+    payload.append('phoneNumber', formData.phoneNumber);
+    payload.append('membership', formData.membership);
+    if (image) {
+      payload.append('image', image);
+    }
+
+    try {
+      const response = await axios.put(`http://localhost:8080/customers/${customer.id}`, payload, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      console.log('Profile updated successfully:', response.data);
+      handleClose();
+    } catch (error) {
+      console.error('Error updating profile:', error);
+    }
   };
 
   return (
@@ -121,7 +144,7 @@ const UpdateProfileModal = ({ open, handleClose, customer }) => {
           <Button variant="contained" color="secondary" onClick={handleClose}>
             Cancel
           </Button>
-          <Button variant="contained" color="primary">
+          <Button variant="contained" color="primary" onClick={handleSubmit}>
             Save
           </Button>
         </div>
