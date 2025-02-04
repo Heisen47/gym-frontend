@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import PaymentHistoryTable from "./PaymentHistoryTable";
 import axios from "axios";
+import UpdateProfileModal from "./UpdateProfileModal";
 
 export default function UserProfile({ customer, id }) {
   const [loading, setLoading] = useState(true);
   const [payment, setPayment] = useState(null);
+  const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchPayments = async () => {
@@ -30,6 +32,9 @@ export default function UserProfile({ customer, id }) {
     fetchPayments();
   }, [id]);
 
+  const handleOpenModal = () => setModalOpen(true);
+  const handleCloseModal = () => setModalOpen(false);
+
   return (
     <section className="min-h-screen bg-gray-100 flex items-center justify-center">
       <div className="container mx-auto px-4">
@@ -43,7 +48,7 @@ export default function UserProfile({ customer, id }) {
                 className="rounded-full w-36 h-36 mx-auto mb-3"
               />
               <div className="flex justify-center gap-2">
-                <button className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
+                <button className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600" onClick={handleOpenModal}>
                   Update Profile
                 </button>
                 <button className="border border-gray-300 py-2 px-4 rounded hover:bg-gray-100">
@@ -118,6 +123,9 @@ export default function UserProfile({ customer, id }) {
           </div>
         </div>
       </div>
+
+      {/* Update Profile Modal */}
+      <UpdateProfileModal open={modalOpen} handleClose={handleCloseModal} customer={customer} />
     </section>
   );
 }
