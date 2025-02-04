@@ -1,5 +1,15 @@
 import React, { useState } from "react";
-import { Modal, Box, TextField, Button } from "@mui/material";
+import {
+  Modal,
+  Box,
+  TextField,
+  Button,
+  InputLabel,
+  Select,
+  FormControl,
+  MenuItem,
+  FormHelperText,
+} from "@mui/material";
 
 const style = {
   position: "absolute",
@@ -14,15 +24,28 @@ const style = {
 };
 
 const UpdateProfileModal = ({ open, handleClose, customer }) => {
+  const [formData, setFormData] = useState({
+    name: customer.name,
+    email: customer.email,
+    phoneNumber: customer.phoneNumber,
+    membership: customer.membership,
+  });
+  const [image, setImage] = useState(null);
 
-      const [image, setImage] = useState(null);
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setImage(file);
+    }
+  };
 
-    const handleImageChange = (event) => {
-        const file = event.target.files[0];
-        if (file) {
-          setImage(file);
-        }
-      };
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
   return (
     <Modal
@@ -39,7 +62,9 @@ const UpdateProfileModal = ({ open, handleClose, customer }) => {
           label="Name"
           variant="outlined"
           fullWidth
-          defaultValue={customer.name}
+          value={formData.name}
+          onChange={handleChange}
+          name="name"
           className="mb-4"
           margin="normal"
         />
@@ -47,7 +72,9 @@ const UpdateProfileModal = ({ open, handleClose, customer }) => {
           label="Email"
           variant="outlined"
           fullWidth
-          defaultValue={customer.email}
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
           className="mb-4"
           margin="normal"
         />
@@ -55,10 +82,30 @@ const UpdateProfileModal = ({ open, handleClose, customer }) => {
           label="Phone Number"
           variant="outlined"
           fullWidth
-          defaultValue={customer.phoneNumber}
+          name="phoneNumber"
+          value={formData.phoneNumber}
+          onChange={handleChange}
           className="mb-4"
           margin="normal"
         />
+
+        <FormControl
+          fullWidth
+          variant="outlined"
+          className="mb-4"
+          margin="normal"
+        >
+          <InputLabel>Membership</InputLabel>
+          <Select
+            label="Membership"
+            name="membership"
+            value={formData.membership}
+            onChange={handleChange}
+          >
+            <MenuItem value="true">Active</MenuItem>
+            <MenuItem value="false">Inactive</MenuItem>
+          </Select>
+        </FormControl>
 
         <TextField
           type="file"
@@ -70,7 +117,6 @@ const UpdateProfileModal = ({ open, handleClose, customer }) => {
           margin="normal"
         />
 
-        
         <div className="flex justify-end space-x-4">
           <Button variant="contained" color="secondary" onClick={handleClose}>
             Cancel
