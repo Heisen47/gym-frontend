@@ -13,10 +13,33 @@ export default function UserProfile({ customer, id }) {
 
   const fileInputRef = useRef(null);
 
-  const handleImageChange = (event) => {
+  const handleImageChange = async (event) => {
     const file = event.target.files[0];
     if (file) {
       setImage(file);
+      await uploadImage(file);
+    }
+  };
+
+  const uploadImage = async (file) => {
+    const formData = new FormData();
+    formData.append("image", file);
+
+    try {
+      const response = await axios.put(
+        `http://localhost:8080/customers/${id}/image`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      window.location.reload();
+      alert("Image uploaded successfully");
+      
+    } catch (error) {
+      console.error("Error uploading image:", error);
     }
   };
 
@@ -48,7 +71,7 @@ export default function UserProfile({ customer, id }) {
     fetchPayments();
   }, [id]);
 
-  
+
 
   const handleOpenModal = () => setModalOpen(true);
   const handleCloseModal = () => setModalOpen(false);
