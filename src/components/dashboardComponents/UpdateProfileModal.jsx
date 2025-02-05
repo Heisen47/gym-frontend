@@ -130,16 +130,6 @@ const UpdateProfileModal = ({ open, handleClose, customer }) => {
           </Select>
         </FormControl>
 
-        <TextField
-          type="file"
-          accept="image/*"
-          name="image"
-          onChange={handleImageChange}
-          id="image-upload"
-          className="mb-4"
-          margin="normal"
-        />
-
         <div className="flex justify-end space-x-4">
           <Button variant="contained" color="secondary" onClick={handleClose}>
             Cancel
