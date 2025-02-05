@@ -3,20 +3,22 @@ import PaymentHistoryTable from "./PaymentHistoryTable";
 import axios from "axios";
 import UpdateProfileModal from "./UpdateProfileModal";
 import { Camera } from "lucide-react";
+import { CircularProgress } from "@mui/material";
 
 export default function UserProfile({ customer, id }) {
   const [loading, setLoading] = useState(true);
   const [payment, setPayment] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
+  const [loadingImage, setLoadingImage] = useState(false);
+  const [image, setImage] = useState(customer.image);
 
-  const [image, setImage] = useState(null);
 
   const fileInputRef = useRef(null);
 
   const handleImageChange = async (event) => {
     const file = event.target.files[0];
     if (file) {
-      setImage(file);
+      setLoadingImage(true);
       await uploadImage(file);
     }
   };
@@ -35,17 +37,21 @@ export default function UserProfile({ customer, id }) {
           },
         }
       );
-      window.location.reload();
-      alert("Image uploaded successfully");
-      
+      if (response.status === 200) {
+        setImage(response.data.image); 
+      }
     } catch (error) {
       console.error("Error uploading image:", error);
+      
+    }finally {
+      setLoadingImage(false);
     }
   };
 
   const triggerFileInput = () => {
     fileInputRef.current.click();
   };
+
 
   useEffect(() => {
     const fetchPayments = async () => {
@@ -71,8 +77,6 @@ export default function UserProfile({ customer, id }) {
     fetchPayments();
   }, [id]);
 
-
-
   const handleOpenModal = () => setModalOpen(true);
   const handleCloseModal = () => setModalOpen(false);
 
@@ -86,11 +90,17 @@ export default function UserProfile({ customer, id }) {
               {/* image container */}
 
               <div className="relative group w-36 mx-auto">
-                <img
-                  src={`${customer.image}`}
-                  alt="avatar"
-                  className="rounded-full w-36 h-36 mb-3"
-                />
+                {loadingImage ? (
+                  <div className="w-36 h-36 flex items-center justify-center">
+                    <CircularProgress size={20} />
+                  </div>
+                ) : (
+                  <img
+                    src={image}
+                    alt="avatar"
+                    className="rounded-full w-36 h-36 mb-3"
+                  />
+                )}
 
                 <input
                   type="file"
