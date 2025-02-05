@@ -1,12 +1,28 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import PaymentHistoryTable from "./PaymentHistoryTable";
 import axios from "axios";
 import UpdateProfileModal from "./UpdateProfileModal";
+import { Camera } from "lucide-react";
 
 export default function UserProfile({ customer, id }) {
   const [loading, setLoading] = useState(true);
   const [payment, setPayment] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
+
+  const [image, setImage] = useState(null);
+
+  const fileInputRef = useRef(null);
+
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setImage(file);
+    }
+  };
+
+  const triggerFileInput = () => {
+    fileInputRef.current.click();
+  };
 
   useEffect(() => {
     const fetchPayments = async () => {
@@ -32,6 +48,8 @@ export default function UserProfile({ customer, id }) {
     fetchPayments();
   }, [id]);
 
+  
+
   const handleOpenModal = () => setModalOpen(true);
   const handleCloseModal = () => setModalOpen(false);
 
@@ -42,13 +60,41 @@ export default function UserProfile({ customer, id }) {
           {/* Left Column */}
           <div className="lg:w-1/3 w-full">
             <div className="bg-white rounded-lg shadow p-5 text-center mb-6">
-              <img
-                src={`${customer.image}`}
-                alt="avatar"
-                className="rounded-full w-36 h-36 mx-auto mb-3"
-              />
+              {/* image container */}
+
+              <div className="relative group w-36 mx-auto">
+                <img
+                  src={`${customer.image}`}
+                  alt="avatar"
+                  className="rounded-full w-36 h-36 mb-3"
+                />
+
+                <input
+                  type="file"
+                  accept="image/*"
+                  ref={fileInputRef}
+                  onChange={handleImageChange}
+                  className="hidden"
+                />
+                {/* Hover icon container */}
+                <div
+                  className="absolute bottom-3 right-0 
+                    opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                >
+                  <div className="bg-gray-800/75 p-2 rounded-full hover:bg-gray-800 cursor-pointer">
+                    <Camera
+                      className="w-5 h-5 text-white"
+                      onClick={triggerFileInput}
+                    />
+                  </div>
+                </div>
+              </div>
+
               <div className="flex justify-center gap-2">
-                <button className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600" onClick={handleOpenModal}>
+                <button
+                  className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+                  onClick={handleOpenModal}
+                >
                   Update Profile
                 </button>
                 <button className="border border-gray-300 py-2 px-4 rounded hover:bg-gray-100">
@@ -117,15 +163,17 @@ export default function UserProfile({ customer, id }) {
                   </div>
                 </div>
               </div>
-
             </div>
-
           </div>
         </div>
       </div>
 
       {/* Update Profile Modal */}
-      <UpdateProfileModal open={modalOpen} handleClose={handleCloseModal} customer={customer} />
+      <UpdateProfileModal
+        open={modalOpen}
+        handleClose={handleCloseModal}
+        customer={customer}
+      />
     </section>
   );
 }

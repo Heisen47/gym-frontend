@@ -30,14 +30,6 @@ const UpdateProfileModal = ({ open, handleClose, customer }) => {
     phoneNumber: customer.phoneNumber,
     membership: customer.membership,
   });
-  const [image, setImage] = useState(null);
-
-  const handleImageChange = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      setImage(file);
-    }
-  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -53,9 +45,6 @@ const UpdateProfileModal = ({ open, handleClose, customer }) => {
     payload.append('email', formData.email);
     payload.append('phoneNumber', formData.phoneNumber);
     payload.append('membership', formData.membership);
-    if (image) {
-      payload.append('image', image);
-    }
 
     try {
       const response = await axios.put(`http://localhost:8080/customers/${customer.id}`, payload, {
@@ -65,6 +54,7 @@ const UpdateProfileModal = ({ open, handleClose, customer }) => {
       });
       console.log('Profile updated successfully:', response.data);
       handleClose();
+      window.location.reload();
     } catch (error) {
       console.error('Error updating profile:', error);
     }
