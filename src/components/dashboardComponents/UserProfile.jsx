@@ -91,7 +91,7 @@ export default function UserProfile({ customer, id }) {
 
   const handleDeleteProfile = async () => {
     try {
-      await axios.delete(`http://localhost:8080/customers/${id}`);
+      await axios.put(`http://localhost:8080/customers/${id}/delete`);
       console.log("Profile deleted successfully");
       handleCloseDeleteModal();
       navigate("/admin/customers");
