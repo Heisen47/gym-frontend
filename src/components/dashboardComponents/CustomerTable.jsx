@@ -30,39 +30,41 @@ const CustomerTable = ({ rows }) => {
               </tr>
             </thead>
             <tbody>
-              {rows.map((row, index) => (
-                <tr
-                  key={index}
-                  className={`
+              {rows
+                .filter((row) => row.active === true)
+                .map((row, index) => (
+                  <tr
+                    key={index}
+                    className={`
                   border-b border-gray-200
                   ${index % 2 === 0 ? "bg-white" : "bg-gray-50"}
                   last:border-0
                 `}
-                >
-                  <td
-                    className="p-4 text-sm text-gray-900 cursor-pointer "
-                    target="_blank"
-                    onClick={() => handleRowClick(row.id)}
                   >
-                    {row.id}
-                  </td>
-                  <td
-                    className="p-4 text-sm text-gray-900 cursor-pointer hover:underline"
-                    onClick={() => handleRowClick(row.id)}
-                  >
-                    {row.email}
-                  </td>
-                  <td className="p-4 text-sm text-gray-900 text-right cursor-pointer ">
-                    {row.membership ? "Active" : "Inactive"}
-                  </td>
-                  <td className="p-4 text-sm text-gray-900 text-right cursor-pointer ">
-                    {row.name}
-                  </td>
-                  <td className="p-4 text-sm text-gray-900 text-right cursor-pointer ">
-                    {row.phoneNumber}
-                  </td>
-                </tr>
-              ))}
+                    <td
+                      className="p-4 text-sm text-gray-900 cursor-pointer "
+                      target="_blank"
+                      onClick={() => handleRowClick(row.id)}
+                    >
+                      {row.id}
+                    </td>
+                    <td
+                      className="p-4 text-sm text-gray-900 cursor-pointer hover:underline"
+                      onClick={() => handleRowClick(row.id)}
+                    >
+                      {row.email}
+                    </td>
+                    <td className="p-4 text-sm text-gray-900 text-right cursor-pointer ">
+                      {row.membership ? "Active" : "Inactive"}
+                    </td>
+                    <td className="p-4 text-sm text-gray-900 text-right cursor-pointer ">
+                      {row.name}
+                    </td>
+                    <td className="p-4 text-sm text-gray-900 text-right cursor-pointer ">
+                      {row.phoneNumber}
+                    </td>
+                  </tr>
+                ))}
             </tbody>
           </table>
         </div>
