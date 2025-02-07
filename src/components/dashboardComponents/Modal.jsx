@@ -11,6 +11,10 @@ import {
   FormHelperText,
 } from "@mui/material";
 import axios from "axios";
+import { DatePicker } from "@mui/x-date-pickers";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import dayjs from "dayjs";
 
 const style = {
   position: "absolute",
@@ -30,6 +34,7 @@ const CustomModal = ({ open, handleClose, handleFormSubmit }) => {
     email: "",
     membership: "",
     phoneNumber: "",
+    dateOfJoining: "",
   });
   const [errors, setErrors] = useState({});
   const [image, setImage] = useState(null);
@@ -40,6 +45,16 @@ const CustomModal = ({ open, handleClose, handleFormSubmit }) => {
       ...prev,
       [name]: value,
     }));
+  };
+
+  const handleDateChange = (date) => {
+    if (date) {
+      const currentTime = dayjs().tz("Asia/Kolkata").format("HH:mm:ss"); 
+      setFormData((prev) => ({
+        ...prev,
+        dateOfJoining: date.tz("Asia/Kolkata").format(`YYYY-MM-DD[T]${currentTime}[Z]`),
+      }));
+    }
   };
 
   const validate = () => {
@@ -57,9 +72,9 @@ const CustomModal = ({ open, handleClose, handleFormSubmit }) => {
       ? ""
       : "phoneNumber number is not valid";
 
-      if (image && image.size > 2 * 1024 * 1024) {
-        alert('Image size should be less than 2 MB');
-      }
+    if (image && image.size > 2 * 1024 * 1024) {
+      alert("Image size should be less than 2 MB");
+    }
     setErrors(tempErrors);
     return Object.values(tempErrors).every((x) => x === "");
   };
@@ -68,14 +83,15 @@ const CustomModal = ({ open, handleClose, handleFormSubmit }) => {
     e.preventDefault();
     if (validate()) {
       const payload = new FormData();
-      payload.append('name', formData.name);
-      payload.append('email', formData.email);
-      payload.append('membership', formData.membership);
-      payload.append('phoneNumber', formData.phoneNumber);
+      payload.append("name", formData.name);
+      payload.append("email", formData.email);
+      payload.append("membership", formData.membership);
+      payload.append("phoneNumber", formData.phoneNumber);
+      payload.append("dateOfJoining", formData.dateOfJoining);
       if (image) {
-        payload.append('image', image);
+        payload.append("image", image);
       }
-
+      console.log(payload);
       try {
         const response = await axios.post(
           "http://localhost:8080/addUser",
@@ -176,6 +192,22 @@ const CustomModal = ({ open, handleClose, handleFormSubmit }) => {
             margin="normal"
           />
 
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DatePicker
+              label="Date of Joining"
+              value={formData.dateOfJoining ? dayjs(formData.dateOfJoining) : null}
+              name="dateOfJoining"
+              onChange={handleDateChange}
+              slotProps={{
+                textField: {
+                  fullWidth: true,
+                  margin: "normal",
+                },
+              }}
+              sx={{ width: "100%", marginBottom: "16px" }}
+            />
+          </LocalizationProvider>
+
           <TextField
             type="file"
             accept="image/*"
@@ -184,7 +216,9 @@ const CustomModal = ({ open, handleClose, handleFormSubmit }) => {
             id="image-upload"
             className="mb-4"
           />
-          <p className="xs italic text-red-500">Image should be of max size 2MB</p>
+          <p className="xs italic text-red-500">
+            Image should be of max size 2MB
+          </p>
 
           <div className="flex justify-end space-x-4 p-2">
             <Button variant="contained" color="secondary" onClick={handleClose}>

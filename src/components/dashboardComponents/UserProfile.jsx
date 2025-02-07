@@ -4,6 +4,8 @@ import axios from "axios";
 import UpdateProfileModal from "./UpdateProfileModal";
 import { Camera } from "lucide-react";
 import { CircularProgress } from "@mui/material";
+import DeleteProfileAlert from "./DeleteProfileAlert";
+import { useNavigate } from "react-router";
 
 export default function UserProfile({ customer, id }) {
   const [loading, setLoading] = useState(true);
@@ -11,15 +13,18 @@ export default function UserProfile({ customer, id }) {
   const [modalOpen, setModalOpen] = useState(false);
   const [loadingImage, setLoadingImage] = useState(false);
   const [image, setImage] = useState(customer.image);
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
 
 
   const fileInputRef = useRef(null);
+  const navigate = useNavigate();
 
   const handleImageChange = async (event) => {
     const file = event.target.files[0];
     if (file) {
       setLoadingImage(true);
       await uploadImage(file);
+      
     }
   };
 
@@ -39,6 +44,7 @@ export default function UserProfile({ customer, id }) {
       );
       if (response.status === 200) {
         setImage(response.data.image); 
+        window.location.reload();
       }
     } catch (error) {
       console.error("Error uploading image:", error);
@@ -79,6 +85,20 @@ export default function UserProfile({ customer, id }) {
 
   const handleOpenModal = () => setModalOpen(true);
   const handleCloseModal = () => setModalOpen(false);
+
+  const handleOpenDeleteModal = () => setDeleteModalOpen(true);
+  const handleCloseDeleteModal = () => setDeleteModalOpen(false);
+
+  const handleDeleteProfile = async () => {
+    try {
+      await axios.delete(`http://localhost:8080/customers/${id}`);
+      console.log("Profile deleted successfully");
+      handleCloseDeleteModal();
+      navigate("/admin/customers");
+    } catch (error) {
+      console.error("Error deleting profile:", error);
+    }
+  };
 
   return (
     <section className="min-h-screen bg-gray-100 flex items-center justify-center">
@@ -130,7 +150,7 @@ export default function UserProfile({ customer, id }) {
                 >
                   Update Profile
                 </button>
-                <button className="border border-gray-300 py-2 px-4 rounded hover:bg-gray-100">
+                <button className="border border-gray-300 py-2 px-4 rounded hover:bg-gray-100" onClick={handleOpenDeleteModal}>
                   Delete Profile
                 </button>
               </div>
@@ -207,6 +227,14 @@ export default function UserProfile({ customer, id }) {
         handleClose={handleCloseModal}
         customer={customer}
       />
+    
+          {/* Delete Profile Modal */}
+          <DeleteProfileAlert
+        open={deleteModalOpen}
+        handleClose={handleCloseDeleteModal}
+        handleDelete={handleDeleteProfile}
+      />
+
     </section>
   );
 }
