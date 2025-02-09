@@ -1,5 +1,6 @@
 import { CircularProgress } from '@mui/material';
 import axios from 'axios';
+import dayjs from 'dayjs';
 import React, { useEffect, useState } from 'react';
 
 const Payment = () => {
@@ -30,6 +31,13 @@ const Payment = () => {
     fetchPayments();
   }, []);
 
+
+    const formatDate = (dateString) => {
+      const date = dayjs(dateString);
+      if (!date.isValid()) return "Invalid Date";
+      return date.format("DD-MMM-YY");
+    };
+
   const calculateUserPayments = (payments) => {
     const userPayments = {};
 
@@ -42,10 +50,12 @@ const Payment = () => {
           totalAmount: 0, 
           paymentDate: paymentDate, 
           paymentMethod: paymentMethod, 
-          validity: validity 
+          validity: validity,
+          lastPaidAmount: 0
         };
       }
       userPayments[id].totalAmount += parseFloat(paymentAmount);
+      userPayments[id].lastPaidAmount = parseFloat(paymentAmount);
     });
 
     return userPayments;
@@ -68,18 +78,20 @@ const Payment = () => {
                 <th className="py-2 px-4 border-b border-gray-200 text-left">User Name</th>
                 <th className="py-2 px-4 border-b border-gray-200 text-left">Payment Date</th>
                 <th className="py-2 px-4 border-b border-gray-200 text-right">Total Payment (Rs.)</th>
+                <th className="py-2 px-4 border-b border-gray-200 text-right">Last Paid Amount (Rs.)</th>
                 <th className="py-2 px-4 border-b border-gray-200 text-left">Payment Method</th>
                 <th className="py-2 px-4 border-b border-gray-200 text-left">Validity</th>
               </tr>
             </thead>
             <tbody>
-              {Object.entries(userPayments).map(([id, { name, totalAmount, paymentDate, paymentMethod, validity }]) => (
+              {Object.entries(userPayments).map(([id, { name, totalAmount, lastPaidAmount, paymentDate, paymentMethod, validity }]) => (
                 <tr key={id}>
                   <td className="py-2 px-4 border-b border-gray-200">{name}</td>
-                  <td className="py-2 px-4 border-b border-gray-200">{new Date(paymentDate).toLocaleDateString()}</td>
+                  <td className="py-2 px-4 border-b border-gray-200">{formatDate(paymentDate)}</td>
                   <td className="py-2 px-4 border-b border-gray-200 text-right">{totalAmount.toFixed(2)}</td>
+                  <td className="py-2 px-4 border-b border-gray-200 text-right">{lastPaidAmount.toFixed(2)}</td>
                   <td className="py-2 px-4 border-b border-gray-200">{paymentMethod}</td>
-                  <td className="py-2 px-4 border-b border-gray-200">{new Date(validity).toLocaleDateString()}</td>
+                  <td className="py-2 px-4 border-b border-gray-200">{formatDate(validity)}</td>
                 </tr>
               ))}
             </tbody>
