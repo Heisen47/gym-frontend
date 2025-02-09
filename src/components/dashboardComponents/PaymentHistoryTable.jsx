@@ -43,7 +43,7 @@ export default function PaymentHistoryTable({ payment, loading }) {
                 <TableCell align="right">
                   {payment.paymentMethod.toUpperCase()}
                 </TableCell>
-                <TableCell align="right">{payment.validity}</TableCell>
+                <TableCell align="right">{formatDate(payment.validity)}</TableCell>
               </TableRow>
             ))}
         </TableBody>
