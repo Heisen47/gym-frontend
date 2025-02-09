@@ -6,15 +6,13 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import dayjs from "dayjs";
 
 export default function PaymentHistoryTable({ payment, loading }) {
   const formatDate = (dateString) => {
-    const [day, month, year] = dateString.split("-");
-    const fullYear = parseInt(year, 10) < 100 ? `20${year}` : year;
-    const date = new Date(`${fullYear}-${month}-${day}`);
-    if (isNaN(date.getTime())) return "Invalid Date";
-    const options = { day: "2-digit", month: "short", year: "2-digit" };
-    return date.toLocaleDateString("en-GB", options);
+    const date = dayjs(dateString);
+    if (!date.isValid()) return "Invalid Date";
+    return date.format("DD-MMM-YY");
   };
 
   return (
