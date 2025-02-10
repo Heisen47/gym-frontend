@@ -1,14 +1,39 @@
 import { Button, FormControl, InputLabel, MenuItem, Modal, Select, TextField } from "@mui/material";
 import { Box } from "@mui/system";
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useState, useEffect } from "react";
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
 
-const UpdatePaymentsModal = ({ open, handleClose }) => {
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
+
+const UpdatePaymentsModal = ({ open, handleClose, paymentId, onUpdate , userId}) => {
+
   const [formData, setFormData] = useState({
+    paymentId: "",
     amount: "",
     paymentDate: "",
     paymentMethod: "",
-    membership: "",
+    validity: "",
   });
+
+  useEffect(() => {
+    if (paymentId) {
+      const fetchPaymentData = async () => {
+        try {
+          const response = await axios.put(`http://localhost:8080/payments/${paymentId}`);
+          setFormData(response.data);
+        } catch (error) {
+          console.error("Error fetching payment data:", error);
+        }
+      };
+
+      fetchPaymentData();
+    }
+  }, [paymentId]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -18,10 +43,34 @@ const UpdatePaymentsModal = ({ open, handleClose }) => {
     }));
   };
 
-  const handleSubmit = () => {
-    console.log(formData);
-    handleClose();
+  const handleSubmit = async () => {
+    try {
+      console.log("Sending userId:", userId);
+      const formattedData = {
+        paymentId: Number(formData.paymentId),
+        paymentDate: dayjs(formData.paymentDate).tz("Asia/Kolkata").format("YYYY-MM-DDTHH:mm:ss[Z]"),
+        paymentAmount: parseFloat(formData.amount).toFixed(2),
+        paymentMethod: formData.paymentMethod,
+        validity: dayjs(formData.validity).tz("Asia/Kolkata").format("YYYY-MM-DDTHH:mm:ss[Z]"),
+        user: userId ? { id: Number(userId) } : undefined, 
+      };
+  
+      console.log("Formatted Data:", formattedData); 
+  
+      const response = await axios.put(`http://localhost:8080/payments/update/${paymentId}`, formattedData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+  
+      console.log("Payment updated successfully:", response.data);
+      onUpdate();
+      handleClose();
+    } catch (error) {
+      console.error("Error updating payment:", error);
+    }
   };
+  
 
   const style = {
     position: "absolute",
@@ -29,7 +78,7 @@ const UpdatePaymentsModal = ({ open, handleClose }) => {
     left: "50%",
     transform: "translate(-50%, -50%)",
     width: 400,
-    backgroundColor: "white", // Ensure visible background
+    backgroundColor: "white",
     boxShadow: 24,
     p: 4,
     borderRadius: 2,
@@ -50,9 +99,9 @@ const UpdatePaymentsModal = ({ open, handleClose }) => {
           label="Id"
           variant="outlined"
           fullWidth
-          value={formData.amount}
+          value={formData.paymentId}
           onChange={handleChange}
-          name="amount"
+          name="paymentId"
           sx={{ mb: 2 }}
         />
         <TextField
@@ -72,6 +121,17 @@ const UpdatePaymentsModal = ({ open, handleClose }) => {
           value={formData.paymentDate}
           onChange={handleChange}
           name="paymentDate"
+          sx={{ mb: 2 }}
+          InputLabelProps={{ shrink: true }}
+        />
+        <TextField
+          label="Validity"
+          type="date"
+          variant="outlined"
+          fullWidth
+          value={formData.validity}
+          onChange={handleChange}
+          name="validity"
           sx={{ mb: 2 }}
           InputLabelProps={{ shrink: true }}
         />

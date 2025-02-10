@@ -245,7 +245,7 @@ export default function UserProfile({ customer, id }) {
       />
 
       {/* Update Payments Modal */}
-      <UpdatePaymentsModal open={paymentModalOpen} handleClose={handleClosePaymentModal} />
+      <UpdatePaymentsModal open={paymentModalOpen} handleClose={handleClosePaymentModal} userId = {id} />
     </section>
   );
 }
