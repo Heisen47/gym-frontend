@@ -24,7 +24,7 @@ const UpdatePaymentsModal = ({ open, handleClose, paymentId, onUpdate , userId})
     if (paymentId) {
       const fetchPaymentData = async () => {
         try {
-          const response = await axios.put(`http://localhost:8080/payments/${paymentId}`);
+          const response = await axios.put(`http://localhost:8080/payments/${paymentId}` );
           setFormData(response.data);
         } catch (error) {
           console.error("Error fetching payment data:", error);
@@ -45,24 +45,25 @@ const UpdatePaymentsModal = ({ open, handleClose, paymentId, onUpdate , userId})
 
   const handleSubmit = async () => {
     try {
-      console.log("Sending userId:", userId);
       const formattedData = {
-        paymentId: Number(formData.paymentId),
+        paymentId: Number(formData.paymentId), 
         paymentDate: dayjs(formData.paymentDate).tz("Asia/Kolkata").format("YYYY-MM-DDTHH:mm:ss[Z]"),
-        paymentAmount: parseFloat(formData.amount).toFixed(2),
+        paymentAmount: parseFloat(formData.amount).toFixed(2), 
         paymentMethod: formData.paymentMethod,
         validity: dayjs(formData.validity).tz("Asia/Kolkata").format("YYYY-MM-DDTHH:mm:ss[Z]"),
-        user: userId ? { id: Number(userId) } : undefined, 
+        user: {
+          id: Number(userId),
+        },
       };
-  
-      console.log("Formatted Data:", formattedData); 
-  
+
+      console.log("Formatted Data:", formattedData);
+
       const response = await axios.put(`http://localhost:8080/payments/update/${paymentId}`, formattedData, {
         headers: {
           "Content-Type": "application/json",
         },
       });
-  
+
       console.log("Payment updated successfully:", response.data);
       onUpdate();
       handleClose();
@@ -70,6 +71,7 @@ const UpdatePaymentsModal = ({ open, handleClose, paymentId, onUpdate , userId})
       console.error("Error updating payment:", error);
     }
   };
+
   
 
   const style = {

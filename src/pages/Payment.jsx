@@ -88,7 +88,7 @@ const Payment = () => {
                   Last Paid Amount (Rs.)
                 </th>
                 <th className="py-2 px-4 border-b border-gray-300 text-left">
-                  Payment Method
+                  Last Payment Method
                 </th>
                 <th className="py-2 px-4 border-b border-gray-300 text-left">
                   Validity
