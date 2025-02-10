@@ -20,6 +20,7 @@ export default function PaymentHistoryTable({ payment, loading }) {
       <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table" stickyHeader>
         <TableHead>
           <TableRow>
+            <TableCell>Id</TableCell>
             <TableCell>Amount(Rs.)</TableCell>
             <TableCell align="right">Payment Date</TableCell>
             <TableCell align="right">Payment method</TableCell>
@@ -33,6 +34,9 @@ export default function PaymentHistoryTable({ payment, loading }) {
                 key={index}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
+                <TableCell component="th" scope="row">
+                  {payment.paymentId}
+                </TableCell>
                 <TableCell component="th" scope="row">
                   {payment.paymentAmount}
                 </TableCell>

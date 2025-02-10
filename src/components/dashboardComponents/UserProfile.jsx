@@ -3,18 +3,19 @@ import PaymentHistoryTable from "./PaymentHistoryTable";
 import axios from "axios";
 import UpdateProfileModal from "./UpdateProfileModal";
 import { Camera } from "lucide-react";
-import { CircularProgress } from "@mui/material";
+import { Button, CircularProgress } from "@mui/material";
 import DeleteProfileAlert from "./DeleteProfileAlert";
 import { useNavigate } from "react-router";
+import UpdatePaymentsModal from "./UpdatePaymentsModal";
 
 export default function UserProfile({ customer, id }) {
   const [loading, setLoading] = useState(true);
   const [payment, setPayment] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
+  const [paymentModalOpen, setPaymentModalOpen] = useState(false);
   const [loadingImage, setLoadingImage] = useState(false);
   const [image, setImage] = useState(customer.image);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
-
 
   const fileInputRef = useRef(null);
   const navigate = useNavigate();
@@ -24,7 +25,6 @@ export default function UserProfile({ customer, id }) {
     if (file) {
       setLoadingImage(true);
       await uploadImage(file);
-      
     }
   };
 
@@ -43,13 +43,12 @@ export default function UserProfile({ customer, id }) {
         }
       );
       if (response.status === 200) {
-        setImage(response.data.image); 
+        setImage(response.data.image);
         window.location.reload();
       }
     } catch (error) {
       console.error("Error uploading image:", error);
-      
-    }finally {
+    } finally {
       setLoadingImage(false);
     }
   };
@@ -57,7 +56,6 @@ export default function UserProfile({ customer, id }) {
   const triggerFileInput = () => {
     fileInputRef.current.click();
   };
-
 
   useEffect(() => {
     const fetchPayments = async () => {
@@ -85,6 +83,9 @@ export default function UserProfile({ customer, id }) {
 
   const handleOpenModal = () => setModalOpen(true);
   const handleCloseModal = () => setModalOpen(false);
+
+  const handleOpenPaymentModal = () => setPaymentModalOpen(true);
+  const handleClosePaymentModal = () => setPaymentModalOpen(false);
 
   const handleOpenDeleteModal = () => setDeleteModalOpen(true);
   const handleCloseDeleteModal = () => setDeleteModalOpen(false);
@@ -150,7 +151,10 @@ export default function UserProfile({ customer, id }) {
                 >
                   Update Profile
                 </button>
-                <button className="border border-gray-300 py-2 px-4 rounded hover:bg-gray-100" onClick={handleOpenDeleteModal}>
+                <button
+                  className="border border-gray-300 py-2 px-4 rounded hover:bg-gray-100"
+                  onClick={handleOpenDeleteModal}
+                >
                   Delete Profile
                 </button>
               </div>
@@ -206,9 +210,14 @@ export default function UserProfile({ customer, id }) {
 
             <div className="w-full">
               <div className="bg-white rounded-lg shadow p-5">
-                <p className="mb-4 text-lg font-medium text-primary">
-                  Payment History
-                </p>
+                <div className="flex justify-between items-center">
+                  <p className="mb-4 text-lg font-medium text-primary">
+                    Payment History
+                  </p>
+                  <Button variant="contained" color="primary" onClick={handleOpenPaymentModal}>
+                    Update Payment
+                  </Button>
+                </div>
 
                 <div className="h-[300px] overflow-hidden">
                   <div>
@@ -227,14 +236,16 @@ export default function UserProfile({ customer, id }) {
         handleClose={handleCloseModal}
         customer={customer}
       />
-    
-          {/* Delete Profile Modal */}
-          <DeleteProfileAlert
+
+      {/* Delete Profile Modal */}
+      <DeleteProfileAlert
         open={deleteModalOpen}
         handleClose={handleCloseDeleteModal}
         handleDelete={handleDeleteProfile}
       />
 
+      {/* Update Payments Modal */}
+      <UpdatePaymentsModal open={paymentModalOpen} handleClose={handleClosePaymentModal} />
     </section>
   );
 }
