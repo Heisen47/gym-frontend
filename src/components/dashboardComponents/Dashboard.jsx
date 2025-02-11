@@ -1,9 +1,8 @@
 import React, { useState, useMemo } from "react";
 import { PieChart } from "@mui/x-charts/PieChart";
-import { Button, Paper, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import { Button } from "@mui/material";
 import CustomModal from "./Modal";
 import { LineChart } from "@mui/x-charts/LineChart";
-import { Table } from "lucide-react";
 import DashboardTable from "./DashboardTable";
 
 const Dashboard = () => {
