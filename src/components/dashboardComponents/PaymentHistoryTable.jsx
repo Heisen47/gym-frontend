@@ -17,14 +17,42 @@ export default function PaymentHistoryTable({ payment, loading }) {
 
   return (
     <TableContainer component={Paper} sx={{ maxHeight: 400 }}>
-      <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table" stickyHeader>
-        <TableHead>
+      <Table
+        sx={{ minWidth: 650 }}
+        size="small"
+        aria-label="a dense table"
+        stickyHeader
+      >
+        <TableHead sx={{ backgroundColor: "darkgray" }}>
           <TableRow>
-            <TableCell>Id</TableCell>
-            <TableCell>Amount(Rs.)</TableCell>
-            <TableCell align="right">Payment Date</TableCell>
-            <TableCell align="right">Payment method</TableCell>
-            <TableCell align="right">Validity (days)</TableCell>
+            <TableCell
+              sx={{ fontFamily: "Arial, sans-serif", fontWeight: "bold" }}
+            >
+              Id
+            </TableCell>
+            <TableCell
+              sx={{ fontFamily: "Arial, sans-serif", fontWeight: "bold" }}
+            >
+              Amount(Rs.)
+            </TableCell>
+            <TableCell
+              align="right"
+              sx={{ fontFamily: "Arial, sans-serif", fontWeight: "bold" }}
+            >
+              Payment Date
+            </TableCell>
+            <TableCell
+              align="right"
+              sx={{ fontFamily: "Arial, sans-serif", fontWeight: "bold" }}
+            >
+              Payment method
+            </TableCell>
+            <TableCell
+              align="right"
+              sx={{ fontFamily: "Arial, sans-serif", fontWeight: "bold" }}
+            >
+              Validity (days)
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -47,7 +75,9 @@ export default function PaymentHistoryTable({ payment, loading }) {
                 <TableCell align="right">
                   {payment.paymentMethod.toUpperCase()}
                 </TableCell>
-                <TableCell align="right">{formatDate(payment.validity)}</TableCell>
+                <TableCell align="right">
+                  {formatDate(payment.validity)}
+                </TableCell>
               </TableRow>
             ))}
         </TableBody>

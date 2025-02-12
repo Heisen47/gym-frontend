@@ -11,7 +11,6 @@ import dayjs from "dayjs";
 export default function DashboardTable({ filteredData }) {
   const currentYear = dayjs().year();
 
-
   const filteredAndSortedData = filteredData.filter((row) => {
     const validityDate = dayjs(row.validity);
     return validityDate.year() >= currentYear;
@@ -20,21 +19,49 @@ export default function DashboardTable({ filteredData }) {
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
-        <TableHead>
+        <TableHead sx={{ backgroundColor: "darkgray" }}>
           <TableRow>
-            <TableCell>Payment ID</TableCell>
-            <TableCell>Name</TableCell>
-            <TableCell align="right">Amount</TableCell>
-            <TableCell align="right">Payment Date</TableCell>
-            <TableCell align="right">Payment Method</TableCell>
-            <TableCell align="right">Validity</TableCell>
+            <TableCell
+              sx={{ fontFamily: "Arial, sans-serif", fontWeight: "bold" }}
+            >
+              Payment ID
+            </TableCell>
+            <TableCell
+              sx={{ fontFamily: "Arial, sans-serif", fontWeight: "bold" }}
+            >
+              Name
+            </TableCell>
+            <TableCell
+              align="right"
+              sx={{ fontFamily: "Arial, sans-serif", fontWeight: "bold" }}
+            >
+              Amount
+            </TableCell>
+            <TableCell
+              align="right"
+              sx={{ fontFamily: "Arial, sans-serif", fontWeight: "bold" }}
+            >
+              Payment Date
+            </TableCell>
+            <TableCell
+              align="right"
+              sx={{ fontFamily: "Arial, sans-serif", fontWeight: "bold" }}
+            >
+              Payment Method
+            </TableCell>
+            <TableCell
+              align="right"
+              sx={{ fontFamily: "Arial, sans-serif", fontWeight: "bold" }}
+            >
+              Validity
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {filteredAndSortedData.map((row) => {
             const validityDays = dayjs(row.validity).diff(dayjs(), "day");
             let textColor = "inherit";
-            if (validityDays < 7) {
+            if (validityDays <= 7) {
               textColor = "red";
             } else if (validityDays <= 14) {
               textColor = "gray";

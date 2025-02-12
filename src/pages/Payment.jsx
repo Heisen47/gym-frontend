@@ -61,7 +61,7 @@ const Payment = () => {
 
   return (
     <div className="container mx-auto px-4">
-      <h2 className="text-2xl font-bold mb-4">Payments Summary</h2>
+      <h2 className="text-2xl font-bold font-sans mb-4">Payments Summary</h2>
 
       {loading ? (
         <div className="flex justify-center items-center h-64">
@@ -71,25 +71,25 @@ const Payment = () => {
         </div>
       ) : (
         <div className="overflow-auto">
-          <table className="min-w-full bg-white border border-gray-300">
-            <thead className="bg-gray-100">
+          <table className="min-w-full bg-gray-300 ">
+            <thead className=" bg-gray-500 ">
               <tr>
-                <th className="py-2 px-4 border-b border-gray-300 text-left">
+                <th className="py-2 px-4 border-b border-gray-300 text-left font-bold font-sans">
                   User Name
                 </th>
-                <th className="py-2 px-4 border-b border-gray-300 text-left">
+                <th className="py-2 px-4 border-b border-gray-300 text-left font-bold font-sans">
                   Payment Date
                 </th>
-                <th className="py-2 px-4 border-b border-gray-300 text-right">
+                <th className="py-2 px-4 border-b border-gray-300 text-right font-bold font-sans">
                   Total Payment (Rs.)
                 </th>
-                <th className="py-2 px-4 border-b border-gray-300 text-right">
+                <th className="py-2 px-4 border-b border-gray-300 text-right font-bold font-sans">
                   Last Paid Amount (Rs.)
                 </th>
-                <th className="py-2 px-4 border-b border-gray-300 text-left">
+                <th className="py-2 px-4 border-b border-gray-300 text-left font-bold font-sans">
                   Last Payment Method
                 </th>
-                <th className="py-2 px-4 border-b border-gray-300 text-left">
+                <th className="py-2 px-4 border-b border-gray-300 text-left font-bold font-sans">
                   Validity
                 </th>
               </tr>
@@ -108,22 +108,22 @@ const Payment = () => {
                   },
                 ]) => (
                   <tr key={id} className="hover:bg-gray-50">
-                    <td className="py-2 px-4 border-b border-gray-300">
+                    <td className="py-2 px-4 border-b border-gray-300 font-sans">
                       {name}
                     </td>
-                    <td className="py-2 px-4 border-b border-gray-300">
+                    <td className="py-2 px-4 border-b border-gray-300 font-sans">
                       {formatDate(paymentDate)}
                     </td>
-                    <td className="py-2 px-4 border-b border-gray-300 text-right">
+                    <td className="py-2 px-4 border-b border-gray-300 text-right font-sans">
                       {totalAmount.toFixed(2)}
                     </td>
-                    <td className="py-2 px-4 border-b border-gray-300 text-right">
+                    <td className="py-2 px-4 border-b border-gray-300 text-right font-sans">
                       {lastPaidAmount.toFixed(2)}
                     </td>
-                    <td className="py-2 px-4 border-b border-gray-300">
+                    <td className="py-2 px-4 border-b border-gray-300 font-sans">
                       {paymentMethod}
                     </td>
-                    <td className="py-2 px-4 border-b border-gray-300">
+                    <td className="py-2 px-4 border-b border-gray-300 font-sans">
                       {formatDate(validity)}
                     </td>
                   </tr>
