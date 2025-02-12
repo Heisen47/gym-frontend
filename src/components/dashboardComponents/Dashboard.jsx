@@ -1,17 +1,18 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { PieChart } from "@mui/x-charts/PieChart";
-import { Button } from "@mui/material";
+import { Button, CircularProgress } from "@mui/material";
 import CustomModal from "./Modal";
 import { LineChart } from "@mui/x-charts/LineChart";
 import DashboardTable from "./DashboardTable";
+import axios from "axios";
+import dayjs from "dayjs";
 
 const Dashboard = () => {
   const [open, setOpen] = useState(false);
-  const [data, setData] = useState([
-    { id: 0, value: 10, label: "series A" },
-    { id: 1, value: 15, label: "series B" },
-    { id: 2, value: 20, label: "series C" },
-  ]);
+  const [data, setData] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -32,9 +33,34 @@ const Dashboard = () => {
     }
   };
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:8080/payments");
+        const result = response.data;
+        setData(result);
+
+        const filtered = result.filter((item) => {
+          const validityDate = dayjs(item.validity);
+          const currentDate = dayjs();
+          return validityDate.diff(currentDate, "day") < 7;
+        });
+
+        setFilteredData(filtered);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+
   const pieChartData = useMemo(() => [
     {
-      data: data,
+      data: data.map((item) => ({ id: item.id, value: item.value, label: item.label })),
     },
   ], [data]);
 
@@ -48,14 +74,17 @@ const Dashboard = () => {
           </Button>
         </div>
 
-        {/* <h2 className="text-xl font-semibold mb-3">User Activity</h2> */}
         <div className="flex space-x-5 justify-center items-center border border-black">
 
-          <PieChart
-            series={pieChartData}
-            width={400}
-            height={200}
-          />
+        {loading ? (
+            <CircularProgress />
+          ) : (
+            <PieChart
+              series={pieChartData}
+              width={400}
+              height={200}
+            />
+          )}
 
           <LineChart
             xAxis={[{ data: [1, 2, 3, 5, 8, 10] }]}
@@ -69,7 +98,7 @@ const Dashboard = () => {
           />
         </div>
 
-          <DashboardTable />
+          <DashboardTable filteredData ={filteredData}/>
 
       </div>
 
