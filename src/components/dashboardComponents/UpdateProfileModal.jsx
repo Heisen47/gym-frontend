@@ -52,7 +52,6 @@ const UpdateProfileModal = ({ open, handleClose, customer }) => {
           'Content-Type': 'multipart/form-data',
         },
       });
-      console.log('Profile updated successfully:', response.data);
       handleClose();
       window.location.reload();
     } catch (error) {

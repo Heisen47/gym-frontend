@@ -91,7 +91,7 @@ const CustomModal = ({ open, handleClose, handleFormSubmit }) => {
       if (image) {
         payload.append("image", image);
       }
-      console.log(payload);
+
       try {
         const response = await axios.post(
           "http://localhost:8080/addUser",
@@ -103,7 +103,6 @@ const CustomModal = ({ open, handleClose, handleFormSubmit }) => {
           }
         );
 
-        console.log("Customer created successfully:", response.data);
 
         if (handleFormSubmit) {
           handleFormSubmit(response.data);

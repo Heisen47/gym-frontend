@@ -43,7 +43,7 @@ const Dashboard = () => {
         const filtered = result.filter((item) => {
           const validityDate = dayjs(item.validity);
           const currentDate = dayjs();
-          return validityDate.diff(currentDate, "day") < 7;
+          return validityDate.diff(currentDate, "day") <= 14;
         });
 
         setFilteredData(filtered);

@@ -29,7 +29,6 @@ const User = () => {
 
         setCustomer(customerData);
         setLoading(false);
-        console.log(customerData);
       } catch (error) {
         console.error("Error fetching customer data:", error);
         setLoading(false);

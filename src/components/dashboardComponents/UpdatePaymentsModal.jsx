@@ -56,15 +56,12 @@ const UpdatePaymentsModal = ({ open, handleClose, paymentId, onUpdate , userId})
         },
       };
 
-      console.log("Formatted Data:", formattedData);
-
       const response = await axios.put(`http://localhost:8080/payments/update/${paymentId}`, formattedData, {
         headers: {
           "Content-Type": "application/json",
         },
       });
 
-      console.log("Payment updated successfully:", response.data);
       onUpdate();
       handleClose();
     } catch (error) {

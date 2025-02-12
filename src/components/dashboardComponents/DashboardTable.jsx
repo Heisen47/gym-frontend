@@ -11,6 +11,7 @@ import dayjs from "dayjs";
 export default function DashboardTable({ filteredData }) {
   const currentYear = dayjs().year();
 
+
   const filteredAndSortedData = filteredData.filter((row) => {
     const validityDate = dayjs(row.validity);
     return validityDate.year() >= currentYear;
@@ -35,8 +36,8 @@ export default function DashboardTable({ filteredData }) {
             let textColor = "inherit";
             if (validityDays < 7) {
               textColor = "red";
-            } else if (validityDays < 14) {
-              textColor = "yellow";
+            } else if (validityDays <= 14) {
+              textColor = "gray";
             }
 
             return (
@@ -45,11 +46,11 @@ export default function DashboardTable({ filteredData }) {
                 <TableCell>{row.user.name}</TableCell>
                 <TableCell align="right">{row.paymentAmount}</TableCell>
                 <TableCell align="right">
-                  {dayjs(row.paymentDate).format("DD-MMMM-YYYY")}
+                  {dayjs(row.paymentDate).format("DD-MMM-YYYY")}
                 </TableCell>
                 <TableCell align="right">{row.paymentMethod}</TableCell>
                 <TableCell align="right" style={{ color: textColor }}>
-                  {dayjs(row.validity).format("DD-MMMM-YYYY")}
+                  {dayjs(row.validity).format("DD-MMM-YYYY")}
                 </TableCell>
               </TableRow>
             );

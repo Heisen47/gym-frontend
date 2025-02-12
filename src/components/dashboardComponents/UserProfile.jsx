@@ -71,7 +71,6 @@ export default function UserProfile({ customer, id }) {
 
         setPayment(response.data);
         setLoading(false);
-        console.log(response.data);
       } catch (error) {
         console.error("Error fetching customer data:", error);
         setLoading(false);
@@ -93,7 +92,6 @@ export default function UserProfile({ customer, id }) {
   const handleDeleteProfile = async () => {
     try {
       await axios.put(`http://localhost:8080/customers/${id}/delete`);
-      console.log("Profile deleted successfully");
       handleCloseDeleteModal();
       navigate("/admin/customers");
     } catch (error) {

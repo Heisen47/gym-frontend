@@ -18,7 +18,6 @@ const Payment = () => {
 
         setPayments(response.data);
         setLoading(false);
-        console.log(response.data);
       } catch (error) {
         console.error("Error fetching payment data:", error);
         setLoading(false);
