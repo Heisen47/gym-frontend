@@ -13,7 +13,6 @@ const Dashboard = () => {
   const [filteredData, setFilteredData] = useState([]);
   const [loading, setLoading] = useState(true);
 
-
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -43,7 +42,7 @@ const Dashboard = () => {
         const filtered = result.filter((item) => {
           const validityDate = dayjs(item.validity);
           const currentDate = dayjs();
-          return validityDate.diff(currentDate, "day") <= 14;
+          return validityDate.diff(currentDate, "day") <= 10;
         });
 
         setFilteredData(filtered);
@@ -57,12 +56,18 @@ const Dashboard = () => {
     fetchData();
   }, []);
 
-
-  const pieChartData = useMemo(() => [
-    {
-      data: data.map((item) => ({ id: item.id, value: item.value, label: item.label })),
-    },
-  ], [data]);
+  const pieChartData = useMemo(
+    () => [
+      {
+        data: data.map((item) => ({
+          id: item.id,
+          value: item.value,
+          label: item.label,
+        })),
+      },
+    ],
+    [data]
+  );
 
   return (
     <>
@@ -75,15 +80,10 @@ const Dashboard = () => {
         </div>
 
         <div className="flex space-x-5 justify-center items-center border border-black">
-
-        {loading ? (
+          {loading ? (
             <CircularProgress />
           ) : (
-            <PieChart
-              series={pieChartData}
-              width={400}
-              height={200}
-            />
+            <PieChart series={pieChartData} width={400} height={200} />
           )}
 
           <LineChart
@@ -97,13 +97,26 @@ const Dashboard = () => {
             height={300}
           />
         </div>
+        <div className="flex items-center mb-4 justify-end">
+          <div className="flex items-center mr-4">
+            <span className="h-4 w-4 bg-gray-500 inline-block mr-2"></span>
+            <span>10 days</span>
+          </div>
+          <div className="flex items-center">
+            <span className="h-4 w-4 bg-red-500 inline-block mr-2"></span>
+            <span>7 days</span>
+          </div>
+        </div>
 
-          <DashboardTable filteredData ={filteredData}/>
-
+        <DashboardTable filteredData={filteredData} />
       </div>
 
       {/* Modal for creating new customer */}
-      <CustomModal open={open} handleClose={handleClose} handleFormSubmit={handleFormSubmit}/>
+      <CustomModal
+        open={open}
+        handleClose={handleClose}
+        handleFormSubmit={handleFormSubmit}
+      />
     </>
   );
 };
