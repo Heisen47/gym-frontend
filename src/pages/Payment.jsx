@@ -1,7 +1,9 @@
-import { CircularProgress } from "@mui/material";
+import { Download } from "@mui/icons-material";
+import {Table, CircularProgress, Paper, TableBody, TableCell, TableContainer, TableHead, TableRow, Button } from "@mui/material";
 import axios from "axios";
 import dayjs from "dayjs";
 import React, { useEffect, useState } from "react";
+import * as XLSX from "xlsx";
 
 const Payment = () => {
   const [payments, setPayments] = useState([]);
@@ -59,9 +61,28 @@ const Payment = () => {
 
   const userPayments = calculateUserPayments(payments);
 
+  const handleDownload = () => {
+    const worksheet = XLSX.utils.json_to_sheet(
+      Object.entries(userPayments).map(([id, row]) => ({
+        "User Name": row.name,
+        "Payment Date": formatDate(row.paymentDate),
+        "Total Payment (Rs.)": row.totalAmount.toFixed(2),
+        "Last Paid Amount (Rs.)": row.lastPaidAmount.toFixed(2),
+        "Last Payment Method": row.paymentMethod,
+        "Validity": formatDate(row.validity),
+      }))
+    );
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Payments");
+    XLSX.writeFile(workbook, "Payments.xlsx");
+  };
+
   return (
     <div className="container mx-auto px-4">
-      <h2 className="text-2xl font-bold font-sans mb-4">Payments Summary</h2>
+      <div className="flex justify-between mb-5">
+        <h2 className="text-2xl font-bold font-sans">Payments Summary</h2>
+        <Button variant="contained" color="primary" onClick={handleDownload}><Download/> Excel</Button>
+      </div>
 
       {loading ? (
         <div className="flex justify-center items-center h-64">
@@ -70,31 +91,19 @@ const Payment = () => {
           </div>
         </div>
       ) : (
-        <div className="overflow-auto">
-          <table className="min-w-full bg-gray-300 ">
-            <thead className=" bg-gray-500 ">
-              <tr>
-                <th className="py-2 px-4 border-b border-gray-300 text-left font-bold font-sans">
-                  User Name
-                </th>
-                <th className="py-2 px-4 border-b border-gray-300 text-left font-bold font-sans">
-                  Payment Date
-                </th>
-                <th className="py-2 px-4 border-b border-gray-300 text-right font-bold font-sans">
-                  Total Payment (Rs.)
-                </th>
-                <th className="py-2 px-4 border-b border-gray-300 text-right font-bold font-sans">
-                  Last Paid Amount (Rs.)
-                </th>
-                <th className="py-2 px-4 border-b border-gray-300 text-left font-bold font-sans">
-                  Last Payment Method
-                </th>
-                <th className="py-2 px-4 border-b border-gray-300 text-left font-bold font-sans">
-                  Validity
-                </th>
-              </tr>
-            </thead>
-            <tbody>
+        <TableContainer component={Paper} sx={{ overflowX: "auto" }}>
+          <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+            <TableHead sx={{ backgroundColor: "darkgray" }}>
+              <TableRow>
+                <TableCell sx={{ fontFamily: "Arial, sans-serif", fontWeight: "bold" }}>User Name</TableCell>
+                <TableCell sx={{ fontFamily: "Arial, sans-serif", fontWeight: "bold" }}>Payment Date</TableCell>
+                <TableCell align="right" sx={{ fontFamily: "Arial, sans-serif", fontWeight: "bold" }}>Total Payment (Rs.)</TableCell>
+                <TableCell align="right" sx={{ fontFamily: "Arial, sans-serif", fontWeight: "bold" }}>Last Paid Amount (Rs.)</TableCell>
+                <TableCell sx={{ fontFamily: "Arial, sans-serif", fontWeight: "bold" }}>Last Payment Method</TableCell>
+                <TableCell sx={{ fontFamily: "Arial, sans-serif", fontWeight: "bold" }}>Validity</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
               {Object.entries(userPayments).map(
                 ([
                   id,
@@ -107,31 +116,19 @@ const Payment = () => {
                     validity,
                   },
                 ]) => (
-                  <tr key={id} className="hover:bg-gray-50">
-                    <td className="py-2 px-4 border-b border-gray-300 font-sans">
-                      {name}
-                    </td>
-                    <td className="py-2 px-4 border-b border-gray-300 font-sans">
-                      {formatDate(paymentDate)}
-                    </td>
-                    <td className="py-2 px-4 border-b border-gray-300 text-right font-sans">
-                      {totalAmount.toFixed(2)}
-                    </td>
-                    <td className="py-2 px-4 border-b border-gray-300 text-right font-sans">
-                      {lastPaidAmount.toFixed(2)}
-                    </td>
-                    <td className="py-2 px-4 border-b border-gray-300 font-sans">
-                      {paymentMethod}
-                    </td>
-                    <td className="py-2 px-4 border-b border-gray-300 font-sans">
-                      {formatDate(validity)}
-                    </td>
-                  </tr>
+                  <TableRow key={id} className="hover:bg-gray-50">
+                    <TableCell sx={{ fontFamily: "Arial, sans-serif" }}>{name}</TableCell>
+                    <TableCell sx={{ fontFamily: "Arial, sans-serif" }}>{formatDate(paymentDate)}</TableCell>
+                    <TableCell align="right" sx={{ fontFamily: "Arial, sans-serif" }}>{totalAmount.toFixed(2)}</TableCell>
+                    <TableCell align="right" sx={{ fontFamily: "Arial, sans-serif" }}>{lastPaidAmount.toFixed(2)}</TableCell>
+                    <TableCell sx={{ fontFamily: "Arial, sans-serif" }}>{paymentMethod}</TableCell>
+                    <TableCell sx={{ fontFamily: "Arial, sans-serif" }}>{formatDate(validity)}</TableCell>
+                  </TableRow>
                 )
               )}
-            </tbody>
-          </table>
-        </div>
+            </TableBody>
+          </Table>
+        </TableContainer>
       )}
     </div>
   );
