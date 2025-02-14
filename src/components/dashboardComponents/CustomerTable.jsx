@@ -1,75 +1,153 @@
 import React from "react";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+} from "@mui/material";
+import * as XLSX from "xlsx";
+import { Button } from "@mui/material";
+import { Download } from "@mui/icons-material";
 
 const CustomerTable = ({ rows }) => {
   const handleRowClick = (id) => {
     window.open(`/user/${id}`, "_blank");
   };
 
+  const handleDownload = () => {
+    const worksheet = XLSX.utils.json_to_sheet(
+      rows.map((row) => ({
+        "User ID": row.id,
+        Name: row.name,
+        Email: row.email,
+        Membership: row.membership,
+        "Phone Number": row.phoneNumber,
+        active: row.active,
+      }))
+    );
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Payments");
+    XLSX.writeFile(workbook, "Users.xlsx");
+  };
+
   return (
-    <div className="w-full rounded-lg flex text-center scrollbar-hide">
-      <div className="w-full md:min-w-[700px] absolute">
-        <div className="max-h-96 overflow-auto ">
-          <table className="w-full border-collapse bg-white">
-            <thead className="bg-gray-800 sticky top-0">
-              <tr>
-                <th className="p-4 text-left text-sm font-semibold text-white">
-                  User Id
-                </th>
-                <th className="p-4 text-left text-sm font-semibold text-white">
-                  Email
-                </th>
-                <th className="p-4 text-right text-sm font-semibold text-white">
-                  Membership
-                </th>
-                <th className="p-4 text-right text-sm font-semibold text-white">
-                  Name
-                </th>
-                <th className="p-4 text-right text-sm font-semibold text-white">
-                  Phone Number
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {rows
-                .filter((row) => row.active === true)
-                .map((row, index) => (
-                  <tr
+    <>
+      <TableContainer component={Paper} sx={{ overflowX: "auto" }}>
+        <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+          <TableHead sx={{ backgroundColor: "darkgray" }}>
+            <TableRow>
+              <TableCell
+                sx={{ fontFamily: "Arial, sans-serif", fontWeight: "bold" }}
+              >
+                User Id
+              </TableCell>
+              <TableCell
+                sx={{ fontFamily: "Arial, sans-serif", fontWeight: "bold" }}
+              >
+                Email
+              </TableCell>
+              <TableCell
+                align="right"
+                sx={{ fontFamily: "Arial, sans-serif", fontWeight: "bold" }}
+              >
+                Membership
+              </TableCell>
+              <TableCell
+                align="right"
+                sx={{ fontFamily: "Arial, sans-serif", fontWeight: "bold" }}
+              >
+                Name
+              </TableCell>
+              <TableCell
+                align="right"
+                sx={{ fontFamily: "Arial, sans-serif", fontWeight: "bold" }}
+              >
+                Phone Number
+              </TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows
+              .filter((row) => row.active === true)
+              .map((row, index) => {
+                const textColor = index % 2 === 0 ? "inherit" : "gray";
+                return (
+                  <TableRow
                     key={index}
-                    className={`
-                  border-b border-gray-200
-                  ${index % 2 === 0 ? "bg-white" : "bg-gray-50"}
-                  last:border-0
-                `}
+                    sx={{
+                      backgroundColor: index % 2 === 0 ? "white" : "gray.50",
+                      "&:last-child td, &:last-child th": { border: 0 },
+                    }}
                   >
-                    <td
-                      className="p-4 text-sm text-gray-900 cursor-pointer "
-                      target="_blank"
+                    <TableCell
+                      sx={{
+                        fontFamily: "Arial, sans-serif",
+                        cursor: "pointer",
+                        color: textColor,
+                      }}
                       onClick={() => handleRowClick(row.id)}
                     >
                       {row.id}
-                    </td>
-                    <td
-                      className="p-4 text-sm text-gray-900 cursor-pointer hover:underline"
+                    </TableCell>
+                    <TableCell
+                      sx={{
+                        fontFamily: "Arial, sans-serif",
+                        cursor: "pointer",
+                        color: textColor,
+                      }}
                       onClick={() => handleRowClick(row.id)}
                     >
                       {row.email}
-                    </td>
-                    <td className="p-4 text-sm text-gray-900 text-right cursor-pointer ">
+                    </TableCell>
+                    <TableCell
+                      align="right"
+                      sx={{
+                        fontFamily: "Arial, sans-serif",
+                        cursor: "pointer",
+                        color: textColor,
+                      }}
+                      onClick={() => handleRowClick(row.id)}
+                    >
                       {row.membership ? "Active" : "Inactive"}
-                    </td>
-                    <td className="p-4 text-sm text-gray-900 text-right cursor-pointer ">
+                    </TableCell>
+                    <TableCell
+                      align="right"
+                      sx={{
+                        fontFamily: "Arial, sans-serif",
+                        cursor: "pointer",
+                        color: textColor,
+                      }}
+                      onClick={() => handleRowClick(row.id)}
+                    >
                       {row.name}
-                    </td>
-                    <td className="p-4 text-sm text-gray-900 text-right cursor-pointer ">
+                    </TableCell>
+                    <TableCell
+                      align="right"
+                      sx={{
+                        fontFamily: "Arial, sans-serif",
+                        cursor: "pointer",
+                        color: textColor,
+                      }}
+                      onClick={() => handleRowClick(row.id)}
+                    >
                       {row.phoneNumber}
-                    </td>
-                  </tr>
-                ))}
-            </tbody>
-          </table>
-        </div>
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
+          </TableBody>
+        </Table>
+      </TableContainer>
+
+      <div className="flex justify-center mt-2">
+        <Button variant="contained" color="primary" onClick={handleDownload}>
+          <Download /> Excel
+        </Button>
       </div>
-    </div>
+    </>
   );
 };
 

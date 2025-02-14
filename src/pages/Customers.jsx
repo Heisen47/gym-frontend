@@ -43,35 +43,31 @@ const Customers = () => {
   }
 
   return (
-    <div>
-      <div>
-        <div className="w-full sm:w-3/4 lg:w-2/3 rounded-lg p-6 absolute   flex flex-col justify-center">
-          {/* Search bar */}
-          <div className="mb-6 w-full">
-            <Autocomplete
-              options={names}
-              value={selectedValue}
-              onChange={(event, newValue) => setSelectedValue(newValue)}
-              inputValue={inputValue}
-              onInputChange={(event, newInputValue) =>
-                setInputValue(newInputValue)
-              }
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  label="Search Customer"
-                  variant="outlined"
-                  fullWidth
-                  className="bg-white rounded"
-                />
-              )}
-            />
-          </div>
+    <div className="container mx-auto p-4">
+      <div className="flex flex-col items-center">
+        {/* Search bar */}
+        <div className="w-full sm:w-3/4 lg:w-2/3 mb-6">
+          <Autocomplete
+            options={names}
+            value={selectedValue}
+            onChange={(event, newValue) => setSelectedValue(newValue)}
+            inputValue={inputValue}
+            onInputChange={(event, newInputValue) => setInputValue(newInputValue)}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label="Search Customer"
+                variant="outlined"
+                fullWidth
+                className="bg-white rounded"
+              />
+            )}
+          />
+        </div>
 
-          {/* Table */}
-          <div className=" rounded-lg  p-4  overflow-y-auto">
-            <CustomerTable rows={filteredRows} />
-          </div>
+        {/* Table */}
+        <div className="w-full sm:w-3/4 lg:w-2/3 rounded-lg p-4 overflow-x-auto">
+          <CustomerTable rows={filteredRows} />
         </div>
       </div>
     </div>

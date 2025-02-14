@@ -9,6 +9,7 @@ import Paper from "@mui/material/Paper";
 import dayjs from "dayjs";
 import * as XLSX from "xlsx";
 import { Button } from "@mui/material";
+import { Download } from "@mui/icons-material";
 
 export default function DashboardTable({ filteredData }) {
   const currentYear = dayjs().year();
@@ -36,14 +37,6 @@ export default function DashboardTable({ filteredData }) {
 
   return (
     <>
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={handleDownload}
-        sx={{ mb: 1 }}
-      >
-        Download as Excel
-      </Button>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
           <TableHead sx={{ backgroundColor: "darkgray" }}>
@@ -112,6 +105,12 @@ export default function DashboardTable({ filteredData }) {
           </TableBody>
         </Table>
       </TableContainer>
+
+      <div className="flex justify-center mt-2">
+        <Button variant="contained" color="primary" onClick={handleDownload}>
+          <Download /> Excel
+        </Button>
+      </div>
     </>
   );
 }
