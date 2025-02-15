@@ -111,7 +111,6 @@ const Dashboard = () => {
         <DashboardTable filteredData={filteredData} />
       </div>
 
-      {/* Modal for creating new customer */}
       <CustomModal
         open={open}
         handleClose={handleClose}
