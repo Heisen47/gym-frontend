@@ -14,7 +14,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="flex items-center z-30">
+    <div className="flex items-center max-h-full z-30">
 
       <div
         className={`bg-gray-500 text-[#C7C8CC] h-screen flex flex-col justify-center transition-all duration-300 ${
