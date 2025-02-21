@@ -3,7 +3,15 @@ import PaymentHistoryTable from "./PaymentHistoryTable";
 import axios from "axios";
 import UpdateProfileModal from "./UpdateProfileModal";
 import { Camera } from "lucide-react";
-import { Button, CircularProgress } from "@mui/material";
+import {
+  Button,
+  CircularProgress,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from "@mui/material";
 import DeleteProfileAlert from "./DeleteProfileAlert";
 import { useNavigate } from "react-router";
 import UpdatePaymentsModal from "./UpdatePaymentsModal";
@@ -19,7 +27,7 @@ export default function UserProfile({ customer, id }) {
   const [loadingImage, setLoadingImage] = useState(false);
   const [image, setImage] = useState(customer.image);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
-
+  const [openInvoiceAlert, setOpenInvoiceAlert] = useState(false);
   const fileInputRef = useRef(null);
   const navigate = useNavigate();
 
@@ -102,21 +110,35 @@ export default function UserProfile({ customer, id }) {
     }
   };
 
-    const handleDownload = () => {
-      const worksheet = XLSX.utils.json_to_sheet(
-        payment.map((row) => ({
-          "User ID": row.user.id,
-          Name: row.user.name,
-          Amount: row.paymentAmount,
-          "Payment Date": dayjs(row.paymentDate).format("DD-MMM-YYYY"),
-          "Payment Method": row.paymentMethod,
-          Validity: dayjs(row.validity).format("DD-MMM-YYYY"),
-        }))
-      );
-      const workbook = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(workbook, worksheet, "Payments");
-      XLSX.writeFile(workbook, "Payments.xlsx");
-    };
+  const handleDownload = () => {
+    const worksheet = XLSX.utils.json_to_sheet(
+      payment.map((row) => ({
+        "User ID": row.user.id,
+        Name: row.user.name,
+        Amount: row.paymentAmount,
+        "Payment Date": dayjs(row.paymentDate).format("DD-MMM-YYYY"),
+        "Payment Method": row.paymentMethod,
+        Validity: dayjs(row.validity).format("DD-MMM-YYYY"),
+      }))
+    );
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Payments");
+    XLSX.writeFile(workbook, "Payments.xlsx");
+  };
+
+  const handleInvoiceAlertOpen = () => {
+    setOpenInvoiceAlert(true);
+  };
+
+  const handleInvoiceAlertClose = () => {
+    setOpenInvoiceAlert(false);
+  };
+
+  const handleClick = (event) => {
+    event.preventDefault();
+    handleInvoiceAlertClose();
+    window.open("https://mdbootstrap.com", "_blank");
+  };
 
   return (
     <section className="min-h-screen bg-gray-100 flex items-center justify-center">
@@ -181,29 +203,32 @@ export default function UserProfile({ customer, id }) {
               <ul className="divide-y">
                 <li className="flex justify-between items-center px-5 py-3">
                   <i className="fas fa-globe text-yellow-500"></i>
-                  <a
-                    href="https://mdbootstrap.com"
-                    className="text-blue-500 hover:underline"
-                  >
+                  <Button variant="outlined" onClick={handleInvoiceAlertOpen}>
                     Generate invoice
-                  </a>
+                  </Button>
                 </li>
-                <li className="flex justify-between items-center px-5 py-3">
-                  <i className="fab fa-github text-gray-800"></i>
-                  <span>mdbootstrap</span>
-                </li>
-                <li className="flex justify-between items-center px-5 py-3">
-                  <i className="fab fa-twitter text-blue-400"></i>
-                  <span>@mdbootstrap</span>
-                </li>
-                <li className="flex justify-between items-center px-5 py-3">
-                  <i className="fab fa-instagram text-pink-500"></i>
-                  <span>mdbootstrap</span>
-                </li>
-                <li className="flex justify-between items-center px-5 py-3">
-                  <i className="fab fa-facebook text-blue-700"></i>
-                  <span>mdbootstrap</span>
-                </li>
+                <Dialog
+                  open={openInvoiceAlert}
+                  onClose={handleInvoiceAlertClose}
+                  slotProps={{
+                    paper: {
+                      component: "form",
+                      onSubmit: handleClick,
+                    },
+                  }}
+                >
+                  <DialogTitle>Subscribe</DialogTitle>
+                  <DialogContent>
+                    <DialogContentText>
+                      To subscribe to this website, please enter your email
+                      address here. We will send updates occasionally.
+                    </DialogContentText>
+                  </DialogContent>
+                  <DialogActions>
+                    <Button onClick={handleInvoiceAlertClose}>Cancel</Button>
+                    <Button type="submit">Subscribe</Button>
+                  </DialogActions>
+                </Dialog>
               </ul>
             </div>
           </div>
