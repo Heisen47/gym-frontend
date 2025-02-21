@@ -71,7 +71,7 @@ const Dashboard = () => {
 
   return (
     <>
-      <div className="p-5">
+      <div className>
         <div className="flex justify-between items-center mb-5">
           <h1 className="text-2xl font-bold mb-5">Dashboard Overview</h1>
           <Button variant="contained" onClick={handleOpen}>

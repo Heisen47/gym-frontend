@@ -9,6 +9,7 @@ import { useNavigate } from "react-router";
 import UpdatePaymentsModal from "./UpdatePaymentsModal";
 import * as XLSX from "xlsx";
 import dayjs from "dayjs";
+import { Download } from "@mui/icons-material";
 
 export default function UserProfile({ customer, id }) {
   const [loading, setLoading] = useState(true);
@@ -184,7 +185,7 @@ export default function UserProfile({ customer, id }) {
                     href="https://mdbootstrap.com"
                     className="text-blue-500 hover:underline"
                   >
-                    https://mdbootstrap.com
+                    Generate invoice
                   </a>
                 </li>
                 <li className="flex justify-between items-center px-5 py-3">
@@ -243,7 +244,7 @@ export default function UserProfile({ customer, id }) {
                       color="success"
                       onClick={handleDownload}
                     >
-                      Download excel
+                      <Download /> excel
                     </Button>
                   </div>
                 </div>
