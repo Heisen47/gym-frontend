@@ -7,6 +7,8 @@ import { Button, CircularProgress } from "@mui/material";
 import DeleteProfileAlert from "./DeleteProfileAlert";
 import { useNavigate } from "react-router";
 import UpdatePaymentsModal from "./UpdatePaymentsModal";
+import * as XLSX from "xlsx";
+import dayjs from "dayjs";
 
 export default function UserProfile({ customer, id }) {
   const [loading, setLoading] = useState(true);
@@ -98,6 +100,22 @@ export default function UserProfile({ customer, id }) {
       console.error("Error deleting profile:", error);
     }
   };
+
+    const handleDownload = () => {
+      const worksheet = XLSX.utils.json_to_sheet(
+        payment.map((row) => ({
+          "User ID": row.user.id,
+          Name: row.user.name,
+          Amount: row.paymentAmount,
+          "Payment Date": dayjs(row.paymentDate).format("DD-MMM-YYYY"),
+          "Payment Method": row.paymentMethod,
+          Validity: dayjs(row.validity).format("DD-MMM-YYYY"),
+        }))
+      );
+      const workbook = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(workbook, worksheet, "Payments");
+      XLSX.writeFile(workbook, "Payments.xlsx");
+    };
 
   return (
     <section className="min-h-screen bg-gray-100 flex items-center justify-center">
@@ -212,9 +230,22 @@ export default function UserProfile({ customer, id }) {
                   <p className="mb-4 text-lg font-medium text-primary">
                     Payment History
                   </p>
-                  <Button variant="contained" color="primary" onClick={handleOpenPaymentModal}>
-                    Update Payment
-                  </Button>
+                  <div className="flex gap-4">
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={handleOpenPaymentModal}
+                    >
+                      Update Payment
+                    </Button>
+                    <Button
+                      variant="contained"
+                      color="success"
+                      onClick={handleDownload}
+                    >
+                      Download excel
+                    </Button>
+                  </div>
                 </div>
 
                 <div className="h-[300px] overflow-hidden">
@@ -243,7 +274,11 @@ export default function UserProfile({ customer, id }) {
       />
 
       {/* Update Payments Modal */}
-      <UpdatePaymentsModal open={paymentModalOpen} handleClose={handleClosePaymentModal} userId = {id} />
+      <UpdatePaymentsModal
+        open={paymentModalOpen}
+        handleClose={handleClosePaymentModal}
+        userId={id}
+      />
     </section>
   );
 }
