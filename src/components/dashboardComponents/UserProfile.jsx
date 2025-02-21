@@ -134,10 +134,9 @@ export default function UserProfile({ customer, id }) {
     setOpenInvoiceAlert(false);
   };
 
-  const handleClick = (event) => {
-    event.preventDefault();
+  const handleClick = () => {
     handleInvoiceAlertClose();
-    window.open("https://mdbootstrap.com", "_blank");
+    window.open("https://www.google.com/", "_blank");
   };
 
   return (
@@ -210,12 +209,6 @@ export default function UserProfile({ customer, id }) {
                 <Dialog
                   open={openInvoiceAlert}
                   onClose={handleInvoiceAlertClose}
-                  slotProps={{
-                    paper: {
-                      component: "form",
-                      onSubmit: handleClick,
-                    },
-                  }}
                 >
                   <DialogTitle>Subscribe</DialogTitle>
                   <DialogContent>
@@ -226,7 +219,7 @@ export default function UserProfile({ customer, id }) {
                   </DialogContent>
                   <DialogActions>
                     <Button onClick={handleInvoiceAlertClose}>Cancel</Button>
-                    <Button type="submit">Subscribe</Button>
+                    <Button onClick={handleClick}>Subscribe</Button>
                   </DialogActions>
                 </Dialog>
               </ul>
