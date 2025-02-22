@@ -12,7 +12,7 @@ const Payment = () => {
   useEffect(() => {
     const fetchPayments = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/payments`, {
+        const response = await axios.get(`http://localhost:8080/admin/payments`, {
           headers: {
             "Content-Type": "application/json",
           },

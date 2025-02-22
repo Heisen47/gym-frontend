@@ -94,7 +94,7 @@ const CustomModal = ({ open, handleClose, handleFormSubmit }) => {
 
       try {
         const response = await axios.post(
-          "http://localhost:8080/addUser",
+          "http://localhost:8080/admin/addUser",
           payload,
           {
             headers: {

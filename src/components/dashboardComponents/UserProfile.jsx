@@ -45,7 +45,7 @@ export default function UserProfile({ customer, id }) {
 
     try {
       const response = await axios.put(
-        `http://localhost:8080/customers/${id}/image`,
+        `http://localhost:8080/admin/customers/${id}/image`,
         formData,
         {
           headers: {
@@ -72,7 +72,7 @@ export default function UserProfile({ customer, id }) {
     const fetchPayments = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/payments/user/${id}`,
+          `http://localhost:8080/admin/payments/user/${id}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -146,8 +146,8 @@ export default function UserProfile({ customer, id }) {
           {/* Left Column */}
           <div className="lg:w-1/3 w-full">
             <div className="bg-white rounded-lg shadow p-5 text-center mb-6">
-              {/* image container */}
 
+              {/* image container */}
               <div className="relative group w-36 mx-auto">
                 {loadingImage ? (
                   <div className="w-36 h-36 flex items-center justify-center">
@@ -182,6 +182,7 @@ export default function UserProfile({ customer, id }) {
                 </div>
               </div>
 
+                {/* profile update and delete */}
               <div className="flex justify-center gap-2">
                 <button
                   className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
@@ -198,6 +199,7 @@ export default function UserProfile({ customer, id }) {
               </div>
             </div>
 
+                {/* Invoice */}
             <div className="bg-white rounded-lg shadow">
               <ul className="divide-y">
                 <li className="flex justify-between items-center px-5 py-3">
@@ -206,20 +208,25 @@ export default function UserProfile({ customer, id }) {
                     Generate invoice
                   </Button>
                 </li>
+                <li className="flex justify-between items-center px-5 py-3">
+                  <i className="fas fa-globe text-yellow-500"></i>
+                  <Button variant="outlined" onClick={handleInvoiceAlertOpen}>
+                    Download invoice
+                  </Button>
+                </li>
                 <Dialog
                   open={openInvoiceAlert}
                   onClose={handleInvoiceAlertClose}
                 >
-                  <DialogTitle>Subscribe</DialogTitle>
+                  <DialogTitle>Warning!!</DialogTitle>
                   <DialogContent>
                     <DialogContentText>
-                      To subscribe to this website, please enter your email
-                      address here. We will send updates occasionally.
+                      Have you entered the latest payment details?
                     </DialogContentText>
                   </DialogContent>
                   <DialogActions>
-                    <Button onClick={handleInvoiceAlertClose}>Cancel</Button>
-                    <Button onClick={handleClick}>Subscribe</Button>
+                    <Button onClick={handleInvoiceAlertClose}>No</Button>
+                    <Button onClick={handleClick}>Yes</Button>
                   </DialogActions>
                 </Dialog>
               </ul>

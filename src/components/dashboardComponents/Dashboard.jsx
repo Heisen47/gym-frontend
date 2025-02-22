@@ -35,7 +35,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/payments");
+        const response = await axios.get("http://localhost:8080/admin/payments");
         const result = response.data;
         setData(result);
 

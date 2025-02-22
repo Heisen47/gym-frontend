@@ -15,6 +15,8 @@ export default function PaymentHistoryTable({ payment, loading }) {
     return date.format("DD-MMM-YY");
   };
 
+  const sortedPayments = payment.sort((a, b) => dayjs(b.paymentDate) - dayjs(a.paymentDate));
+
   return (
     <TableContainer component={Paper} sx={{ maxHeight: 400 }}>
       <Table
@@ -57,7 +59,7 @@ export default function PaymentHistoryTable({ payment, loading }) {
         </TableHead>
         <TableBody>
           {!loading &&
-            payment.map((payment, index) => (
+            sortedPayments.map((payment, index) => (
               <TableRow
                 key={index}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}

@@ -14,7 +14,7 @@ const User = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/customers/${id}`,
+          `http://localhost:8080/admin/customers/${id}`,
           {
             headers: {
               "Content-Type": "application/json",
