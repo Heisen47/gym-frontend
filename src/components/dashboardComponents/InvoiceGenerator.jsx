@@ -7,7 +7,7 @@ const InvoiceGenerator = ({ invoiceData }) => {
   const generatePDF = () => {
     const doc = new jsPDF();
 
-    doc.addImage(logo, "PNG", 14, 10, 50, 20);
+    doc.addImage(logo, "PNG", 150, 10, 50, 30);
 
     // Title
     doc.setFontSize(20);
