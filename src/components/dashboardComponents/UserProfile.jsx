@@ -18,10 +18,12 @@ import UpdatePaymentsModal from "./UpdatePaymentsModal";
 import * as XLSX from "xlsx";
 import dayjs from "dayjs";
 import { Download } from "@mui/icons-material";
+import InvoiceGenerator from "./InvoiceGenerator";
+import sampleInvoice from "./data/SampleInvoice";
 
 export default function UserProfile({ customer, id }) {
   const [loading, setLoading] = useState(true);
-  const [payment, setPayment] = useState(null);
+  const [payment, setPayment] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [paymentModalOpen, setPaymentModalOpen] = useState(false);
   const [loadingImage, setLoadingImage] = useState(false);
@@ -209,10 +211,7 @@ export default function UserProfile({ customer, id }) {
                   </Button>
                 </li>
                 <li className="flex justify-between items-center px-5 py-3">
-                  <i className="fas fa-globe text-yellow-500"></i>
-                  <Button variant="outlined" onClick={handleInvoiceAlertOpen}>
-                    Download invoice
-                  </Button>
+                  <InvoiceGenerator invoiceData={sampleInvoice}/>
                 </li>
                 <Dialog
                   open={openInvoiceAlert}
