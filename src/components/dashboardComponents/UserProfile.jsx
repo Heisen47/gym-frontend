@@ -141,6 +141,14 @@ export default function UserProfile({ customer, id }) {
     window.open("https://www.google.com/", "_blank");
   };
 
+  const handleInvoice = async() =>{
+    try{
+      const invoiceData = await axios.get(`http://localhost:8080/admin/invoice/${id}`);
+    }catch(error){
+      console.error("Error generating invoice:", error);
+    }
+  }
+
   return (
     <section className="min-h-screen bg-gray-100 flex items-center justify-center">
       <div className="container mx-auto px-4">
