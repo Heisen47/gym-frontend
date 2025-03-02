@@ -30,6 +30,7 @@ export default function UserProfile({ customer, id }) {
   const [image, setImage] = useState(customer.image);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [openInvoiceAlert, setOpenInvoiceAlert] = useState(false);
+  const [invoiceData, setInvoiceData] = useState(null);
   const fileInputRef = useRef(null);
   const navigate = useNavigate();
 
@@ -143,11 +144,17 @@ export default function UserProfile({ customer, id }) {
 
   const handleInvoice = async() =>{
     try{
-      const invoiceData = await axios.get(`http://localhost:8080/admin/invoice/${id}`);
+      const response = await axios.get(`http://localhost:8080/admin/invoice/${id}`);
+      setInvoiceData(response.data);
+      console.log("Invoice data:", response.data);
     }catch(error){
       console.error("Error generating invoice:", error);
     }
   }
+
+  useEffect(() => {
+    handleInvoice(); 
+  }, [id]);
 
   return (
     <section className="min-h-screen bg-gray-100 flex items-center justify-center">
@@ -219,7 +226,7 @@ export default function UserProfile({ customer, id }) {
                   </Button>
                 </li>
                 <li className="flex justify-between items-center px-5 py-3">
-                  <InvoiceGenerator invoiceData={sampleInvoice}/>
+                {invoiceData && <InvoiceGenerator invoiceData={invoiceData}/>}
                 </li>
                 <Dialog
                   open={openInvoiceAlert}
