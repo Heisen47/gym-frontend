@@ -9,7 +9,6 @@ import {
   FormControl,
   InputLabel,
   Input,
-  FormHelperText,
 } from "@mui/material";
 
 import GoogleAuth from "./GoogleAuth";
@@ -35,6 +34,7 @@ export const CustomModal = ({
   onAuthSuccess,
   setName,
   setDp,
+  setIsAdmin, // Add setIsAdmin prop
 }) => {
   const [open, setOpen] = useState(false);
   const [alignment, setAlignment] = useState("left");
@@ -45,6 +45,14 @@ export const CustomModal = ({
 
   const handleChange = (event, newAlignment) => {
     setAlignment(newAlignment);
+  };
+
+  const handleAdminLogin = () => {
+    // Perform admin login logic here
+    // If successful, set isAdmin to true
+    setIsAdmin(true);
+    onAuthSuccess();
+    handleClose();
   };
 
   return (
@@ -119,6 +127,9 @@ export const CustomModal = ({
                 <InputLabel htmlFor="my-input" className="p-2">Password</InputLabel>
                 <Input id="my-input" aria-describedby="my-helper-text" />
               </FormControl>
+              <Button onClick={handleAdminLogin} variant="contained" className="mt-4">
+                Login as Admin
+              </Button>
             </Box>
           )}
 

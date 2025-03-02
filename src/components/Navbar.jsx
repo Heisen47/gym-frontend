@@ -29,8 +29,9 @@ const Navbar = () => {
   const [dp, setDp] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const [open, setOpen] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false); // Add isAdmin state
 
-  const settings = ["Profile", "Account", "Dashboard", "Logout"];
+  const settings = ["Logout"];
 
   //drawer settings for mobile
   const handleLinkClick = () => {
@@ -48,7 +49,9 @@ const Navbar = () => {
     if (setting === "Logout") {
       googleLogout();
       setIsAuthenticated(false);
+      setName("Bob");
       setDp(null);
+      setIsAdmin(false); // Reset isAdmin state on logout
       Cookies.remove('authToken'); // Remove the auth token cookie on logout
       Cookies.remove('name'); // Remove the name cookie on logout
       Cookies.remove('dp'); // Remove the dp cookie on logout
@@ -221,16 +224,18 @@ const Navbar = () => {
                 </div>
               </Link>
 
-              <Link to="/admin/dashboard" className="block md:inline font-sans">
-                <motion.div
-                  initial={{ opacity: 0, y: -50 }} // Start off-screen to the top
-                  animate={{ opacity: 1, y: 0 }} // Slide into view
-                  transition={{ duration: 0.5 }} // Control animation speed
-                  className="flex flex-col"
-                >
-                  Admin
-                </motion.div>
-              </Link>
+              {isAdmin && (
+                <Link to="/admin/dashboard" className="block md:inline font-sans">
+                  <motion.div
+                    initial={{ opacity: 0, y: -50 }} // Start off-screen to the top
+                    animate={{ opacity: 1, y: 0 }} // Slide into view
+                    transition={{ duration: 0.5 }} // Control animation speed
+                    className="flex flex-col"
+                  >
+                    Admin
+                  </motion.div>
+                </Link>
+              )}
             </div>
           </Typography>
 
@@ -256,6 +261,7 @@ const Navbar = () => {
               onAuthSuccess={handleAuthSuccess} // Handles authentication success
               setName={setName}
               setDp={setDp}
+              setIsAdmin={setIsAdmin} // Pass setIsAdmin to CustomModal
             />
           )}
 
@@ -299,7 +305,7 @@ const Navbar = () => {
                 key={setting}
                 onClick={() => handleCloseUserMenu(setting)}
               >
-                <Typography sx={{ textAlign: "center" }}>{setting}</Typography>
+                <Typography sx={{ textAlign: "center" , padding:"1px" }}>{setting}</Typography>
               </MenuItem>
             ))}
           </Menu>
