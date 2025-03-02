@@ -1,9 +1,9 @@
-import { useGoogleLogin } from "@react-oauth/google";
-import axios from "axios";
+import { useGoogleLogin } from '@react-oauth/google';
+import axios from 'axios';
+import Cookies from 'js-cookie';
 
-const useGoogleAuth = (onAuthSuccess , setName ,setDp) => {
-
-  const handleGoogleLogin = useGoogleLogin({
+const useGoogleAuth = (onAuthSuccess, setName, setDp) => {
+  const login = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
       try {
         const userInfo = await axios.get(
@@ -15,30 +15,35 @@ const useGoogleAuth = (onAuthSuccess , setName ,setDp) => {
           }
         );
 
-        console.log("Access Token:", tokenResponse.access_token);
-
-        console.log("User Info:", userInfo.data);
-        onAuthSuccess();
-
-        // setup user info
+        const authToken = tokenResponse.access_token;
         const name = userInfo.data.given_name;
         const dp = userInfo.data.picture;
+
+        // Set the auth token, name, and dp in cookies with a 24-hour expiry
+        Cookies.set('authToken', authToken, { expires: 1 });
+        Cookies.set('name', name, { expires: 1 });
+        Cookies.set('dp', dp, { expires: 1 });
+
+        console.log("Access Token:", tokenResponse.access_token);
+        console.log("User Info:", userInfo.data);
+
+        onAuthSuccess();
         setName(name);
         setDp(dp);
 
         return userInfo.data;
-      } catch (error) {
+      } 
+      catch (error) {
         console.error("Error during Google authentication:", error);
         throw error;
       }
     },
-    onError: (error) => {
-      console.error("Google Login Error:", error);
+    onFailure: (error) => {
+      console.error('Login failed:', error);
     },
-    scope: "email profile",
   });
 
-  return handleGoogleLogin;
+  return login;
 };
 
 export default useGoogleAuth;

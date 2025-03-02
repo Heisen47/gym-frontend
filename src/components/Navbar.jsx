@@ -19,6 +19,7 @@ import { Drawer } from "vaul";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { motion } from "framer-motion";
 import PersonIcon from "@mui/icons-material/Person";
+import Cookies from 'js-cookie';
 
 const Navbar = () => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -48,6 +49,9 @@ const Navbar = () => {
       googleLogout();
       setIsAuthenticated(false);
       setDp(null);
+      Cookies.remove('authToken'); // Remove the auth token cookie on logout
+      Cookies.remove('name'); // Remove the name cookie on logout
+      Cookies.remove('dp'); // Remove the dp cookie on logout
     }
   };
 
@@ -101,6 +105,19 @@ const Navbar = () => {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Check for auth token, name, and dp cookies on page load
+  useEffect(() => {
+    const authToken = Cookies.get('authToken');
+    const storedName = Cookies.get('name');
+    const storedDp = Cookies.get('dp');
+    if (authToken) {
+      setIsAuthenticated(true);
+      setName(storedName);
+      setDp(storedDp);
+      // Optionally, you can fetch user details using the auth token
+    }
   }, []);
 
   return (
