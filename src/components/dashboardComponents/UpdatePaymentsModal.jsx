@@ -24,7 +24,7 @@ const UpdatePaymentsModal = ({ open, handleClose, paymentId, onUpdate , userId})
     if (paymentId) {
       const fetchPaymentData = async () => {
         try {
-          const response = await axios.put(`http://localhost:8080/admin/payments/${paymentId}` );
+          const response = await axios.put(`${process.env.REACT_APP_API_BASE_URL}/admin/payments/${paymentId}` );
           setFormData(response.data);
         } catch (error) {
           console.error("Error fetching payment data:", error);
@@ -56,7 +56,7 @@ const UpdatePaymentsModal = ({ open, handleClose, paymentId, onUpdate , userId})
         },
       };
 
-      const response = await axios.put(`http://localhost:8080/admin/payments/update/${paymentId}`, formattedData, {
+      const response = await axios.put(`${process.env.REACT_APP_API_BASE_URL}/admin/payments/update/${paymentId}`, formattedData, {
         headers: {
           "Content-Type": "application/json",
         },

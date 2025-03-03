@@ -18,7 +18,7 @@ const Dashboard = () => {
 
   const handleFormSubmit = async (formData) => {
     try {
-      const response = await fetch("http://localhost:8080/addUser", {
+      const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/addUser`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -35,7 +35,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/admin/payments");
+        const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/admin/payments`);
         const result = response.data;
         setData(result);
 

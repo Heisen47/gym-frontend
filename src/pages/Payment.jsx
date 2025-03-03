@@ -12,7 +12,7 @@ const Payment = () => {
   useEffect(() => {
     const fetchPayments = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/admin/payments`, {
+        const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/admin/payments`, {
           headers: {
             "Content-Type": "application/json",
           },

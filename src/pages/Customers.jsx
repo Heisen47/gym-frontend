@@ -12,7 +12,7 @@ const Customers = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/admin/customers", {
+        const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/admin/customers`, {
           headers: {
             "Content-Type": "application/json",
           },

@@ -94,7 +94,7 @@ const CustomModal = ({ open, handleClose, handleFormSubmit }) => {
 
       try {
         const response = await axios.post(
-          "http://localhost:8080/admin/addUser",
+          `${process.env.REACT_APP_API_BASE_URL}/admin/addUser`,
           payload,
           {
             headers: {

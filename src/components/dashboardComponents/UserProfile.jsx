@@ -48,7 +48,7 @@ export default function UserProfile({ customer, id }) {
 
     try {
       const response = await axios.put(
-        `http://localhost:8080/admin/customers/${id}/image`,
+        `${process.env.REACT_APP_API_BASE_URL}/admin/customers/${id}/image`,
         formData,
         {
           headers: {
@@ -75,7 +75,7 @@ export default function UserProfile({ customer, id }) {
     const fetchPayments = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/admin/payments/user/${id}`,
+          `${process.env.REACT_APP_API_BASE_URL}/admin/payments/user/${id}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -105,7 +105,7 @@ export default function UserProfile({ customer, id }) {
 
   const handleDeleteProfile = async () => {
     try {
-      await axios.put(`http://localhost:8080/customers/${id}/delete`);
+      await axios.put(`${process.env.REACT_APP_API_BASE_URL}/customers/${id}/delete`);
       handleCloseDeleteModal();
       navigate("/admin/customers");
     } catch (error) {
@@ -144,7 +144,7 @@ export default function UserProfile({ customer, id }) {
 
   const handleInvoice = async() =>{
     try{
-      const response = await axios.get(`http://localhost:8080/admin/invoice/${id}`);
+      const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/admin/invoice/${id}`);
       setInvoiceData(response.data);
       console.log("Invoice data:", response.data);
     }catch(error){

@@ -120,14 +120,14 @@ export const CustomModal = ({
               }}
             >
               <FormControl className="text-center">
-                <InputLabel htmlFor="my-input" className="p-2">Email address</InputLabel>
+                <InputLabel htmlFor="my-input" >Email address</InputLabel>
                 <Input id="my-input" aria-describedby="my-helper-text" />
               </FormControl>
               <FormControl>
-                <InputLabel htmlFor="my-input" className="p-2">Password</InputLabel>
+                <InputLabel htmlFor="my-input">Password</InputLabel>
                 <Input id="my-input" aria-describedby="my-helper-text" />
               </FormControl>
-              <Button onClick={handleAdminLogin} variant="contained" className="mt-4">
+              <Button onClick={handleAdminLogin} variant="contained" sx={{ mt: 2 }}>
                 Login as Admin
               </Button>
             </Box>

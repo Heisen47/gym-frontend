@@ -68,3 +68,48 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+## API Endpoints
+
+### Base URL
+The base URL for all API endpoints is defined in the `.env` file:
+
+
+### Endpoints
+
+- **GET /admin/payments**
+  - Description: Fetches all payment records.
+  - Example: `${process.env.REACT_APP_API_BASE_URL}/admin/payments`
+
+- **POST /addUser**
+  - Description: Adds a new user.
+  - Example: `${process.env.REACT_APP_API_BASE_URL}/addUser`
+  - Request Body:
+    ```json
+    {
+      "name": "John Doe",
+      "email": "john.doe@example.com",
+      "password": "password123"
+    }
+    ```
+
+- **GET /admin/invoice/:id**
+  - Description: Fetches the invoice for a specific user by ID.
+  - Example: `${process.env.REACT_APP_API_BASE_URL}/admin/invoice/1`
+
+- **PUT /admin/customers/:id/image**
+  - Description: Uploads an image for a specific customer by ID.
+  - Example: `${process.env.REACT_APP_API_BASE_URL}/admin/customers/1/image`
+  - Request Body: FormData containing the image file.
+
+- **PUT /customers/:id/delete**
+  - Description: Deletes a specific customer by ID.
+  - Example: `${process.env.REACT_APP_API_BASE_URL}/customers/1/delete`
+
+- **GET /admin/payments/user/:id**
+  - Description: Fetches payment records for a specific user by ID.
+  - Example: `${process.env.REACT_APP_API_BASE_URL}/admin/payments/user/1`
+
+## Environment Variables
+
+Make sure to set the following environment variables in your [.env](http://_vscodecontentref_/2) file:

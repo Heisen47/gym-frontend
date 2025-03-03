@@ -47,7 +47,7 @@ const UpdateProfileModal = ({ open, handleClose, customer }) => {
     payload.append('membership', formData.membership);
 
     try {
-      const response = await axios.put(`http://localhost:8080/admin/customers/${customer.id}`, payload, {
+      const response = await axios.put(`${process.env.REACT_APP_API_BASE_URL}/admin/customers/${customer.id}`, payload, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
