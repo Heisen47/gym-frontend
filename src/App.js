@@ -11,6 +11,7 @@ import Dashboard from "../src/components/dashboardComponents/Dashboard";
 import Customers from "./pages/Customers";
 import Payment from "./pages/Payment";
 import User from "./pages/User";
+import ProtectedRoute from "./Auth/ProtectedRoute";
 
 function App() {
 
@@ -27,7 +28,7 @@ function App() {
           />
 
           {/* Admin Routes */}
-          <Route path="/admin/*" element={<Admin />}>
+          <Route path="/admin/*" element={<ProtectedRoute element={Admin}/>}>
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="customers" element={<Customers />} />
             <Route path="payment" element={<Payment />} />
