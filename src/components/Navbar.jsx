@@ -119,7 +119,6 @@ const Navbar = () => {
       setIsAuthenticated(true);
       setName(storedName);
       setDp(storedDp);
-      // Optionally, you can fetch user details using the auth token
     }
   }, []);
 
@@ -162,7 +161,7 @@ const Navbar = () => {
                   <MenuIcon className="h-8 w-8" />
                 </button>
               </Drawer.Trigger>
-              <HamburgerMenu handleLinkClick={handleLinkClick} />
+              <HamburgerMenu handleLinkClick={handleLinkClick} isAdmin ={isAdmin} />
             </Drawer.Root>
           </motion.div>
 
@@ -261,7 +260,7 @@ const Navbar = () => {
               onAuthSuccess={handleAuthSuccess} // Handles authentication success
               setName={setName}
               setDp={setDp}
-              setIsAdmin={setIsAdmin} // Pass setIsAdmin to CustomModal
+              setIsAdmin={setIsAdmin} 
             />
           )}
 

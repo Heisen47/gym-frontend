@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router";
 import { Drawer } from "vaul";
 
-const HamburgerMenu = ({ handleLinkClick }) => {
+const HamburgerMenu = ({ handleLinkClick, isAdmin }) => {
   const navs = ["About", "Product"];
 
   return (
@@ -27,12 +27,14 @@ const HamburgerMenu = ({ handleLinkClick }) => {
                 className="block md:inline"
                 onClick={handleLinkClick}
               >
-                 {nav}
+                {nav}
               </Link>
             ))}
-            <Link to="/admin" className="block md:inline font-sans" onClick={handleLinkClick}>
-              Admin
-            </Link>
+            {isAdmin && (
+              <Link to="/admin/dashboard" className="block md:inline font-sans">
+                Admin
+              </Link>
+            )}
           </div>
         </div>
       </Drawer.Content>
