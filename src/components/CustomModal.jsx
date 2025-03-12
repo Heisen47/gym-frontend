@@ -10,6 +10,8 @@ import {
   InputLabel,
   Input,
 } from "@mui/material";
+import axios from "axios";
+import Cookies from "js-cookie";
 
 import GoogleAuth from "./GoogleAuth";
 import FbAuth from "./FbAuth";
@@ -39,6 +41,8 @@ export const CustomModal = ({
   const [open, setOpen] = useState(false);
   const [alignment, setAlignment] = useState("left");
   const [admin, setAdmin] = useState(false);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -47,12 +51,26 @@ export const CustomModal = ({
     setAlignment(newAlignment);
   };
 
-  const handleAdminLogin = () => {
-    // Perform admin login logic here
-    // If successful, set isAdmin to true
-    setIsAdmin(true);
-    onAuthSuccess();
-    handleClose();
+  const handleAdminLogin = async () => {
+    try {
+      const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/auth/login`, {
+        username,
+        password,
+      });
+
+      if (response.status === 200) {
+        const { token } = response.data;
+        Cookies.set("authToken", token, { expires: 1 });
+        Cookies.set("isAdmin", true, { expires: 1 });
+        setIsAdmin(true);
+        onAuthSuccess();
+        handleClose();
+      } else {
+        console.error("Login failed:", response.status);
+      }
+    } catch (error) {
+      console.error("Error during admin login:", error);
+    }
   };
 
   return (
@@ -120,12 +138,23 @@ export const CustomModal = ({
               }}
             >
               <FormControl className="text-center">
-                <InputLabel htmlFor="my-input" >Email address</InputLabel>
-                <Input id="my-input" aria-describedby="my-helper-text" />
+                <InputLabel htmlFor="username-input">Username</InputLabel>
+                <Input
+                  id="username-input"
+                  aria-describedby="username-helper-text"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                />
               </FormControl>
               <FormControl>
-                <InputLabel htmlFor="my-input">Password</InputLabel>
-                <Input id="my-input" aria-describedby="my-helper-text" />
+                <InputLabel htmlFor="password-input">Password</InputLabel>
+                <Input
+                  id="password-input"
+                  type="password"
+                  aria-describedby="password-helper-text"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
               </FormControl>
               <Button onClick={handleAdminLogin} variant="contained" sx={{ mt: 2 }}>
                 Login as Admin
