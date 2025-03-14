@@ -55,6 +55,7 @@ const Navbar = () => {
       Cookies.remove('authToken'); // Remove the auth token cookie on logout
       Cookies.remove('name'); // Remove the name cookie on logout
       Cookies.remove('dp'); // Remove the dp cookie on logout
+      window.location.reload(); // Reload the page to clear the state
     }
   };
 

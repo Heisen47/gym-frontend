@@ -63,6 +63,7 @@ export const CustomModal = ({
         Cookies.set("authToken", token, { expires: 1 });
         Cookies.set("isAdmin", true, { expires: 1 });
         setIsAdmin(true);
+        setName("Admin");
         onAuthSuccess();
         handleClose();
       } else {
