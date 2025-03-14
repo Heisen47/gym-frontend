@@ -20,6 +20,7 @@ import dayjs from "dayjs";
 import { Download } from "@mui/icons-material";
 import InvoiceGenerator from "./InvoiceGenerator";
 import sampleInvoice from "./data/SampleInvoice";
+import axiosInstance from "../../Auth/axiosInstance";
 
 export default function UserProfile({ customer, id }) {
   const [loading, setLoading] = useState(true);
@@ -47,8 +48,8 @@ export default function UserProfile({ customer, id }) {
     formData.append("image", file);
 
     try {
-      const response = await axios.put(
-        `${process.env.REACT_APP_API_BASE_URL}/admin/customers/${id}/image`,
+      const response = await axiosInstance.put(
+        `/admin/customers/${id}/image`,
         formData,
         {
           headers: {
@@ -74,8 +75,8 @@ export default function UserProfile({ customer, id }) {
   useEffect(() => {
     const fetchPayments = async () => {
       try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_API_BASE_URL}/admin/payments/user/${id}`,
+        const response = await axiosInstance.get(
+          `/admin/payments/user/${id}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -105,7 +106,7 @@ export default function UserProfile({ customer, id }) {
 
   const handleDeleteProfile = async () => {
     try {
-      await axios.put(`${process.env.REACT_APP_API_BASE_URL}/customers/${id}/delete`);
+      await axiosInstance.put(`admin/customers/${id}/delete`);
       handleCloseDeleteModal();
       navigate("/admin/customers");
     } catch (error) {
@@ -144,7 +145,7 @@ export default function UserProfile({ customer, id }) {
 
   const handleInvoice = async() =>{
     try{
-      const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/admin/invoice/${id}`);
+      const response = await axiosInstance.get(`/admin/invoice/${id}`);
       setInvoiceData(response.data);
       console.log("Invoice data:", response.data);
     }catch(error){

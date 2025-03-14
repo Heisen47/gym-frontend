@@ -4,6 +4,7 @@ import axios from "axios";
 import dayjs from "dayjs";
 import React, { useEffect, useState } from "react";
 import * as XLSX from "xlsx";
+import axiosInstance from "../Auth/axiosInstance";
 
 const Payment = () => {
   const [payments, setPayments] = useState([]);
@@ -12,7 +13,7 @@ const Payment = () => {
   useEffect(() => {
     const fetchPayments = async () => {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/admin/payments`, {
+        const response = await axiosInstance.get(`/admin/payments`, {
           headers: {
             "Content-Type": "application/json",
           },

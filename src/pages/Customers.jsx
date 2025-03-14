@@ -2,6 +2,7 @@ import { TextField, Autocomplete, CircularProgress } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import CustomerTable from "../components/dashboardComponents/CustomerTable";
 import axios from "axios";
+import axiosInstance from "../Auth/axiosInstance";
 
 const Customers = () => {
   const [inputValue, setInputValue] = useState("");
@@ -12,7 +13,7 @@ const Customers = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/admin/customers`, {
+        const response = await axiosInstance.get(`/admin/customers`, {
           headers: {
             "Content-Type": "application/json",
           },

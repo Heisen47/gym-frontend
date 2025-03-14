@@ -4,6 +4,7 @@ import UserProfile from "../components/dashboardComponents/UserProfile";
 import axios from "axios";
 import { useParams } from "react-router";
 import { Skeleton } from "@mui/material";
+import axiosInstance from "../Auth/axiosInstance";
 
 const User = () => {
   const { id } = useParams();
@@ -13,8 +14,8 @@ const User = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_API_BASE_URL}/admin/customers/${id}`,
+        const response = await axiosInstance.get(
+          `/admin/customers/${id}`,
           {
             headers: {
               "Content-Type": "application/json",

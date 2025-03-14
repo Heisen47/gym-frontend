@@ -10,6 +10,7 @@ import {
   MenuItem,
 } from "@mui/material";
 import axios from "axios";
+import axiosInstance from "../../Auth/axiosInstance";
 
 const style = {
   position: "absolute",
@@ -47,7 +48,7 @@ const UpdateProfileModal = ({ open, handleClose, customer }) => {
     payload.append('membership', formData.membership);
 
     try {
-      const response = await axios.put(`${process.env.REACT_APP_API_BASE_URL}/admin/customers/${customer.id}`, payload, {
+      const response = await axiosInstance.put(`/admin/customers/${customer.id}`, payload, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

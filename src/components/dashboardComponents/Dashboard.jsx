@@ -4,7 +4,7 @@ import { Button, CircularProgress } from "@mui/material";
 import CustomModal from "./Modal";
 import { LineChart } from "@mui/x-charts/LineChart";
 import DashboardTable from "./DashboardTable";
-import axios from "axios";
+import axiosInstance from "../../Auth/axiosInstance";
 import dayjs from "dayjs";
 
 const Dashboard = () => {
@@ -35,7 +35,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/admin/payments`);
+        const response = await axiosInstance.get('/admin/payments');
         const result = response.data;
         setData(result);
 

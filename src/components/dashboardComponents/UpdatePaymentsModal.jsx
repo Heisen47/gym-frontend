@@ -5,6 +5,7 @@ import React, { useState, useEffect } from "react";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
+import axiosInstance from "../../Auth/axiosInstance";
 
 
 dayjs.extend(utc);
@@ -24,7 +25,7 @@ const UpdatePaymentsModal = ({ open, handleClose, paymentId, onUpdate , userId})
     if (paymentId) {
       const fetchPaymentData = async () => {
         try {
-          const response = await axios.put(`${process.env.REACT_APP_API_BASE_URL}/admin/payments/${paymentId}` );
+          const response = await axiosInstance.put(`/admin/payments/${paymentId}` );
           setFormData(response.data);
         } catch (error) {
           console.error("Error fetching payment data:", error);
@@ -56,7 +57,7 @@ const UpdatePaymentsModal = ({ open, handleClose, paymentId, onUpdate , userId})
         },
       };
 
-      const response = await axios.put(`${process.env.REACT_APP_API_BASE_URL}/admin/payments/update/${paymentId}`, formattedData, {
+      const response = await axiosInstance.put(`/admin/payments/update/${paymentId}`, formattedData, {
         headers: {
           "Content-Type": "application/json",
         },

@@ -15,6 +15,7 @@ import { DatePicker } from "@mui/x-date-pickers";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
+import axiosInstance from "../../Auth/axiosInstance";
 
 const style = {
   position: "absolute",
@@ -93,8 +94,8 @@ const CustomModal = ({ open, handleClose, handleFormSubmit }) => {
       }
 
       try {
-        const response = await axios.post(
-          `${process.env.REACT_APP_API_BASE_URL}/admin/addUser`,
+        const response = await axiosInstance.post(
+          `/admin/addUser`,
           payload,
           {
             headers: {

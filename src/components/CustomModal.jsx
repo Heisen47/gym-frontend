@@ -60,8 +60,16 @@ export const CustomModal = ({
 
       if (response.status === 200) {
         const { token } = response.data;
-        Cookies.set("authToken", token, { expires: 1 });
+
+        Cookies.set("authToken", token, {
+          expires: 1, // 1 day
+          secure: process.env.NODE_ENV === 'production', // HTTPS only in production
+          sameSite: 'strict',
+          path: '/'
+        });
         Cookies.set("isAdmin", true, { expires: 1 });
+        Cookies.set("name", "Admin", { expires: 1 });
+        
         setIsAdmin(true);
         setName("Admin");
         onAuthSuccess();
