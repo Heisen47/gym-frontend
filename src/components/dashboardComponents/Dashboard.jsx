@@ -14,6 +14,10 @@ const Dashboard = () => {
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [monthlyData, setMonthlyData] = useState({
+    months: [],
+    userCounts: []
+  });
 
   const handleUserModalOpen = () => setUserModalOpen(true);
   const handleUserModalClose = () => setUserModalOpen(false);
@@ -40,6 +44,27 @@ const Dashboard = () => {
     }
   };
 
+  const processMonthlyData = (customers) => {
+    const monthlyUsers = new Array(12).fill(0); 
+    const monthNames = [
+      "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+    ];
+
+    customers.forEach(customer => {
+      if (customer.active) {
+        const createdAt = dayjs(customer.createdAt);
+        const month = createdAt.month();
+        monthlyUsers[month]++;
+      }
+    });
+
+    return {
+      months: monthNames,
+      userCounts: monthlyUsers
+    };
+  };
+
   const handleAdminSubmit = async (formData) => {
     try {
       await axiosInstance.post("/admin/register", formData);
@@ -52,17 +77,27 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axiosInstance.get("/admin/payments");
-        const result = response.data;
-        setData(result);
+        const [paymentsResponse, customersResponse] = await Promise.all([
+          axiosInstance.get("/admin/payments"),
+          axiosInstance.get("/admin/customers")
+        ]);
 
-        const filtered = result.filter((item) => {
+        // Process payments data
+        const paymentsResult = paymentsResponse.data;
+        setData(paymentsResult);
+
+        const filtered = paymentsResult.filter((item) => {
           const validityDate = dayjs(item.validity);
           const currentDate = dayjs();
           return validityDate.diff(currentDate, "day") <= 10;
         });
-
         setFilteredData(filtered);
+
+        // Process customers data for line chart
+        const customersResult = customersResponse.data;
+        const monthlyStats = processMonthlyData(customersResult);
+        setMonthlyData(monthlyStats);
+
         setLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -86,6 +121,12 @@ const Dashboard = () => {
     [data]
   );
 
+  const calculateYAxisMax = (userCounts) => {
+    const maxCount = Math.max(...userCounts);
+    // Round up to nearest 10 for better readability
+    return Math.ceil(maxCount / 10) * 10;
+  };
+
   return (
     <>
       <div className>
@@ -105,19 +146,39 @@ const Dashboard = () => {
           {loading ? (
             <CircularProgress />
           ) : (
+            <>
             <PieChart series={pieChartData} width={400} height={200} />
+            <LineChart
+              xAxis={[{ 
+                data: monthlyData.months,
+                scaleType: 'band',
+              }]}
+              yAxis={[{
+                min: 0,
+                max: calculateYAxisMax(monthlyData.userCounts),
+                tickCount: 10
+              }]}
+              series={[
+                {
+                  data: monthlyData.userCounts,
+                  area: true,
+                  color: '#2196f3',
+                  label: 'Active Users',
+                  showMark: true
+                },
+              ]}
+              width={500}
+              height={300}
+              margin={{ left: 70, right: 70, top: 20, bottom: 30  }}
+              tooltip={{ 
+                trigger: 'axis' ,
+                formatter: (params) => `${params[0].axisValueLabel}: ${params[0].value} users`
+               }}
+            />
+          </>
           )}
 
-          <LineChart
-            xAxis={[{ data: [1, 2, 3, 5, 8, 10] }]}
-            series={[
-              {
-                data: [2, 5.5, 2, 8.5, 1.5, 5],
-              },
-            ]}
-            width={500}
-            height={300}
-          />
+          
         </div>
         <div className="flex items-center mb-4 justify-end">
           <div className="flex items-center mr-4">
