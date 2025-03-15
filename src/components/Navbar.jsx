@@ -118,10 +118,13 @@ const Navbar = () => {
     const authToken = Cookies.get('authToken');
     const storedName = Cookies.get('name');
     const storedDp = Cookies.get('dp');
+    const storedIsAdmin = Cookies.get('isAdmin') === 'true'; // Check for isAdmin cookie
+
     if (authToken) {
       setIsAuthenticated(true);
       setName(storedName);
       setDp(storedDp);
+      setIsAdmin(storedIsAdmin)
     }
   }, []);
 
