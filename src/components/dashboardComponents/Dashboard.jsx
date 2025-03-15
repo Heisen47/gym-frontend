@@ -42,8 +42,7 @@ const Dashboard = () => {
 
   const handleAdminSubmit = async (formData) => {
     try {
-      const response = await axiosInstance.post("/admin/register", formData);
-      alert("Admin created successfully" , response.data);
+      await axiosInstance.post("/admin/register", formData);
       handleAdminModalClose();
     } catch (error) {
       console.error("Error creating admin:", error);

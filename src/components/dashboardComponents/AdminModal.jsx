@@ -7,6 +7,8 @@ import {
   CircularProgress,
   InputAdornment,
   IconButton,
+  Snackbar,
+  Alert,
 } from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
@@ -18,6 +20,12 @@ export const AdminModal = ({ open, handleClose, handleAdminSubmit }) => {
     email: "",
     password: "",
     mobile: "",
+  });
+
+  const [snackbar, setSnackbar] = useState({
+    open: false,
+    message: "",
+    severity: "success",
   });
 
   const [errors, setErrors] = useState({});
@@ -37,11 +45,19 @@ export const AdminModal = ({ open, handleClose, handleAdminSubmit }) => {
       newErrors.confirmPassword = "Confirm Password is required";
     if (formData.password !== formData.confirmPassword) {
       newErrors.confirmPassword = "Passwords do not match";
-      alert("Passwords do not match!");
+    setSnackbar({
+      open: true,
+      message: "Passwords do not match!",
+      severity: "error",
+    });
     }
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSnackbarClose = () => {
+    setSnackbar((prev) => ({ ...prev, open: false }));
   };
 
   const handleChange = (e) => {
@@ -58,14 +74,18 @@ export const AdminModal = ({ open, handleClose, handleAdminSubmit }) => {
       setLoading(true);
       try {
         const adminData = {
-            name: formData.Name,
-            email: formData.email,
-            password: formData.password,
-            mobile: formData.mobile
-          };
-
+          name: formData.Name,
+          email: formData.email,
+          password: formData.password,
+          mobile: formData.mobile,
+        };
 
         await handleAdminSubmit(adminData);
+        setSnackbar({
+          open: true,
+          message: "Admin created successfully!",
+          severity: "success",
+        });
         handleClose();
         setFormData({
           Name: "",
@@ -75,7 +95,11 @@ export const AdminModal = ({ open, handleClose, handleAdminSubmit }) => {
           mobile: "",
         });
       } catch (error) {
-        console.error("Error submitting form:", error);
+        setSnackbar({
+          open: true,
+          message: error.response?.data?.message || "Failed to create admin",
+          severity: "error",
+        });
       } finally {
         setLoading(false);
       }
@@ -105,112 +129,130 @@ export const AdminModal = ({ open, handleClose, handleAdminSubmit }) => {
   };
 
   return (
-    <Modal
-      open={open}
-      onClose={handleClose}
-      aria-labelledby="admin-modal-title"
-      aria-describedby="admin-modal-description"
-    >
-      <Box sx={style}>
-        <h2 id="admin-modal-title" className="text-2xl font-bold mb-4">
-          Create Admin
-        </h2>
-        <form onSubmit={onSubmit} className="space-y-4">
-          <TextField
-            fullWidth
-            label="Name"
-            name="Name"
-            value={formData.Name}
-            onChange={handleChange}
-            error={!!errors.Name}
-            helperText={errors.Name}
-          />
-          <TextField
-            fullWidth
-            label="Email"
-            name="email"
-            type="email"
-            value={formData.email}
-            onChange={handleChange}
-            error={!!errors.email}
-            helperText={errors.email}
-          />
-          <TextField
-            fullWidth
-            label="Mobile"
-            name="mobile"
-            type="tel"
-            value={formData.mobile}
-            onChange={handleChange}
-            error={!!errors.mobile}
-            helperText={errors.mobile}
-            inputProps={{ 
+    <>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="admin-modal-title"
+        aria-describedby="admin-modal-description"
+      >
+        <Box sx={style}>
+          <h2 id="admin-modal-title" className="text-2xl font-bold mb-4">
+            Create Admin
+          </h2>
+          <form onSubmit={onSubmit} className="space-y-4">
+            <TextField
+              fullWidth
+              label="Name"
+              name="Name"
+              value={formData.Name}
+              onChange={handleChange}
+              error={!!errors.Name}
+              helperText={errors.Name}
+            />
+            <TextField
+              fullWidth
+              label="Email"
+              name="email"
+              type="email"
+              value={formData.email}
+              onChange={handleChange}
+              error={!!errors.email}
+              helperText={errors.email}
+            />
+            <TextField
+              fullWidth
+              label="Mobile"
+              name="mobile"
+              type="tel"
+              value={formData.mobile}
+              onChange={handleChange}
+              error={!!errors.mobile}
+              helperText={errors.mobile}
+              inputProps={{
                 maxLength: 10,
-                pattern: "[0-9]*" 
+                pattern: "[0-9]*",
               }}
-          />
-          <TextField
-            fullWidth
-            label="Password"
-            name="password"
-            type={showPassword ? "text" : "password"}
-            value={formData.password}
-            onChange={handleChange}
-            error={!!errors.password}
-            helperText={errors.password}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={() => handleClickShowPassword("password")}
-                    edge="end"
-                  >
-                    {showPassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
-          />
-          <TextField
-            fullWidth
-            label="Confirm Password"
-            name="confirmPassword"
-            type={showConfirmPassword ? "text" : "password"}
-            value={formData.confirmPassword}
-            onChange={handleChange}
-            error={!!errors.confirmPassword}
-            helperText={errors.confirmPassword}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle confirm password visibility"
-                    onClick={() => handleClickShowPassword("confirm")}
-                    edge="end"
-                  >
-                    {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
-          />
+            />
+            <TextField
+              fullWidth
+              label="Password"
+              name="password"
+              type={showPassword ? "text" : "password"}
+              value={formData.password}
+              onChange={handleChange}
+              error={!!errors.password}
+              helperText={errors.password}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={() => handleClickShowPassword("password")}
+                      edge="end"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+            />
+            <TextField
+              fullWidth
+              label="Confirm Password"
+              name="confirmPassword"
+              type={showConfirmPassword ? "text" : "password"}
+              value={formData.confirmPassword}
+              onChange={handleChange}
+              error={!!errors.confirmPassword}
+              helperText={errors.confirmPassword}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle confirm password visibility"
+                      onClick={() => handleClickShowPassword("confirm")}
+                      edge="end"
+                    >
+                      {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+            />
 
-          <div className="flex justify-end space-x-2 pt-4">
-            <Button onClick={handleClose} variant="outlined">
-              Cancel
-            </Button>
-            <Button
-              type="submit"
-              variant="contained"
-              disabled={loading}
-              startIcon={loading && <CircularProgress size={20} />}
-            >
-              {loading ? "Creating..." : "Create Admin"}
-            </Button>
-          </div>
-        </form>
-      </Box>
-    </Modal>
+            <div className="flex justify-end space-x-2 pt-4">
+              <Button onClick={handleClose} variant="outlined">
+                Cancel
+              </Button>
+              <Button
+                type="submit"
+                variant="contained"
+                disabled={loading}
+                startIcon={loading && <CircularProgress size={20} />}
+              >
+                {loading ? "Creating..." : "Create Admin"}
+              </Button>
+            </div>
+          </form>
+        </Box>
+      </Modal>
+      <Snackbar
+        open={snackbar.open}
+        autoHideDuration={3000}
+        onClose={handleSnackbarClose}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      >
+        <Alert
+          onClose={handleSnackbarClose}
+          severity={snackbar.severity}
+          sx={{ width: "100%" }}
+          elevation={6}
+          variant="filled"
+        >
+          {snackbar.message}
+        </Alert>
+      </Snackbar>
+    </>
   );
 };
