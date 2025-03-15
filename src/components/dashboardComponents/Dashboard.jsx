@@ -6,36 +6,54 @@ import { LineChart } from "@mui/x-charts/LineChart";
 import DashboardTable from "./DashboardTable";
 import axiosInstance from "../../Auth/axiosInstance";
 import dayjs from "dayjs";
+import { AdminModal } from "./AdminModal";
 
 const Dashboard = () => {
-  const [open, setOpen] = useState(false);
+  const [userModalOpen, setUserModalOpen] = useState(false);
+  const [adminModalOpen, setAdminModalOpen] = useState(false);
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleUserModalOpen = () => setUserModalOpen(true);
+  const handleUserModalClose = () => setUserModalOpen(false);
+  const handleAdminModalOpen = () => setAdminModalOpen(true);
+  const handleAdminModalClose = () => setAdminModalOpen(false);
 
   const handleFormSubmit = async (formData) => {
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/addUser`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        `${process.env.REACT_APP_API_BASE_URL}/addUser`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
       const newData = await response.json();
       setData((prevData) => [...prevData, newData]);
+      handleUserModalClose();
     } catch (error) {
       console.error("Error submitting form data:", error);
+    }
+  };
+
+  const handleAdminSubmit = async (formData) => {
+    try {
+      const response = await axiosInstance.post("/admin/register", formData);
+      alert("Admin created successfully" , response.data);
+      handleAdminModalClose();
+    } catch (error) {
+      console.error("Error creating admin:", error);
     }
   };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axiosInstance.get('/admin/payments');
+        const response = await axiosInstance.get("/admin/payments");
         const result = response.data;
         setData(result);
 
@@ -74,9 +92,14 @@ const Dashboard = () => {
       <div className>
         <div className="flex justify-between items-center mb-5">
           <h1 className="text-2xl font-bold mb-5">Dashboard Overview</h1>
-          <Button variant="contained" onClick={handleOpen}>
-            Create User
-          </Button>
+          <div className="flex space-x-5">
+            <Button variant="contained" onClick={handleUserModalOpen}>
+              Create User
+            </Button>
+            <Button variant="contained" color="success" onClick={handleAdminModalOpen}>
+              Create Admin
+            </Button>
+          </div>
         </div>
 
         <div className="flex space-x-5 justify-center items-center border border-black">
@@ -112,9 +135,14 @@ const Dashboard = () => {
       </div>
 
       <CustomModal
-        open={open}
-        handleClose={handleClose}
+        open={userModalOpen}
+        handleClose={handleUserModalClose}
         handleFormSubmit={handleFormSubmit}
+      />
+      <AdminModal 
+        open={adminModalOpen} 
+        handleClose={handleAdminModalClose} 
+        handleAdminSubmit={handleAdminSubmit} 
       />
     </>
   );
