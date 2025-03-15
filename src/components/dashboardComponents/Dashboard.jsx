@@ -128,26 +128,31 @@ const Dashboard = () => {
   };
 
   const pieChartData = useMemo(
-    () => [
-      {
-        data: [
-          {
-            id: 0,
-            value: userStats.active,
-            label: "Active Users",
-            color: "#4caf50",
+    () => 
+      [
+        {
+          data: [
+            {
+              id: 0,
+              value: userStats.active,
+              label: "Active Users",
+              color: "#5178d3",
+            },
+            {
+              id: 1,
+              value: userStats.inactive,
+              label: "Inactive Users",
+              color: "#e67971",
+            },
+          ],
+          labelStyle: {
+            padding: 50, // Add padding to the labels
           },
-          {
-            id: 1,
-            value: userStats.inactive,
-            label: "Inactive Users",
-            color: "#f44336",
-          },
-        ],
-      },
-    ],
+        }
+      ],
     [userStats]
   );
+
 
   const calculateYAxisMax = (amounts) => {
     const maxAmount = Math.max(...amounts);
@@ -186,9 +191,14 @@ const Dashboard = () => {
                   legend: {
                     direction: "row",
                     position: { vertical: "bottom", horizontal: "middle" },
-                    padding: 0,
+                    padding: 8,
+                    itemMarkWidth: 20,
+                    itemMarkHeight: 20,
+                    markGap: 8,
+                    itemGap: 12,
                   },
                 }}
+                
               />
               <LineChart
                 xAxis={[
