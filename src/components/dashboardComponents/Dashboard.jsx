@@ -16,8 +16,27 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(true);
   const [monthlyData, setMonthlyData] = useState({
     months: [],
-    userCounts: []
+    userCounts: [],
   });
+
+  const [userStats, setUserStats] = useState({
+    active: 0,
+    inactive: 0,
+  });
+
+  const processUserStats = (customers) => {
+    return customers.reduce(
+      (acc, customer) => {
+        if (customer.active) {
+          acc.active++;
+        } else {
+          acc.inactive++;
+        }
+        return acc;
+      },
+      { active: 0, inactive: 0 }
+    );
+  };
 
   const handleUserModalOpen = () => setUserModalOpen(true);
   const handleUserModalClose = () => setUserModalOpen(false);
@@ -44,26 +63,6 @@ const Dashboard = () => {
     }
   };
 
-  const processMonthlyData = (customers) => {
-    const monthlyUsers = new Array(12).fill(0); 
-    const monthNames = [
-      "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-    ];
-
-    customers.forEach(customer => {
-      if (customer.active) {
-        const createdAt = dayjs(customer.createdAt);
-        const month = createdAt.month();
-        monthlyUsers[month]++;
-      }
-    });
-
-    return {
-      months: monthNames,
-      userCounts: monthlyUsers
-    };
-  };
 
   const handleAdminSubmit = async (formData) => {
     try {
@@ -79,24 +78,26 @@ const Dashboard = () => {
       try {
         const [paymentsResponse, customersResponse] = await Promise.all([
           axiosInstance.get("/admin/payments"),
-          axiosInstance.get("/admin/customers")
+          axiosInstance.get("/admin/customers"),
         ]);
 
-        // Process payments data
-        const paymentsResult = paymentsResponse.data;
-        setData(paymentsResult);
+        // Process customers data for pie chart
+        const customersResult = customersResponse.data;
+        const stats = processUserStats(customersResult);
+        setUserStats(stats);
 
+        // Process payments data for line chart
+        const paymentsResult = paymentsResponse.data;
+        const monthlyStats = processMonthlyPayments(paymentsResult);
+        setMonthlyData(monthlyStats);
+
+        // Process payments for table
         const filtered = paymentsResult.filter((item) => {
           const validityDate = dayjs(item.validity);
           const currentDate = dayjs();
           return validityDate.diff(currentDate, "day") <= 10;
         });
         setFilteredData(filtered);
-
-        // Process customers data for line chart
-        const customersResult = customersResponse.data;
-        const monthlyStats = processMonthlyData(customersResult);
-        setMonthlyData(monthlyStats);
 
         setLoading(false);
       } catch (error) {
@@ -108,23 +109,49 @@ const Dashboard = () => {
     fetchData();
   }, []);
 
+  const processMonthlyPayments = (payments) => {
+    const monthlyPayments = new Array(12).fill(0);
+    const monthNames = [
+      "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+    ];
+  
+    payments.forEach((payment) => {
+      const paymentMonth = dayjs(payment.rowversion).month();
+      monthlyPayments[paymentMonth] += Number(payment.paymentAmount); // Ensure amount is a number
+    });
+  
+    return {
+      months: monthNames,
+      paymentAmounts: monthlyPayments,
+    };
+  };
+
   const pieChartData = useMemo(
     () => [
       {
-        data: data.map((item) => ({
-          id: item.id,
-          value: item.value,
-          label: item.label,
-        })),
+        data: [
+          {
+            id: 0,
+            value: userStats.active,
+            label: "Active Users",
+            color: "#4caf50",
+          },
+          {
+            id: 1,
+            value: userStats.inactive,
+            label: "Inactive Users",
+            color: "#f44336",
+          },
+        ],
       },
     ],
-    [data]
+    [userStats]
   );
 
-  const calculateYAxisMax = (userCounts) => {
-    const maxCount = Math.max(...userCounts);
-    // Round up to nearest 10 for better readability
-    return Math.ceil(maxCount / 10) * 10;
+  const calculateYAxisMax = (amounts) => {
+    const maxAmount = Math.max(...amounts);
+    return Math.ceil(maxAmount / 1000) * 1000; // Round to nearest thousand
   };
 
   return (
@@ -136,7 +163,11 @@ const Dashboard = () => {
             <Button variant="contained" onClick={handleUserModalOpen}>
               Create User
             </Button>
-            <Button variant="contained" color="success" onClick={handleAdminModalOpen}>
+            <Button
+              variant="contained"
+              color="success"
+              onClick={handleAdminModalOpen}
+            >
               Create Admin
             </Button>
           </div>
@@ -147,38 +178,54 @@ const Dashboard = () => {
             <CircularProgress />
           ) : (
             <>
-            <PieChart series={pieChartData} width={400} height={200} />
-            <LineChart
-              xAxis={[{ 
-                data: monthlyData.months,
-                scaleType: 'band',
-              }]}
-              yAxis={[{
-                min: 0,
-                max: calculateYAxisMax(monthlyData.userCounts),
-                tickCount: 10
-              }]}
-              series={[
-                {
-                  data: monthlyData.userCounts,
-                  area: true,
-                  color: '#2196f3',
-                  label: 'Active Users',
-                  showMark: true
-                },
-              ]}
-              width={500}
-              height={300}
-              margin={{ left: 70, right: 70, top: 20, bottom: 30  }}
-              tooltip={{ 
-                trigger: 'axis' ,
-                formatter: (params) => `${params[0].axisValueLabel}: ${params[0].value} users`
-               }}
-            />
-          </>
+              <PieChart
+                series={pieChartData}
+                width={400}
+                height={200}
+                slotProps={{
+                  legend: {
+                    direction: "row",
+                    position: { vertical: "bottom", horizontal: "middle" },
+                    padding: 0,
+                  },
+                }}
+              />
+              <LineChart
+                xAxis={[
+                  {
+                    data: monthlyData.months,
+                    scaleType: "band",
+                  },
+                ]}
+                yAxis={[
+                  {
+                    min: 0,
+                    max: calculateYAxisMax(monthlyData.paymentAmounts),
+                    tickCount: 10,
+                  },
+                ]}
+                series={[
+                  {
+                    data: monthlyData.paymentAmounts,
+                    area: true,
+                    showMark: true,
+                    color: "#2196f3",
+                    label: "Monthly Payments",
+                  },
+                ]}
+                width={500}
+                height={300}
+                margin={{ left: 70, right: 70, top: 20, bottom: 30 }}
+                tooltip={{
+                  trigger: "axis",
+                  formatter: (params) =>
+                    `${
+                      params[0].axisValueLabel
+                    }: ₹${params[0].value.toLocaleString()}`,
+                }}
+              />{" "}
+            </>
           )}
-
-          
         </div>
         <div className="flex items-center mb-4 justify-end">
           <div className="flex items-center mr-4">
@@ -199,10 +246,10 @@ const Dashboard = () => {
         handleClose={handleUserModalClose}
         handleFormSubmit={handleFormSubmit}
       />
-      <AdminModal 
-        open={adminModalOpen} 
-        handleClose={handleAdminModalClose} 
-        handleAdminSubmit={handleAdminSubmit} 
+      <AdminModal
+        open={adminModalOpen}
+        handleClose={handleAdminModalClose}
+        handleAdminSubmit={handleAdminSubmit}
       />
     </>
   );
