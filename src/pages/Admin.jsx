@@ -5,7 +5,7 @@ import { Outlet } from "react-router"
 
 const Admin = () => {
   return (
-    <div className="flex bg-slate-600 ">
+    <div className="flex min-h-full bg-slate-600 ">
       <Sidebar />
 
       <main className="flex-grow p-4">

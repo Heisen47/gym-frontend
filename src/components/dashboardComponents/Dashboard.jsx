@@ -63,7 +63,6 @@ const Dashboard = () => {
     }
   };
 
-
   const handleAdminSubmit = async (formData) => {
     try {
       await axiosInstance.post("/admin/register", formData);
@@ -81,17 +80,14 @@ const Dashboard = () => {
           axiosInstance.get("/admin/customers"),
         ]);
 
-        // Process customers data for pie chart
         const customersResult = customersResponse.data;
         const stats = processUserStats(customersResult);
         setUserStats(stats);
 
-        // Process payments data for line chart
         const paymentsResult = paymentsResponse.data;
         const monthlyStats = processMonthlyPayments(paymentsResult);
         setMonthlyData(monthlyStats);
 
-        // Process payments for table
         const filtered = paymentsResult.filter((item) => {
           const validityDate = dayjs(item.validity);
           const currentDate = dayjs();
@@ -118,7 +114,7 @@ const Dashboard = () => {
   
     payments.forEach((payment) => {
       const paymentMonth = dayjs(payment.rowversion).month();
-      monthlyPayments[paymentMonth] += Number(payment.paymentAmount); // Ensure amount is a number
+      monthlyPayments[paymentMonth] += Number(payment.paymentAmount);
     });
   
     return {
@@ -145,25 +141,37 @@ const Dashboard = () => {
               color: "#e67971",
             },
           ],
-          labelStyle: {
-            padding: 50, // Add padding to the labels
+          legend: {
+            direction: "row",
+            position: { vertical: "bottom", horizontal: "middle" },
+            padding: 20,
+            itemMarkWidth: 20,
+            itemMarkHeight: 20,
+            markGap: 8,
+            itemGap: 12,
           },
         }
       ],
     [userStats]
   );
 
-
   const calculateYAxisMax = (amounts) => {
     const maxAmount = Math.max(...amounts);
-    return Math.ceil(maxAmount / 1000) * 1000; // Round to nearest thousand
+    return Math.ceil(maxAmount / 1000) * 1000;
+  };
+
+  const getChartWidth = () => {
+    if (typeof window !== 'undefined') {
+      return window.innerWidth < 768 ? window.innerWidth - 40 : 500;
+    }
+    return 500;
   };
 
   return (
     <>
-      <div className>
-        <div className="flex justify-between items-center mb-5">
-          <h1 className="text-2xl font-bold mb-5">Dashboard Overview</h1>
+      <div >
+        <div className="flex flex-col md:flex-row justify-between items-center mb-5">
+          <h1 className="text-2xl font-bold mb-5 md:mb-0">Dashboard Overview</h1>
           <div className="flex space-x-5">
             <Button variant="contained" onClick={handleUserModalOpen}>
               Create User
@@ -178,7 +186,7 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <div className="flex space-x-5 justify-center items-center border border-black">
+        <div className="flex flex-col md:flex-row space-y-5 md:space-y-0 md:space-x-5 justify-center items-center border border-black p-4">
           {loading ? (
             <CircularProgress />
           ) : (
@@ -191,14 +199,13 @@ const Dashboard = () => {
                   legend: {
                     direction: "row",
                     position: { vertical: "bottom", horizontal: "middle" },
-                    padding: 8,
+                    padding: 20,
                     itemMarkWidth: 20,
                     itemMarkHeight: 20,
                     markGap: 8,
                     itemGap: 12,
                   },
                 }}
-                
               />
               <LineChart
                 xAxis={[
@@ -220,24 +227,22 @@ const Dashboard = () => {
                     area: true,
                     showMark: true,
                     color: "#2196f3",
-                    label: "Monthly Payments",
+                    label: "Payments",
                   },
                 ]}
                 width={500}
                 height={300}
-                margin={{ left: 70, right: 70, top: 20, bottom: 30 }}
+                margin={{ left: 70, right: 70, top: 20, bottom: 50 }}
                 tooltip={{
                   trigger: "axis",
                   formatter: (params) =>
-                    `${
-                      params[0].axisValueLabel
-                    }: ₹${params[0].value.toLocaleString()}`,
+                    `${params[0].axisValueLabel}: ₹${params[0].value.toLocaleString()}`,
                 }}
-              />{" "}
+              />
             </>
           )}
         </div>
-        <div className="flex items-center mb-4 justify-end">
+        <div className="flex items-center mb-4 justify-end mt-5">
           <div className="flex items-center mr-4">
             <span className="h-4 w-4 bg-gray-500 inline-block mr-2"></span>
             <span>10 days</span>

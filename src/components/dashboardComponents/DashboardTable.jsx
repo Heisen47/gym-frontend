@@ -87,20 +87,20 @@ export default function DashboardTable({ filteredData }) {
                 textColor = "gray";
               }
 
-              return (
+                return (
                 <TableRow key={row.paymentId}>
                   <TableCell>{row.paymentId}</TableCell>
                   <TableCell>{row.user.name}</TableCell>
-                  <TableCell align="right">{row.paymentAmount}</TableCell>
+                  <TableCell align="right">{Math.round(row.paymentAmount)}</TableCell>
                   <TableCell align="right">
-                    {dayjs(row.paymentDate).format("DD-MMM-YYYY")}
+                  {dayjs(row.paymentDate).format("DD-MMM-YYYY")}
                   </TableCell>
                   <TableCell align="right">{row.paymentMethod}</TableCell>
                   <TableCell align="right" style={{ color: textColor }}>
-                    {dayjs(row.validity).format("DD-MMM-YYYY")}
+                  {dayjs(row.validity).format("DD-MMM-YYYY")}
                   </TableCell>
                 </TableRow>
-              );
+                );
             })}
           </TableBody>
         </Table>
