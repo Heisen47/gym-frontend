@@ -17,7 +17,6 @@ export const AdminModal = ({ open, handleClose, handleAdminSubmit }) => {
     Name: "",
     email: "",
     password: "",
-    confirmPassword: "",
     mobile: "",
   });
 
@@ -58,7 +57,15 @@ export const AdminModal = ({ open, handleClose, handleAdminSubmit }) => {
     if (validateForm()) {
       setLoading(true);
       try {
-        await handleAdminSubmit(formData);
+        const adminData = {
+            name: formData.Name,
+            email: formData.email,
+            password: formData.password,
+            mobile: formData.mobile
+          };
+
+
+        await handleAdminSubmit(adminData);
         handleClose();
         setFormData({
           Name: "",
